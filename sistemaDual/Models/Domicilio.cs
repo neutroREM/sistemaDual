@@ -1,8 +1,11 @@
-﻿namespace sistemaDual.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace sistemaDual.Models
 {
     public class Domicilio
     {
-        public int id{ get; set; }
+        [Key]
+        public int id { get; set; }
         public string direccion { get; set; }
         public string colonia { get; set; }
         public string localidad { get; set; }

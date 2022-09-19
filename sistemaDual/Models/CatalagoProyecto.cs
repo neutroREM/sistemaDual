@@ -1,7 +1,10 @@
-﻿namespace sistemaDual.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace sistemaDual.Models
 {
     public class CatalagoProyecto
     {
+        [Key]
         public string CLAVE { get; set; }
         public string nombre { get; set; }
         public string etapa { get; set; }

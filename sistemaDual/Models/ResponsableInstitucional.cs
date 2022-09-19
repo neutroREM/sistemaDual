@@ -1,7 +1,10 @@
-﻿namespace sistemaDual.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace sistemaDual.Models
 {
     public class ResponsableInstitucional
     {
+        [Key]
         public string CURP { get; set; }
         public string nombre { get; set; }
         public string apellido_p { get; set; }

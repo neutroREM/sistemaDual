@@ -1,7 +1,10 @@
-﻿namespace sistemaDual.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace sistemaDual.Models
 {
     public class Empresa
     {
+        [Key]
         public string RFC { get; set; }
         public string id_domicilio { get; set; }
         public string razon_social { get; set; }
