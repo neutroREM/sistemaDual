@@ -1,24 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace sistemaDual.Models
 {
+    
+
     public class ProgramaEducativo
     {
-        [Key]
-        public string CLAVE { get; set; }
-        public string nombre { get; set; }
-        public string version { get; set; }
-
-        public string CCT3 { get; set; }
-        public Universidad Universidad { get; set; }
-
-        public List<Alumno_ProgramaEducativo> Alumno_ProgramaEducativos { get; set; }   
-        public List<MentorEmpresarial> MentorEmpresarialList { get; set; }
-        public List<MentorAcademico> MentorAcademicoList { get; set; }
-        public List<CatalagoProyecto> CatalagoProyectoList { get; set; }
-        public List<AsesorInstitucional> AsesorInstitucionalList { get; set; }
-        public List<Asignatura> AsignaturaList { get; set; }
+        public string ID { get; set; }
         
+        public string Nombre { get; set; }
+        public string Version { get; set; }
+        public string UniversidadID { get; set; }
+
+        public Universidad Universidad { get; set; }
 
     }
 }

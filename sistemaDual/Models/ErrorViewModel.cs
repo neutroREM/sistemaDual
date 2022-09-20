@@ -1,4 +1,4 @@
-namespace sistemaDual.Models
+﻿namespace sistemaDual.Models
 {
     public class ErrorViewModel
     {

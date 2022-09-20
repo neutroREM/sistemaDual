@@ -1,17 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace sistemaDual.Models
 {
     public class Universidad
     {
-        [Key]
-        public string CCT { get; set; }
-        public string nombre { get; set; }
-       
-        public int id_domicilio2 { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string ID { get; set; }
+        
+        public string Nombre { get; set; }
+        public int DomicilioID { get; set; }
+
         public Domicilio Domicilio { get; set; }
 
-        public List<ProgramaEducativo> ProgramasEducativos { get; set; }
-        public List<ResponsableInstitucional> ResponsablesInstitucionales { get; set; }
+        public ICollection<ProgramaEducativo> ProgramaEducativos { get; set; }
     }
 }
