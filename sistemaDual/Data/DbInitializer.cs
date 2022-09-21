@@ -8,7 +8,7 @@ namespace sistemaDual.Data
         {
             context.Database.EnsureCreated();
 
-            if (context.Universidades.Any() && context.ProgramasEducativos.Any())
+            if (context.Universidades.Any() || context.ProgramasEducativos.Any() || context.Domicilios.Any())
             {
                 return;
             }
@@ -27,7 +27,7 @@ namespace sistemaDual.Data
 
             var universidades = new Universidad[]
             {
-                new Universidad{ID="15EPO003Y", Nombre="Universidad Politecnica de Tecamac", DomicilioID=11}
+                new Universidad{CCT="15EPO0003Y", Nombre="Universidad Politecnica de Tecamac", DomicilioID=1}
             };
             foreach(Universidad u in universidades)
             {
@@ -38,7 +38,7 @@ namespace sistemaDual.Data
 
             var programasEducativos = new ProgramaEducativo[]
             {
-                new ProgramaEducativo{Nombre="Educacion Dual", Version="Primera", UniversidadID="15EPO0003Y"}
+                new ProgramaEducativo{Nombre="Educacion Dual", Version="Primera", UniversidadID=1}
             };
             foreach (ProgramaEducativo p in programasEducativos)
             {
