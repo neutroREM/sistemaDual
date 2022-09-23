@@ -15,7 +15,8 @@ namespace sistemaDual.Models
         public TipoBeca TipoBeca { get; set; }
         public string Periocidad { get; set; }
 
-        [DataType(DataType.Time)]
+        [DataType(DataType.Duration)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Duracion { get; set; }
 
         public ICollection<AlumnoDual> AlumnosDuales { get; set; }

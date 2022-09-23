@@ -22,6 +22,7 @@ namespace sistemaDual.Data
         public DbSet<MentorEmpresarial> MentoresEmpresariales { get; set; }
         public DbSet<ResponsableInstitucional> ResponsablesInstitucionales { get; set; }
         public DbSet<AlumnoMentor> AlumnosMentores { get; set; }
+        public DbSet<CatalagoProyecto> CatalagoProyectos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +39,7 @@ namespace sistemaDual.Data
             modelBuilder.Entity<ResponsableInstitucional>().ToTable("ResponsableInstitucional");
             modelBuilder.Entity<AlumnoMentor>()
                 .HasKey(c => new { c.AlumnoDualID, c.MentorEmpresarialID });
+            modelBuilder.Entity<CatalagoProyecto>().ToTable("CatalagoProyecto");
         }
     }
 }

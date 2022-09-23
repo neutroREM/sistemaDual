@@ -45,6 +45,7 @@ namespace sistemaDual.Models
         public Domicilio Domicilio { get; set; }
 
         public ICollection<MentorEmpresarial> MentoresEmpresariales { get; set; }
-        
+        public ICollection<CatalagoProyecto> CatalagoProyectos { get; set; }
+
     }
 }

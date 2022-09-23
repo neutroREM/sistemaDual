@@ -3,16 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace sistemaDual.Models
 {
-    public enum Estatus
-    {
-        Activo,
-        Egresado,
-        BajaDefinitivaMED,
-        BajaTemporalMED,
-        BajaDefinitivaIES,
-        BajaTemporalIES
-
-    }
+    
     public enum Tipo
     {
         NuevoIngreso,
@@ -76,26 +67,27 @@ namespace sistemaDual.Models
         [Required]
         public Double Promedio { get; set; }
 
-        [DisplayFormat(NullDisplayText = "No estatus")]
-        public Estatus? Estatus { get; set; }
-
         //Dates
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaRegistro { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaIngreso { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaReingreso { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaEgreso { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaContratado { get; set; }
-        
+
         [Display(Name = "Nombre Completo")]
         public string NombreComp
         {
@@ -114,6 +106,8 @@ namespace sistemaDual.Models
         public Domicilio Domicilio { get; set; }
 
         public ICollection<AlumnoMentor> AlumnoMentores { get; set; }
+        public ICollection<CatalagoProyecto> CatalagoProyectos { get; set; }
+
 
     }
 }
