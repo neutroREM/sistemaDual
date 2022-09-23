@@ -15,6 +15,46 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\farao\source\repos\sistemaDual\sistemaDual
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AlumnoDual/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vRHVhbFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AlumnoDual/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vRHVhbFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AlumnoDual/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vRHVhbFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AlumnoDual/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vRHVhbFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AlumnoDual/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vRHVhbFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Domicilios/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9taWNpbGlvc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Domicilios/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9taWNpbGlvc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Domicilios/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9taWNpbGlvc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Domicilios/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9taWNpbGlvc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Domicilios/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9taWNpbGlvc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
