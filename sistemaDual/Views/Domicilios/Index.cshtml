@@ -27,6 +27,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Otros)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlumnoDual)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Universidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Empresa)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -49,9 +58,18 @@
                 @Html.DisplayFor(modelItem => item.Otros)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                @Html.DisplayFor(modelItem => item.AlumnoDual.AlumnoDualID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Universidad.UniversidadID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empresa.EmpresaID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DomicilioID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DomicilioID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DomicilioID">Delete</a>
             </td>
         </tr>
 }

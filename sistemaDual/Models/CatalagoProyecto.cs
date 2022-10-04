@@ -17,9 +17,15 @@ namespace sistemaDual.Models
         public int ID { get; set; }
 
         [Required]
+        [StringLength(50)]
+        [Display(Name = "Nombre del proyecto")]
         public string Nombre { get; set; }
+
+        [StringLength(20)]
+        [Display(Name = "Etapa proyecto")]
         public string Etapa { get; set; }
 
+        [StringLength(20)]
         [Display(Name = "Area Conocimiento")]
         public string AreaConocimiento { get; set; }
 
@@ -35,16 +41,14 @@ namespace sistemaDual.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaTermino { get; set; }
 
-        [DisplayFormat(NullDisplayText = "No estatus")]
         public Estatus? Estatus { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaCambioEstatus { get; set; }
 
-        public int AlumnoDualID { get; set; }
-        public int EmpresaID { get; set; }
-        public int ProgramaEducativoID { get; set; }
+        public string AlumnoDualID { get; set; }
+        public string EmpresaID { get; set; }
 
         public ProgramaEducativo ProgramaEducativo { get; set; }
         public AlumnoDual AlumnoDual { get; set; }

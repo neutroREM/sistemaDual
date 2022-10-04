@@ -1,24 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace sistemaDual.Models
 {
     public class Universidad
     {
-        public int ID { get; set; }
 
         [Required]
         [StringLength(10)]
-        public string CCT { get; set; }
+        [Display(Name = "CCT")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string UniversidadID { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string Nombre { get; set; }
-        public int DomicilioID { get; set; }
-
-        public Domicilio Domicilio { get; set; }
+        [Display(Name = "Nombre Universidad")]
+        public string NombreU { get; set; }
 
         public ICollection<ProgramaEducativo> ProgramaEducativos { get; set; }
         public ICollection<ResponsableInstitucional> ResponsablesInstitucionales { get; set; }
+        public ICollection<Domicilio> Domicilios { get; set; }
     }
 }

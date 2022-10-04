@@ -24,12 +24,12 @@ namespace sistemaDual.Models
     }
     public class AlumnoDual
     {
-        public int ID { get; set; }
-
+      
         [Required]
         [StringLength(18)]
         [Display(Name = "CURP")]
-        public string Curp { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string AlumnoDualID { get; set; }
 
         [Required]
         [StringLength(10)]
@@ -37,27 +37,23 @@ namespace sistemaDual.Models
 
         [Required]
         [StringLength(20)]
-        [Column("NombreCompleto")]
         [Display(Name = "Nombre Completo")]
         public string Nombre { get; set; }
 
         [Required]
-        [StringLength(20)]
-        [Column("ApellidoPaterno")]
+        [StringLength(20)]      
         [Display(Name = "Apellido Paterno")]
         public string ApellidoP { get; set; }
 
         [Required]
         [StringLength(20)]
-        [Column("ApellidoMaterno")]
         [Display(Name = "Apellido Materno")]
         public string ApellidoM { get; set; }
 
         [Required]
-        [Phone]
         [StringLength(12)]
         public int Telefono { get; set; }
-
+        
         [Required]
         public Cuatrimestre Cuatrimestre { get; set; }
 
@@ -88,24 +84,15 @@ namespace sistemaDual.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaContratado { get; set; }
 
-        [Display(Name = "Nombre Completo")]
-        public string NombreComp
-        {
-            get
-            {
-                return Nombre + " " + ApellidoP + " " + ApellidoM;
-            }
-        }
-
-        public int DomicilioID { get; set; }
-        public int ProgramaEducativoID { get; set; }
-        public int BecaDualID { get; set; }
+        public int? ProgramaEducativoID { get; set; }
+        public int? BecaDualID { get; set; }
 
         public BecaDual BecaDual { get; set; }
         public ProgramaEducativo ProgramaEducativo { get; set; }
-        public Domicilio Domicilio { get; set; }
 
+        public ICollection<Domicilio> Domicilios { get; set; }
         public ICollection<AlumnoMentor> AlumnoMentores { get; set; }
+        public ICollection<AlumnoAsignatura> AlumnoAsignaturas { get; set; }
         public ICollection<CatalagoProyecto> CatalagoProyectos { get; set; }
 
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using sistemaDual.Data;
 using sistemaDual.Models;
+using sistemaDual.Models.ViewModels;
 
 namespace sistemaDual.Controllers
 {
@@ -22,7 +23,8 @@ namespace sistemaDual.Controllers
         // GET: Domicilios
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Domicilios.ToListAsync());
+            var programaDualContext = _context.Domicilios.Include(d => d.AlumnoDual).Include(d => d.Empresa).Include(d => d.Universidad);
+            return View(await programaDualContext.ToListAsync());
         }
 
         // GET: Domicilios/Details/5
@@ -34,10 +36,10 @@ namespace sistemaDual.Controllers
             }
 
             var domicilio = await _context.Domicilios
-                .Include(s => s.Universidades)
-                    .ThenInclude(e => e.ProgramaEducativos)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .Include(d => d.AlumnoDual)
+                .Include(d => d.Empresa)
+                .Include(d => d.Universidad)
+                .FirstOrDefaultAsync(m => m.DomicilioID == id);
             if (domicilio == null)
             {
                 return NotFound();
@@ -49,23 +51,33 @@ namespace sistemaDual.Controllers
         // GET: Domicilios/Create
         public IActionResult Create()
         {
+            ViewData["AlumnoDualID"] = new SelectList(_context.AlumnosDuales, "AlumnoDualID", "AlumnoDualID");
+            ViewData["EmpresaID"] = new SelectList(_context.Empresas, "EmpresaID", "EmpresaID");
+            ViewData["UniversidadID"] = new SelectList(_context.Universidades, "UniversidadID", "UniversidadID");
             return View();
         }
 
         // POST: Domicilios/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Direccion,Colonia,Municipio,CodigoPostal,Otros")] Domicilio domicilio)
+        public async Task<IActionResult> Create([Bind("DomicilioID,Direccion,Colonia,Municipio,CodigoPostal,Otros,AlumnoDualID,UniversidadID,EmpresaID")] DomicilioViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(domicilio);
+                var domi = new Domicilio(){
+                    Direccion = model.Direccion,
+                    Colonia = model.Colonia,
+                    Municipio = model.Municipio,
+                    CodigoPostal = model.CodigoPostal,
+                    Otros = model.Otros,
+                    
+                };
+                _context.Add(domi);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(domicilio);
+            
+            return View(model);
         }
 
         // GET: Domicilios/Edit/5
@@ -81,6 +93,9 @@ namespace sistemaDual.Controllers
             {
                 return NotFound();
             }
+            ViewData["AlumnoDualID"] = new SelectList(_context.AlumnosDuales, "AlumnoDualID", "AlumnoDualID", domicilio.AlumnoDualID);
+            ViewData["EmpresaID"] = new SelectList(_context.Empresas, "EmpresaID", "EmpresaID", domicilio.EmpresaID);
+            ViewData["UniversidadID"] = new SelectList(_context.Universidades, "UniversidadID", "UniversidadID", domicilio.UniversidadID);
             return View(domicilio);
         }
 
@@ -89,9 +104,9 @@ namespace sistemaDual.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Direccion,Colonia,Municipio,CodigoPostal,Otros")] Domicilio domicilio)
+        public async Task<IActionResult> Edit(int id, DomicilioViewModel model)
         {
-            if (id != domicilio.ID)
+            if (id != model.DomicilioID)
             {
                 return NotFound();
             }
@@ -100,12 +115,23 @@ namespace sistemaDual.Controllers
             {
                 try
                 {
-                    _context.Update(domicilio);
+                    var editDomi = new Domicilio()
+                    {
+                        Direccion = model.Direccion,
+                        Colonia = model.Colonia,
+                        Municipio = model.Municipio,
+                        CodigoPostal = model.CodigoPostal,
+                        Otros = model.Otros,
+                        UniversidadID = model.UniversidadID,
+
+                    };
+                    _context.Update(editDomi);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DomicilioExists(domicilio.ID))
+                    if (!DomicilioExists(model.DomicilioID))
                     {
                         return NotFound();
                     }
@@ -116,7 +142,8 @@ namespace sistemaDual.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(domicilio);
+            
+            return View(model);
         }
 
         // GET: Domicilios/Delete/5
@@ -128,7 +155,10 @@ namespace sistemaDual.Controllers
             }
 
             var domicilio = await _context.Domicilios
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .Include(d => d.AlumnoDual)
+                .Include(d => d.Empresa)
+                .Include(d => d.Universidad)
+                .FirstOrDefaultAsync(m => m.DomicilioID == id);
             if (domicilio == null)
             {
                 return NotFound();
@@ -158,7 +188,7 @@ namespace sistemaDual.Controllers
 
         private bool DomicilioExists(int id)
         {
-          return _context.Domicilios.Any(e => e.ID == id);
+          return _context.Domicilios.Any(e => e.DomicilioID == id);
         }
     }
 }

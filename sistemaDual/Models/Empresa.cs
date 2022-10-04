@@ -5,45 +5,39 @@ namespace sistemaDual.Models
 {
     public class Empresa
     {
-        public int ID { get; set; }
-
+      
         [Required]
-        [Display(Name = "RFC")]
         [StringLength(13)]
-        public string Rfc { get; set; }
+        [Display(Name = "RFC")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string EmpresaID { get; set; }
 
         [Required]
-        [Column("RazonSocial")]
         [Display(Name = "Razon Social")]
         [StringLength(30)]
-        public string Razon { get; set; }
+        public string RazonS { get; set; }
 
         [Required]
-        [Column("NombreComercial")]
         [Display(Name = "Nombre Comercial")]
         [StringLength(30)]
-        public string Nombre { get; set; }
+        public string NombreC { get; set; }
 
         [Required]
         [Display(Name = "Sector Social")]
         [StringLength(30)]
-        public string Sector { get; set; }
+        public string SectorS { get; set; }
 
         [Required]
-        [Column("RepresentanteLegal")]
         [Display(Name = "Representante Legal")]
         [StringLength(30)]
-        public string Representante { get; set; }
+        public string RepresentanteL { get; set; }
 
         [Required]
-        [Column("CorreoRepresentante")]
         [Display(Name = "Correo Representante")]
         [EmailAddress]
-        public string Correo { get; set; }
-        public int DomicilioID { get; set; }
-
-        public Domicilio Domicilio { get; set; }
-
+        public string CorreoR { get; set; }
+      
+        public ICollection<Domicilio> Domicilios { get; set; }
         public ICollection<MentorEmpresarial> MentoresEmpresariales { get; set; }
         public ICollection<CatalagoProyecto> CatalagoProyectos { get; set; }
 

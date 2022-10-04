@@ -1,4 +1,5 @@
-﻿@model sistemaDual.Models.Domicilio
+﻿@using sistemaDual.Models.ViewModels
+@model DomicilioViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -37,6 +38,12 @@
                 <input asp-for="Otros" class="form-control" />
                 <span asp-validation-for="Otros" class="text-danger"></span>
             </div>
+            
+            <div class="form-group">
+                <label asp-for="UniversidadID" class="control-label"></label>
+                <select asp-for="UniversidadID" class ="form-control" asp-items="ViewBag.UniversidadID"></select>
+            </div>
+       
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

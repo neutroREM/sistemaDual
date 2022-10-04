@@ -9,7 +9,7 @@ namespace sistemaDual.Models
     }
     public class BecaDual
     {
-        public int ID { get; set; }
+        public int BecaDUalID { get; set; }
 
         public string Fuente { get; set; }
         public TipoBeca TipoBeca { get; set; }

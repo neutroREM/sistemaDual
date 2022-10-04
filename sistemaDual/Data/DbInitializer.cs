@@ -8,26 +8,14 @@ namespace sistemaDual.Data
         {
             context.Database.EnsureCreated();
 
-            if (context.Universidades.Any() || context.ProgramasEducativos.Any() || context.Domicilios.Any())
+            if (context.Universidades.Any() || context.Domicilios.Any())
             {
                 return;
             }
 
-
-            var domicilios = new Domicilio[]
-            {
-                new Domicilio{Direccion="Prolongacion 5 de Mayo #10", Colonia="Felipe Villanueva", Municipio="Tecamac", CodigoPostal="55740", Otros="No"}
-            };
-            foreach (Domicilio d in domicilios)
-            {
-                context.Domicilios.Add(d);
-            }
-            context.SaveChanges();
-
-
             var universidades = new Universidad[]
             {
-                new Universidad{CCT="15EPO0003Y", Nombre="Universidad Politecnica de Tecamac", DomicilioID=1}
+                new Universidad{UniversidadID="15EPO0003Y", NombreU="Universidad Politecnica de Tecamac"}
             };
             foreach(Universidad u in universidades)
             {
@@ -36,15 +24,7 @@ namespace sistemaDual.Data
             context.SaveChanges();
 
 
-            var programasEducativos = new ProgramaEducativo[]
-            {
-                new ProgramaEducativo{Nombre="Educacion Dual", Version="Primera", UniversidadID=1}
-            };
-            foreach (ProgramaEducativo p in programasEducativos)
-            {
-                context.ProgramasEducativos.Add(p);
-            }
-            context.SaveChanges();
+           
         }
     }
 }
