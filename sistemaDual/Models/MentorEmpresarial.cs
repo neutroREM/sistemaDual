@@ -34,8 +34,8 @@ namespace sistemaDual.Models
         [StringLength(30)]
         public string Cargo { get; set; }
 
-        public int EmpresaID { get; set; }
-        public Empresa Empresa { get; set; }
+        public string? EmpresaID { get; set; }
+        public Empresa? Empresa { get; set; }
 
         public ICollection<AlumnoMentor> AlumnoMentores { get; set; }
 

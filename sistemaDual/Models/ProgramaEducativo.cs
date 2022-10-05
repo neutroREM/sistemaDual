@@ -19,11 +19,10 @@ namespace sistemaDual.Models
         [StringLength(15)]
         public string Version { get; set; }
 
-        public int UniversidadID { get; set; }
-        public Universidad Universidad { get; set; }
+        public string? UniversidadID { get; set; }
+        public Universidad? Universidad { get; set; }
 
         public ICollection<AlumnoDual> AlumnosDuales { get; set; }
-        public ICollection<MentorEmpresarial> MentoresEmpresariales { get; set; }
         public ICollection<MentorAcademico> MentoresAcademicos { get; set; }
         public ICollection<AsesorInstitucional> AsesoresInstitucionales { get; set; }
 

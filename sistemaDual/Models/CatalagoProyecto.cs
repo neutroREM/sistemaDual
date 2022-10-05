@@ -47,12 +47,11 @@ namespace sistemaDual.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaCambioEstatus { get; set; }
 
-        public string AlumnoDualID { get; set; }
-        public string EmpresaID { get; set; }
-
-        public ProgramaEducativo ProgramaEducativo { get; set; }
-        public AlumnoDual AlumnoDual { get; set; }
-        public Empresa Empresa { get; set; }
+        public string? AlumnoDualID { get; set; }
+        public string? EmpresaID { get; set; }
+        
+        public AlumnoDual? AlumnoDual { get; set; }
+        public Empresa? Empresa { get; set; }
 
     }
 }

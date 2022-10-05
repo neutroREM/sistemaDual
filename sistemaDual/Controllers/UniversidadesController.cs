@@ -20,10 +20,11 @@ namespace sistemaDual.Controllers
             _context = context;
         }
 
-        // GET: Universidades
+        // Mostrar Universidades
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Universidades.ToListAsync());
+            var programaDualContext = _context.Universidades.Include(u => u.Domicilio);
+            return View(await programaDualContext.ToListAsync());
         }
 
         // GET: Universidades/Details/5
@@ -35,6 +36,7 @@ namespace sistemaDual.Controllers
             }
 
             var universidad = await _context.Universidades
+                .Include(u => u.Domicilio)
                 .FirstOrDefaultAsync(m => m.UniversidadID == id);
             if (universidad == null)
             {
@@ -47,26 +49,30 @@ namespace sistemaDual.Controllers
         // GET: Universidades/Create
         public IActionResult Create()
         {
+            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomiclioID");
             return View();
         }
 
-        //
+        // POST: Universidades/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UniversidadID,NombreU")] UniversidadViewModel model)
+        public async Task<IActionResult> Create([Bind("UniversidadID,NombreU,DomicilioID")] UniversidadViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var uni = new Universidad()
+                var alumnoD = new Universidad()
                 {
                     UniversidadID = model.UniversidadID,
-                    NombreU = model.NombreU
+                    NombreU = model.NombreU,
+                    DomicilioID = model.DomicilioID
                 };
-               
-                _context.Add(uni);
+                _context.Add(alumnoD);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(model);
         }
 
@@ -83,6 +89,7 @@ namespace sistemaDual.Controllers
             {
                 return NotFound();
             }
+            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", universidad.DomicilioID);
             return View(universidad);
         }
 
@@ -91,9 +98,9 @@ namespace sistemaDual.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("UniversidadID,NombreU")] UniversidadViewModel viewModel)
+        public async Task<IActionResult> Edit(string id, [Bind("UniversidadID,NombreU,DomicilioID")] Universidad universidad)
         {
-            if (id != viewModel.UniversidadID)
+            if (id != universidad.UniversidadID)
             {
                 return NotFound();
             }
@@ -102,18 +109,12 @@ namespace sistemaDual.Controllers
             {
                 try
                 {
-                    var editUni = new Universidad()
-                    {
-                        UniversidadID = viewModel.UniversidadID,
-                        NombreU = viewModel.NombreU
-                    };
-                    _context.Update(editUni);
+                    _context.Update(universidad);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UniversidadExists(viewModel.UniversidadID))
+                    if (!UniversidadExists(universidad.UniversidadID))
                     {
                         return NotFound();
                     }
@@ -124,7 +125,8 @@ namespace sistemaDual.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(viewModel);
+            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", universidad.DomicilioID);
+            return View(universidad);
         }
 
         // GET: Universidades/Delete/5
@@ -136,6 +138,7 @@ namespace sistemaDual.Controllers
             }
 
             var universidad = await _context.Universidades
+                .Include(u => u.Domicilio)
                 .FirstOrDefaultAsync(m => m.UniversidadID == id);
             if (universidad == null)
             {

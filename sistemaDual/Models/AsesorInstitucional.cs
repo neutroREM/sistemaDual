@@ -27,7 +27,7 @@ namespace sistemaDual.Models
         public string ApellidoM { get; set; }
 
 
-        public int ProgramaEducativoID { get; set; }
-        public ProgramaEducativo ProgramaEducativo { get; set; }
+        public int? ProgramaEducativoID { get; set; }
+        public ProgramaEducativo? ProgramaEducativo { get; set; }
     }
 }

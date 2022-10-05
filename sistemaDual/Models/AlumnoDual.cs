@@ -86,11 +86,13 @@ namespace sistemaDual.Models
 
         public int? ProgramaEducativoID { get; set; }
         public int? BecaDualID { get; set; }
+        public int? DomicilioID { get; set; }
 
-        public BecaDual BecaDual { get; set; }
-        public ProgramaEducativo ProgramaEducativo { get; set; }
+        public Domicilio? Domicilio { get; set; }
+        public BecaDual? BecaDual { get; set; }
+        public ProgramaEducativo? ProgramaEducativo { get; set; }
 
-        public ICollection<Domicilio> Domicilios { get; set; }
+        
         public ICollection<AlumnoMentor> AlumnoMentores { get; set; }
         public ICollection<AlumnoAsignatura> AlumnoAsignaturas { get; set; }
         public ICollection<CatalagoProyecto> CatalagoProyectos { get; set; }

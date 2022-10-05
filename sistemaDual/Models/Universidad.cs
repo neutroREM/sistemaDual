@@ -18,8 +18,11 @@ namespace sistemaDual.Models
         [Display(Name = "Nombre Universidad")]
         public string NombreU { get; set; }
 
+        public int? DomicilioID { get; set; }
+        public Domicilio? Domicilio { get; set; }
+
         public ICollection<ProgramaEducativo> ProgramaEducativos { get; set; }
         public ICollection<ResponsableInstitucional> ResponsablesInstitucionales { get; set; }
-        public ICollection<Domicilio> Domicilios { get; set; }
+        
     }
 }

@@ -27,15 +27,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Otros)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlumnoDual)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Universidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -56,15 +47,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Otros)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlumnoDual.AlumnoDualID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Universidad.UniversidadID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Empresa.EmpresaID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.DomicilioID">Edit</a> |

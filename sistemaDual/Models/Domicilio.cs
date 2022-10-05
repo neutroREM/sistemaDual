@@ -16,12 +16,8 @@ namespace sistemaDual.Models
         [StringLength(30)]
         public string? Otros { get; set; }
 
-        public string? AlumnoDualID { get; set; }
-        public string? UniversidadID { get; set; }
-        public string? EmpresaID { get; set; }
-
-        public AlumnoDual AlumnoDual { get; set; }
-        public Universidad Universidad { get; set; }
-        public Empresa Empresa { get; set; }
+        public ICollection<AlumnoDual> AlumnosDual { get; set; }
+        public ICollection<Empresa> Empresas { get; set; }
+        public ICollection<Universidad> Universidades { get; set; }
     }
 }

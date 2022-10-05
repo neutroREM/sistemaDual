@@ -13,6 +13,8 @@
         public string Competencia { get; set; }
         public string Actividad { get; set; }
 
+        public ICollection<AlumnoAsignatura> AlumnoAsignaturas { get; set; }
+
 
     }
 }
