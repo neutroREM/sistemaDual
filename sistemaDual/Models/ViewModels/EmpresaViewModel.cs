@@ -14,6 +14,6 @@
 
         public string CorreoR { get; set; }
 
-        public int? DomicilioID { get; set; }
+        public int DomicilioID { get; set; }
     }
 }

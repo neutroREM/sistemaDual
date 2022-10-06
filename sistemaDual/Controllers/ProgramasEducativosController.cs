@@ -11,11 +11,11 @@ using sistemaDual.Models.ViewModels;
 
 namespace sistemaDual.Controllers
 {
-    public class ProgramaEducativoesController : Controller
+    public class ProgramasEducativosController : Controller
     {
         private readonly ProgramaDualContext _context;
 
-        public ProgramaEducativoesController(ProgramaDualContext context)
+        public ProgramasEducativosController(ProgramaDualContext context)
         {
             _context = context;
         }

@@ -9,7 +9,7 @@ namespace sistemaDual.Models.ViewModels
 
         public string NombreU { get; set; }
 
-        public int? DomicilioID { get; set; }
+        public int DomicilioID { get; set; }
         
 
         

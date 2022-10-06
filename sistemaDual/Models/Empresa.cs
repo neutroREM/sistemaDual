@@ -37,8 +37,8 @@ namespace sistemaDual.Models
         [EmailAddress]
         public string CorreoR { get; set; }
       
-        public int? DomicilioID { get; set; }
-        public Domicilio? Domicilio { get; set; }
+        public int DomicilioID { get; set; }
+        public Domicilio Domicilio { get; set; }
         
         public ICollection<MentorEmpresarial> MentoresEmpresariales { get; set; }
         public ICollection<CatalagoProyecto> CatalagoProyectos { get; set; }

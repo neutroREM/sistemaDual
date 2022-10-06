@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace sistemaDual.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDB : Migration
+    public partial class DBcontext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -88,7 +88,7 @@ namespace sistemaDual.Migrations
                 {
                     UniversidadID = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     NombreU = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    DomicilioID = table.Column<int>(type: "int", nullable: true)
+                    DomicilioID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,7 +97,8 @@ namespace sistemaDual.Migrations
                         name: "FK_Universidad_Domicilio_DomicilioID",
                         column: x => x.DomicilioID,
                         principalTable: "Domicilio",
-                        principalColumn: "DomicilioID");
+                        principalColumn: "DomicilioID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -130,15 +131,14 @@ namespace sistemaDual.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Version = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    UniversidadID = table.Column<int>(type: "int", nullable: true),
-                    UniversidadID1 = table.Column<string>(type: "nvarchar(10)", nullable: true)
+                    UniversidadID = table.Column<string>(type: "nvarchar(10)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProgramaEducativo", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_ProgramaEducativo_Universidad_UniversidadID1",
-                        column: x => x.UniversidadID1,
+                        name: "FK_ProgramaEducativo_Universidad_UniversidadID",
+                        column: x => x.UniversidadID,
                         principalTable: "Universidad",
                         principalColumn: "UniversidadID");
                 });
@@ -387,9 +387,9 @@ namespace sistemaDual.Migrations
                 column: "EmpresaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgramaEducativo_UniversidadID1",
+                name: "IX_ProgramaEducativo_UniversidadID",
                 table: "ProgramaEducativo",
-                column: "UniversidadID1");
+                column: "UniversidadID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ResponsableInstitucional_UniversidadID1",

@@ -14,6 +14,11 @@ namespace sistemaDual.Models
         [Required]
         [StringLength(20)]
         [Display(Name = "Apellido Paterno")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        [Display(Name = "Apellido Paterno")]
         public string ApellidoP { get; set; }
 
         [Required]
@@ -34,8 +39,8 @@ namespace sistemaDual.Models
         [StringLength(30)]
         public string Cargo { get; set; }
 
-        public string? EmpresaID { get; set; }
-        public Empresa? Empresa { get; set; }
+        public string EmpresaID { get; set; }
+        public Empresa Empresa { get; set; }
 
         public ICollection<AlumnoMentor> AlumnoMentores { get; set; }
 

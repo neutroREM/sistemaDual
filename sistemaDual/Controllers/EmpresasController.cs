@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using sistemaDual.Data;
 using sistemaDual.Models;
+using sistemaDual.Models.ViewModels;
 
 namespace sistemaDual.Controllers
 {
@@ -57,16 +58,26 @@ namespace sistemaDual.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmpresaID,RazonS,NombreC,SectorS,RepresentanteL,CorreoR,DomicilioID")] Empresa empresa)
+        public async Task<IActionResult> Create([Bind("EmpresaID,RazonS,NombreC,SectorS,RepresentanteL,CorreoR,DomicilioID")] EmpresaViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var empresa = new Empresa()
+                {
+                    EmpresaID = model.EmpresaID,
+                    RazonS = model.RazonS,
+                    NombreC = model.NombreC,
+                    SectorS = model.SectorS,
+                    RepresentanteL = model.RepresentanteL,
+                    CorreoR = model.RepresentanteL,
+                    DomicilioID = model.DomicilioID
+                };
                 _context.Add(empresa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", empresa.DomicilioID);
-            return View(empresa);
+            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", model.DomicilioID);
+            return View(model);
         }
 
         // GET: Empresas/Edit/5

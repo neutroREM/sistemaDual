@@ -20,14 +20,14 @@ namespace sistemaDual.Controllers
             _context = context;
         }
 
-        // Mostrar Universidades
+        // GET: Universidads
         public async Task<IActionResult> Index()
         {
             var programaDualContext = _context.Universidades.Include(u => u.Domicilio);
             return View(await programaDualContext.ToListAsync());
         }
 
-        // GET: Universidades/Details/5
+        // GET: Universidads/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.Universidades == null)
@@ -46,14 +46,14 @@ namespace sistemaDual.Controllers
             return View(universidad);
         }
 
-        // GET: Universidades/Create
+        // GET: Universidads/Create
         public IActionResult Create()
         {
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomiclioID");
+            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID");
             return View();
         }
 
-        // POST: Universidades/Create
+        // POST: Universidads/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -62,21 +62,21 @@ namespace sistemaDual.Controllers
         {
             if (ModelState.IsValid)
             {
-                var alumnoD = new Universidad()
+                var uni = new Universidad()
                 {
                     UniversidadID = model.UniversidadID,
                     NombreU = model.NombreU,
-                    DomicilioID = model.DomicilioID
+                    DomicilioID = model.DomicilioID,
                 };
-                _context.Add(alumnoD);
+                _context.Add(uni);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
+            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", model.DomicilioID);
             return View(model);
         }
 
-        // GET: Universidades/Edit/5
+        // GET: Universidads/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Universidades == null)
@@ -93,7 +93,7 @@ namespace sistemaDual.Controllers
             return View(universidad);
         }
 
-        // POST: Universidades/Edit/5
+        // POST: Universidads/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -129,7 +129,7 @@ namespace sistemaDual.Controllers
             return View(universidad);
         }
 
-        // GET: Universidades/Delete/5
+        // GET: Universidads/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Universidades == null)
@@ -148,7 +148,7 @@ namespace sistemaDual.Controllers
             return View(universidad);
         }
 
-        // POST: Universidades/Delete/5
+        // POST: Universidads/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)

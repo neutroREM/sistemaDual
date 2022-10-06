@@ -1,0 +1,125 @@
+﻿@model IEnumerable<sistemaDual.Models.AlumnoDual>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Matricula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidoP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidoM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cuatrimestre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Promedio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaIngreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaReingreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEgreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaContratado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Domicilio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BecaDual)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramaEducativo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Matricula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApellidoP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApellidoM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cuatrimestre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Promedio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaReingreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaEgreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaContratado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Domicilio.DomicilioID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BecaDual.BecaDUalID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramaEducativo.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AlumnoDualID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AlumnoDualID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AlumnoDualID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
