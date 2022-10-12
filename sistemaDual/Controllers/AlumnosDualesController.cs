@@ -62,7 +62,7 @@ namespace sistemaDual.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AlumnoDualID,Matricula,Nombre,ApellidoP,ApellidoM,Telefono,Cuatrimestre,Tipo,Promedio,FechaRegistro,FechaIngreso,FechaReingreso,FechaEgreso,FechaContratado,ProgramaEducativoID,BecaDualID,DomicilioID")] AlumnoDualViewModel model)
+        public async Task<IActionResult> Create([Bind("AlumnoDualID,Matricula,Nombre,ApellidoP,ApellidoM,Telefono,Cuatrimestre,Tipo,Promedio,FechaRegistro")] AlumnoDualViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -78,19 +78,14 @@ namespace sistemaDual.Controllers
                     Tipo = model.Tipo,
                     Promedio = model.Promedio,
                     FechaRegistro = model.FechaRegistro,
-                    FechaIngreso = model.FechaIngreso,
-                    FechaReingreso = model.FechaReingreso,
-                    FechaEgreso = model.FechaEgreso,
-                    FechaContratado = model.FechaContratado,
-                    ProgramaEducativoID = model.ProgramaEducativoID,
-                    BecaDualID = model.BecaDualID,
-                    DomicilioID = model.DomicilioID
+
 
                 };
                 _context.Add(alumnoD);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["BecaDualID"] = new SelectList(_context.BecasDuales, "BecaDUalID", "BecaDUalID", model.BecaDualID);
             ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", model.DomicilioID);
             ViewData["ProgramaEducativoID"] = new SelectList(_context.ProgramasEducativos, "ID", "Nombre", model.ProgramaEducativoID);

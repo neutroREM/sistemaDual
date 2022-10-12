@@ -58,21 +58,78 @@ namespace sistemaDual.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UniversidadID,NombreU,DomicilioID")] UniversidadViewModel model)
+        public async Task<IActionResult> Create([Bind("UniversidadID,NombreU,Direccion,Colonia,Municipio,CodigoPostal,NombrePE,Version")] UniversidadViewModel model)
         {
             if (ModelState.IsValid)
             {
+                string idU = model.UniversidadID;
+                string nomU = model.NombreU;
+                
+
+                string dir = model.Direccion;
+                string col = model.Colonia;
+                string mun = model.Municipio;
+                string cp = model.CodigoPostal;
+
+                string nomPE = model.NombrePE;
+                string ver = model.Version;
+
+                /*
+                string idR = model.ResposableID;
+                string nomR = model.NombreRI;
+                string ap = model.ApellidoP;
+                string am = model.ApellidoM;
+                string correo = model.Correo;
+                int tel = model.Telefono;
+                string cargo = model.Cargo;
+                */
+                var domi = new Domicilio()
+                {
+
+                    Direccion = dir,
+                    Colonia = col,
+                    Municipio = mun,
+                    CodigoPostal = cp
+                };
+                _context.Add(domi);
+                await _context.SaveChangesAsync();
+
+
                 var uni = new Universidad()
                 {
-                    UniversidadID = model.UniversidadID,
-                    NombreU = model.NombreU,
-                    DomicilioID = model.DomicilioID,
+                    UniversidadID = idU,
+                    NombreU = nomU,
+                    DomicilioID = domi.DomicilioID
                 };
                 _context.Add(uni);
                 await _context.SaveChangesAsync();
+
+                var pe = new ProgramaEducativo()
+                {
+                    Nombre = nomPE,
+                    Version = ver,
+                    UniversidadID = idU
+                };
+                _context.Add(pe);
+                await _context.SaveChangesAsync();
+                /*
+                var ri = new ResponsableInstitucional()
+                {
+                    ResponsableInstitucionalID = idR,
+                    Nombre = nomR,
+                    ApellidoM = am,
+                    ApellidoP = ap,
+                    Correo = correo,
+                    Telefono = tel,
+                    Cargo = cargo,
+                    UniversidadID = idU
+                };
+                _context.Add(ri);
+                await _context.SaveChangesAsync();
+                */
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", model.DomicilioID);
+            
             return View(model);
         }
 

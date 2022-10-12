@@ -408,6 +408,11 @@ namespace sistemaDual.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(13)");
 
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<int>("Telefono")
                         .HasMaxLength(12)
                         .HasColumnType("int");

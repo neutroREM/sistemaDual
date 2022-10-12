@@ -58,25 +58,48 @@ namespace sistemaDual.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmpresaID,RazonS,NombreC,SectorS,RepresentanteL,CorreoR,DomicilioID")] EmpresaViewModel model)
+        public async Task<IActionResult> Create([Bind("EmpresaID,RazonS,NombreC,SectorS,RepresentanteL,CorreoR,Direccion,Colonia,Municipio,CodigoPostal")] EmpresaViewModel model)
         {
             if (ModelState.IsValid)
             {
+                string empID = model.EmpresaID;
+                string rs = model.RazonS;
+                string nomC = model.NombreC;
+                string sectS = model.SectorS;
+                string repL = model.RepresentanteL;
+                string correoR = model.RepresentanteL;
+
+                string dir = model.Direccion;
+                string col = model.Colonia;
+                string mun = model.Municipio;
+                string cp = model.CodigoPostal;
+
+                var domi = new Domicilio()
+                {
+
+                    Direccion = dir,
+                    Colonia = col,
+                    Municipio = mun,
+                    CodigoPostal = cp
+                };
+                _context.Add(domi);
+                await _context.SaveChangesAsync();
+
                 var empresa = new Empresa()
                 {
-                    EmpresaID = model.EmpresaID,
-                    RazonS = model.RazonS,
-                    NombreC = model.NombreC,
-                    SectorS = model.SectorS,
-                    RepresentanteL = model.RepresentanteL,
-                    CorreoR = model.RepresentanteL,
-                    DomicilioID = model.DomicilioID
+                    EmpresaID = empID,
+                    RazonS = rs,
+                    NombreC = nomC,
+                    SectorS = sectS,
+                    RepresentanteL = repL,
+                    CorreoR = correoR,
+                    DomicilioID = domi.DomicilioID
                 };
                 _context.Add(empresa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", model.DomicilioID);
+            
             return View(model);
         }
 
