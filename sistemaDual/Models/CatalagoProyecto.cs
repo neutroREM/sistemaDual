@@ -2,16 +2,7 @@
 
 namespace sistemaDual.Models
 {
-    public enum Estatus
-    {
-        Activo,
-        Egresado,
-        BajaDefinitivaMED,
-        BajaTemporalMED,
-        BajaDefinitivaIES,
-        BajaTemporalIES
-
-    }
+   
     public class CatalagoProyecto
     {
         public int ID { get; set; }
@@ -40,8 +31,6 @@ namespace sistemaDual.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaTermino { get; set; }
-
-        public Estatus? Estatus { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

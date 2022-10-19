@@ -24,6 +24,9 @@ namespace sistemaDual.Data
         public DbSet<AlumnoMentor> AlumnosMentores { get; set; }
         public DbSet<CatalagoProyecto> CatalagoProyectos { get; set; }
         public DbSet<AlumnoAsignatura> AlumnoAsignaturas { get; set; }
+        public DbSet<Estatus> Estatutos { get; set; }
+        public DbSet<Configuracion> Configuraciones { get; set; }
+        public DbSet<Rol> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,7 +35,7 @@ namespace sistemaDual.Data
             modelBuilder.Entity<ProgramaEducativo>().ToTable("ProgramaEducativo");
             modelBuilder.Entity<Universidad>().ToTable("Universidad");
             modelBuilder.Entity<AsesorInstitucional>().ToTable("AsesorInstitucional");
-            modelBuilder.Entity<Asignatura>().ToTable("Asignatura");
+            modelBuilder.Entity<Asignatura>().ToTable("AsignaturaAD");
             modelBuilder.Entity<BecaDual>().ToTable("BecaDual");
             modelBuilder.Entity<Empresa>().ToTable("Empresa");
             modelBuilder.Entity<MentorAcademico>().ToTable("MentorAcademico");
@@ -43,6 +46,17 @@ namespace sistemaDual.Data
             modelBuilder.Entity<CatalagoProyecto>().ToTable("CatalagoProyecto");
             modelBuilder.Entity<AlumnoAsignatura>()
                 .HasKey(c => new { c.AlumnoDualID, c.AsignaturaID });
+            modelBuilder.Entity<Estatus>().ToTable("EstatusAD");
+            modelBuilder.Entity<Configuracion>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToTable("Configuracion");
+            });
+            modelBuilder.Entity<Rol>(entity =>
+            {
+               
+                entity.ToTable("Rol");
+            });
         }
     }
 }

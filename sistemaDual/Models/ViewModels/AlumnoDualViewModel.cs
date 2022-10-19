@@ -14,7 +14,19 @@ namespace sistemaDual.Models.ViewModels
 
         public string ApellidoM { get; set; }
 
+        public string Direccion { get; set; }
+
+        public string Colonia { get; set; }
+
+        public string Municipio { get; set; }
+
+        public string CodigoPostal { get; set; }
+
         public int Telefono { get; set; }
+
+        public string Correo { get; set; }
+
+        public string Clave { get; set; }
 
         public Cuatrimestre Cuatrimestre { get; set; }
 
@@ -35,5 +47,9 @@ namespace sistemaDual.Models.ViewModels
         public int ProgramaEducativoID { get; set; }
         public int BecaDualID { get; set; }
         public int DomicilioID { get; set; }
+        public int RolID { get; set; }
+        public int EstatusID { get; set; }
+
+        public int? EsActivo { get; set; }
     }
 }

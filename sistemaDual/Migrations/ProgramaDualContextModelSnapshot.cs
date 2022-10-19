@@ -62,10 +62,17 @@ namespace sistemaDual.Migrations
                     b.Property<int?>("BecaDualID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Correo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Cuatrimestre")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DomicilioID")
+                    b.Property<int>("DomicilioID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EstatusID")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("FechaContratado")
@@ -99,6 +106,9 @@ namespace sistemaDual.Migrations
                     b.Property<double>("Promedio")
                         .HasColumnType("float");
 
+                    b.Property<int?>("RolID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Telefono")
                         .HasMaxLength(12)
                         .HasColumnType("int");
@@ -112,7 +122,11 @@ namespace sistemaDual.Migrations
 
                     b.HasIndex("DomicilioID");
 
+                    b.HasIndex("EstatusID");
+
                     b.HasIndex("ProgramaEducativoID");
+
+                    b.HasIndex("RolID");
 
                     b.ToTable("AlumnoDual", (string)null);
                 });
@@ -188,7 +202,7 @@ namespace sistemaDual.Migrations
 
                     b.HasKey("AsignaturaID");
 
-                    b.ToTable("Asignatura", (string)null);
+                    b.ToTable("AsignaturaAD", (string)null);
                 });
 
             modelBuilder.Entity("sistemaDual.Models.BecaDual", b =>
@@ -237,9 +251,6 @@ namespace sistemaDual.Migrations
                     b.Property<string>("EmpresaID")
                         .HasColumnType("nvarchar(13)");
 
-                    b.Property<int?>("Estatus")
-                        .HasColumnType("int");
-
                     b.Property<string>("Etapa")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -269,6 +280,20 @@ namespace sistemaDual.Migrations
                     b.HasIndex("EmpresaID");
 
                     b.ToTable("CatalagoProyecto", (string)null);
+                });
+
+            modelBuilder.Entity("sistemaDual.Models.Configuracion", b =>
+                {
+                    b.Property<string>("Propiedad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Recurso")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Valor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Configuracion", (string)null);
                 });
 
             modelBuilder.Entity("sistemaDual.Models.Domicilio", b =>
@@ -348,6 +373,23 @@ namespace sistemaDual.Migrations
                     b.ToTable("Empresa", (string)null);
                 });
 
+            modelBuilder.Entity("sistemaDual.Models.Estatus", b =>
+                {
+                    b.Property<int>("EstatusID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EstatusID"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EstatusID");
+
+                    b.ToTable("EstatusAD", (string)null);
+                });
+
             modelBuilder.Entity("sistemaDual.Models.MentorAcademico", b =>
                 {
                     b.Property<string>("MentorAcademicoID")
@@ -363,6 +405,10 @@ namespace sistemaDual.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Correo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -496,6 +542,28 @@ namespace sistemaDual.Migrations
                     b.ToTable("ResponsableInstitucional", (string)null);
                 });
 
+            modelBuilder.Entity("sistemaDual.Models.Rol", b =>
+                {
+                    b.Property<int>("RolID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RolID"));
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("EsActivo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("RolID");
+
+                    b.ToTable("Rol", (string)null);
+                });
+
             modelBuilder.Entity("sistemaDual.Models.Universidad", b =>
                 {
                     b.Property<string>("UniversidadID")
@@ -544,17 +612,31 @@ namespace sistemaDual.Migrations
 
                     b.HasOne("sistemaDual.Models.Domicilio", "Domicilio")
                         .WithMany("AlumnosDual")
-                        .HasForeignKey("DomicilioID");
+                        .HasForeignKey("DomicilioID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("sistemaDual.Models.Estatus", "Estatus")
+                        .WithMany("AlumnosDuales")
+                        .HasForeignKey("EstatusID");
 
                     b.HasOne("sistemaDual.Models.ProgramaEducativo", "ProgramaEducativo")
                         .WithMany("AlumnosDuales")
                         .HasForeignKey("ProgramaEducativoID");
 
+                    b.HasOne("sistemaDual.Models.Rol", "Rol")
+                        .WithMany("AlumnosDuales")
+                        .HasForeignKey("RolID");
+
                     b.Navigation("BecaDual");
 
                     b.Navigation("Domicilio");
 
+                    b.Navigation("Estatus");
+
                     b.Navigation("ProgramaEducativo");
+
+                    b.Navigation("Rol");
                 });
 
             modelBuilder.Entity("sistemaDual.Models.AlumnoMentor", b =>
@@ -697,6 +779,11 @@ namespace sistemaDual.Migrations
                     b.Navigation("MentoresEmpresariales");
                 });
 
+            modelBuilder.Entity("sistemaDual.Models.Estatus", b =>
+                {
+                    b.Navigation("AlumnosDuales");
+                });
+
             modelBuilder.Entity("sistemaDual.Models.MentorEmpresarial", b =>
                 {
                     b.Navigation("AlumnoMentores");
@@ -709,6 +796,11 @@ namespace sistemaDual.Migrations
                     b.Navigation("AsesoresInstitucionales");
 
                     b.Navigation("MentoresAcademicos");
+                });
+
+            modelBuilder.Entity("sistemaDual.Models.Rol", b =>
+                {
+                    b.Navigation("AlumnosDuales");
                 });
 
             modelBuilder.Entity("sistemaDual.Models.Universidad", b =>

@@ -54,6 +54,10 @@ namespace sistemaDual.Models
         [StringLength(12)]
         public int Telefono { get; set; }
         
+        public string Correo { get; set; }
+
+        public string Clave { get; set; }
+
         [Required]
         public Cuatrimestre Cuatrimestre { get; set; }
 
@@ -86,9 +90,13 @@ namespace sistemaDual.Models
 
         public int? ProgramaEducativoID { get; set; }
         public int? BecaDualID { get; set; }
-        public int? DomicilioID { get; set; }
+        public int DomicilioID { get; set; }
+        public int? EstatusID { get; set; }
+        public int? RolID { get; set; }
 
-        public Domicilio? Domicilio { get; set; }
+        public Rol? Rol { get; set; }
+        public Estatus? Estatus { get; set; }
+        public Domicilio Domicilio { get; set; }
         public BecaDual? BecaDual { get; set; }
         public ProgramaEducativo? ProgramaEducativo { get; set; }
 

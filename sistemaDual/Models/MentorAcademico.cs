@@ -26,6 +26,9 @@ namespace sistemaDual.Models
         [Display(Name = "Apellido Materno")]
         public string ApellidoM { get; set; }
 
+        public string Correo { get; set; }
+        public string Clave { get; set; }
+
         public int? ProgramaEducativoID { get; set; }
         public ProgramaEducativo? ProgramaEducativo { get; set; }
     }

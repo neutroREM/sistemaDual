@@ -20,7 +20,9 @@ namespace sistemaDual.Controllers
             _context = context;
         }
 
+
         // GET: Universidads
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var programaDualContext = _context.Universidades.Include(u => u.Domicilio);
@@ -85,7 +87,6 @@ namespace sistemaDual.Controllers
                 */
                 var domi = new Domicilio()
                 {
-
                     Direccion = dir,
                     Colonia = col,
                     Municipio = mun,

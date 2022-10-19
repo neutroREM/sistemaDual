@@ -73,7 +73,7 @@ namespace sistemaDual.Controllers
                     NumHoras = model.NumHoras,
                     FechaInicio = model.FechaInicio,
                     FechaTermino = model.FechaTermino,
-                    Estatus = model.Estatus,
+                    
                     FechaCambioEstatus = model.FechaCambioEstatus,
                     AlumnoDualID = model.AlumnoDualID,
                     EmpresaID = model.EmpresaID

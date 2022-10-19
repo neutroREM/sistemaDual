@@ -57,6 +57,9 @@
                                     @Html.DisplayNameFor(model => model.Promedio)
                                 </th>
                                 <th>
+                                    @Html.DisplayNameFor(model => model.Domicilio)
+                                </th>
+                                <th>
                                     Acciones
                                 </th>
                             </tr>
@@ -90,6 +93,9 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Promedio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Domicilio.Direccion)
                                 </td>
                                 <td>
                                     <button class="btn btn-primary btn-sm">

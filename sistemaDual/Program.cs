@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using sistemaDual.Data;
+using sistemaDual.Implementation;
+using sistemaDual.Interfaces;
+using sistemaDual.Utilidades.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,17 @@ builder.Services.AddDbContext<ProgramaDualContext>(options => options.UseSqlServ
     ));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+//Repository
+builder.Services.AddTransient(typeof(IGenericRespository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<ICatalagoProyectoRepository, CatalagoProyectoRepository>();
+builder.Services.AddScoped<ICorreoService, CorreoService>();
+builder.Services.AddScoped<IUtilidadesService, UtilidadesService>();
+builder.Services.AddScoped<IRolService, RolService>();
+builder.Services.AddScoped<IAlumnoService, AlumnoService>();
+
+//AutoMapper
+builder.Services.AddAutoMapper(typeof(MapperProfile));
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -19,7 +33,7 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<ProgramaDualContext>();
         DbInitializer.Initialize(context);
-    }
+    } 
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();

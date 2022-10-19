@@ -62,10 +62,25 @@ namespace sistemaDual.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AlumnoDualID,Matricula,Nombre,ApellidoP,ApellidoM,Telefono,Cuatrimestre,Tipo,Promedio,FechaRegistro")] AlumnoDualViewModel model)
+        public async Task<IActionResult> Create([Bind("AlumnoDualID,Matricula,Nombre,ApellidoP,ApellidoM,Direccion,Colonia,Municipio,CodigoPostal,Telefono,Cuatrimestre,Tipo,Promedio,FechaRegistro")] AlumnoDualViewModel model)
         {
             if (ModelState.IsValid)
             {
+                string dir = model.Direccion;
+                string col = model.Colonia;
+                string mun = model.Municipio;
+                string cp = model.CodigoPostal;
+
+                var domi = new Domicilio()
+                {
+                    Direccion = dir,
+                    Colonia = col,
+                    Municipio = mun,
+                    CodigoPostal = cp
+                };
+                _context.Add(domi);
+                await _context.SaveChangesAsync();
+
                 var alumnoD = new AlumnoDual()
                 {
                     AlumnoDualID = model.AlumnoDualID,
@@ -78,7 +93,7 @@ namespace sistemaDual.Controllers
                     Tipo = model.Tipo,
                     Promedio = model.Promedio,
                     FechaRegistro = model.FechaRegistro,
-
+                    DomicilioID = domi.DomicilioID
 
                 };
                 _context.Add(alumnoD);
