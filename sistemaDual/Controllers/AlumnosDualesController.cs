@@ -8,205 +8,124 @@ using Microsoft.EntityFrameworkCore;
 using sistemaDual.Data;
 using sistemaDual.Models;
 using sistemaDual.Models.ViewModels;
+using AutoMapper;
+using Newtonsoft.Json;
+using sistemaDual.Interfaces;
+using sistemaDual.Utilidades.Response;
 
 namespace sistemaDual.Controllers
 {
     public class AlumnosDualesController : Controller
     {
-        private readonly ProgramaDualContext _context;
+        private readonly IMapper _mapper;
+        private readonly IAlumnoService _alumnoService;
+        private readonly IRolService _rolService;
 
-        public AlumnosDualesController(ProgramaDualContext context)
+        public AlumnosDualesController(IMapper mapper, IAlumnoService alumnoService, IRolService rolService)
         {
-            _context = context;
+            _mapper = mapper;
+            _alumnoService = alumnoService;
+            _rolService = rolService;
         }
 
         // GET: AlumnosDuales
         public async Task<IActionResult> Index()
         {
-            var programaDualContext = _context.AlumnosDuales.Include(a => a.BecaDual).Include(a => a.Domicilio).Include(a => a.ProgramaEducativo);
-            return View(await programaDualContext.ToListAsync());
-        }
-
-        // GET: AlumnosDuales/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.AlumnosDuales == null)
-            {
-                return NotFound();
-            }
-
-            var alumnoDual = await _context.AlumnosDuales
-                .Include(a => a.BecaDual)
-                .Include(a => a.Domicilio)
-                .Include(a => a.ProgramaEducativo)
-                .FirstOrDefaultAsync(m => m.AlumnoDualID == id);
-            if (alumnoDual == null)
-            {
-                return NotFound();
-            }
-
-            return View(alumnoDual);
-        }
-
-        // GET: AlumnosDuales/Create
-        public IActionResult Create()
-        {
-            ViewData["BecaDualID"] = new SelectList(_context.BecasDuales, "BecaDUalID", "BecaDUalID");
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID");
-            ViewData["ProgramaEducativoID"] = new SelectList(_context.ProgramasEducativos, "ID", "Nombre");
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ListaRoles()
+        {
+            List<RolViewModel> rolViewModels = _mapper.Map<List<RolViewModel>>(await _rolService.Lista());
+            return StatusCode(StatusCodes.Status200OK, rolViewModels);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Lista()
+        {
+            List<AlumnoDualViewModel> alumnoViewModels = _mapper.Map<List<AlumnoDualViewModel>>(await _alumnoService.Lista());
+            return StatusCode(StatusCodes.Status200OK, new {data = alumnoViewModels});
+        }
+
         // POST: AlumnosDuales/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AlumnoDualID,Matricula,Nombre,ApellidoP,ApellidoM,Direccion,Colonia,Municipio,CodigoPostal,Telefono,Cuatrimestre,Tipo,Promedio,FechaRegistro")] AlumnoDualViewModel model)
+        public async Task<IActionResult> Create([FromForm] string modelo)
         {
-            if (ModelState.IsValid)
+            GenericResponse<AlumnoDualViewModel> response = new GenericResponse<AlumnoDualViewModel>();
+            
+            try
             {
-                string dir = model.Direccion;
-                string col = model.Colonia;
-                string mun = model.Municipio;
-                string cp = model.CodigoPostal;
+                AlumnoDualViewModel alumnoDualVM = JsonConvert.DeserializeObject<AlumnoDualViewModel>(modelo);
 
-                var domi = new Domicilio()
-                {
-                    Direccion = dir,
-                    Colonia = col,
-                    Municipio = mun,
-                    CodigoPostal = cp
-                };
-                _context.Add(domi);
-                await _context.SaveChangesAsync();
+                string urlPlantilla = $"{this.Request.Scheme}://{this.Request.Host}/Plantilla/EnviarClave?correo=[correo]&clave=[clave]";
 
-                var alumnoD = new AlumnoDual()
-                {
-                    AlumnoDualID = model.AlumnoDualID,
-                    Matricula = model.Matricula,
-                    Nombre = model.Nombre,
-                    ApellidoP = model.ApellidoP,
-                    ApellidoM = model.ApellidoM,
-                    Telefono = model.Telefono,
-                    Cuatrimestre = model.Cuatrimestre,
-                    Tipo = model.Tipo,
-                    Promedio = model.Promedio,
-                    FechaRegistro = model.FechaRegistro,
-                    DomicilioID = domi.DomicilioID
+                AlumnoDual alumno_creado = await _alumnoService.Crear(_mapper.Map<AlumnoDual>(alumnoDualVM), urlPlantilla);
 
-                };
-                _context.Add(alumnoD);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                alumnoDualVM = _mapper.Map<AlumnoDualViewModel>(alumno_creado);
+
+                response.Estado = true;
+                response.Objeto = alumnoDualVM;
             }
-
-            ViewData["BecaDualID"] = new SelectList(_context.BecasDuales, "BecaDUalID", "BecaDUalID", model.BecaDualID);
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", model.DomicilioID);
-            ViewData["ProgramaEducativoID"] = new SelectList(_context.ProgramasEducativos, "ID", "Nombre", model.ProgramaEducativoID);
-            return View(model);
+            catch(Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // GET: AlumnosDuales/Edit/5
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null || _context.AlumnosDuales == null)
-            {
-                return NotFound();
-            }
 
-            var alumnoDual = await _context.AlumnosDuales.FindAsync(id);
-            if (alumnoDual == null)
-            {
-                return NotFound();
-            }
-            ViewData["BecaDualID"] = new SelectList(_context.BecasDuales, "BecaDUalID", "BecaDUalID", alumnoDual.BecaDualID);
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", alumnoDual.DomicilioID);
-            ViewData["ProgramaEducativoID"] = new SelectList(_context.ProgramasEducativos, "ID", "Nombre", alumnoDual.ProgramaEducativoID);
-            return View(alumnoDual);
-        }
 
         // POST: AlumnosDuales/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPut]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("AlumnoDualID,Matricula,Nombre,ApellidoP,ApellidoM,Telefono,Cuatrimestre,Tipo,Promedio,FechaRegistro,FechaIngreso,FechaReingreso,FechaEgreso,FechaContratado,ProgramaEducativoID,BecaDualID,DomicilioID")] AlumnoDual alumnoDual)
+        public async Task<IActionResult> Editar([FromForm] string modelo)
         {
-            if (id != alumnoDual.AlumnoDualID)
-            {
-                return NotFound();
-            }
+            GenericResponse<AlumnoDualViewModel> response = new GenericResponse<AlumnoDualViewModel>();
 
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _context.Update(alumnoDual);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AlumnoDualExists(alumnoDual.AlumnoDualID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                AlumnoDualViewModel alumnoDualVM = JsonConvert.DeserializeObject<AlumnoDualViewModel>(modelo);
+                AlumnoDual alumno_editado = await _alumnoService.Editar(_mapper.Map<AlumnoDual>(alumnoDualVM));
+
+                alumnoDualVM = _mapper.Map<AlumnoDualViewModel>(alumno_editado);
+                response.Estado = true;
+                response.Objeto = alumnoDualVM;
             }
-            ViewData["BecaDualID"] = new SelectList(_context.BecasDuales, "BecaDUalID", "BecaDUalID", alumnoDual.BecaDualID);
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", alumnoDual.DomicilioID);
-            ViewData["ProgramaEducativoID"] = new SelectList(_context.ProgramasEducativos, "ID", "Nombre", alumnoDual.ProgramaEducativoID);
-            return View(alumnoDual);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // GET: AlumnosDuales/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null || _context.AlumnosDuales == null)
-            {
-                return NotFound();
-            }
 
-            var alumnoDual = await _context.AlumnosDuales
-                .Include(a => a.BecaDual)
-                .Include(a => a.Domicilio)
-                .Include(a => a.ProgramaEducativo)
-                .FirstOrDefaultAsync(m => m.AlumnoDualID == id);
-            if (alumnoDual == null)
-            {
-                return NotFound();
-            }
-
-            return View(alumnoDual);
-        }
 
         // POST: AlumnosDuales/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpDelete]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> Eliminar(string alumnoDualID)
         {
-            if (_context.AlumnosDuales == null)
+            GenericResponse<string> response = new GenericResponse<string>();
+
+            try
             {
-                return Problem("Entity set 'ProgramaDualContext.AlumnosDuales'  is null.");
+                response.Estado = await _alumnoService.Eliminar(alumnoDualID);
             }
-            var alumnoDual = await _context.AlumnosDuales.FindAsync(id);
-            if (alumnoDual != null)
+            catch(Exception ex)
             {
-                _context.AlumnosDuales.Remove(alumnoDual);
+                response.Estado = false;
+                response.Mensaje = ex.Message;
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        private bool AlumnoDualExists(string id)
-        {
-          return _context.AlumnosDuales.Any(e => e.AlumnoDualID == id);
-        }
+        
     }
 }
