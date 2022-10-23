@@ -51,19 +51,19 @@ namespace sistemaDual.Utilidades.AutoMapper
 
             #region AlumnoDual
             CreateMap<AlumnoDual, AlumnoDualViewModel>()
-                .ForMember(dest => dest.Direccion,
-                opt => opt.MapFrom(src => src.Domicilio))
+                .ForMember(dest => dest.DomicilioID,
+                opt => opt.MapFrom(src => src.DomicilioID))
                 .ForMember(dest => dest.ProgramaEducativoID,
-                opt => opt.MapFrom(src => src.ProgramaEducativo))
+                opt => opt.MapFrom(src => src.ProgramaEducativoID))
                 .ForMember(dest => dest.RolID,
-                opt => opt.MapFrom(src => src.Rol))
+                opt => opt.MapFrom(src => src.RolID))
                 .ForMember(dest => dest.EstatusID,
-                opt => opt.MapFrom(src => src.Estatus))
+                opt => opt.MapFrom(src => src.EstatusID))
                 .ForMember(dest => dest.BecaDualID,
-                opt => opt.MapFrom(src => src.BecaDual));
+                opt => opt.MapFrom(src => src.BecaDualID));
 
-            CreateMap<AlumnoDual, AlumnoDualViewModel>()
-                .ForMember(dest => dest.Direccion,
+            CreateMap<AlumnoDualViewModel, AlumnoDual>()
+                .ForMember(dest => dest.DomicilioID,
                 opt => opt.Ignore())
                 .ForMember(dest => dest.ProgramaEducativoID,
                 opt => opt.Ignore())

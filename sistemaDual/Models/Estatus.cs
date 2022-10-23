@@ -5,7 +5,7 @@
         public int EstatusID { get; set; }
         public string Descripcion { get; set; }
 
-        public virtual ICollection<AlumnoDual> AlumnosDuales { get; set; }
+        public ICollection<AlumnoDual> AlumnosDuales { get; set; }
 
     }
    

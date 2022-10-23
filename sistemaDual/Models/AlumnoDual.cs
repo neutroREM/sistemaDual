@@ -24,7 +24,7 @@ namespace sistemaDual.Models
     }
     public class AlumnoDual
     {
-      
+
         [Required]
         [StringLength(18)]
         [Display(Name = "CURP")]
@@ -41,7 +41,7 @@ namespace sistemaDual.Models
         public string Nombre { get; set; }
 
         [Required]
-        [StringLength(20)]      
+        [StringLength(20)]
         [Display(Name = "Apellido Paterno")]
         public string ApellidoP { get; set; }
 
@@ -53,7 +53,7 @@ namespace sistemaDual.Models
         [Required]
         [StringLength(12)]
         public int Telefono { get; set; }
-        
+
         public string Correo { get; set; }
 
         public string Clave { get; set; }
@@ -88,14 +88,16 @@ namespace sistemaDual.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaContratado { get; set; }
 
+        public int? EsActivo { get; set; }
+
         public int? ProgramaEducativoID { get; set; }
         public int? BecaDualID { get; set; }
-        public int DomicilioID { get; set; }
+        public int? DomicilioID { get; set; }
         public int? EstatusID { get; set; }
         public int? RolID { get; set; }
 
-        public Rol? Rol { get; set; }
-        public Estatus? Estatus { get; set; }
+        public Rol Rol { get; set; }
+        public Estatus Estatus { get; set; }
         public Domicilio Domicilio { get; set; }
         public BecaDual? BecaDual { get; set; }
         public ProgramaEducativo? ProgramaEducativo { get; set; }

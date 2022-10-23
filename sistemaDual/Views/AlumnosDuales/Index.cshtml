@@ -1,5 +1,4 @@
-﻿@model IEnumerable<sistemaDual.Models.AlumnoDual>
-
+﻿
 @{
     ViewData["Title"] = "AlumnosDual";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,8 +18,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#modalData"><i class="fas fa-user-plus" ></i> Nuevo Alumno</button>
-                    <a asp-action="Create">Create New</a>
+                    <button class="btn btn-success" id="btnNuevo"><i class="fas fa-user-plus" ></i> Nuevo Alumno</button>
                 </div>
             </div>
             <hr />
@@ -30,34 +28,55 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.AlumnoDualID)
+                                    AlumnoDualID
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Matricula)
+                                    Matricula
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Nombre)
+                                    Nombre
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.ApellidoP)
+                                    ApellidoP
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.ApellidoM)
+                                    ApellidoM
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Telefono)
+                                    Telefono
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Cuatrimestre)
+                                   Correo
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Tipo)
+                                    Cuatrimestre
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Promedio)
+                                    Tipo
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Domicilio)
+                                    Promedio
+                                </th>
+                                <th>
+                                    FechaRegistro
+                                </th>
+                                <th>
+                                    EsActivo
+                                </th>
+                                <th>
+                                    ProgramaEducativoID
+                                </th>
+                                <th>
+                                    RolID
+                                </th>
+                                <th>
+                                    DomicilioID
+                                </th>
+                                <th>
+                                    EstatusID
+                                </th>
+                                <th>
+                                    BecaDualID
                                 </th>
                                 <th>
                                     Acciones
@@ -65,48 +84,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(var item in Model){
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.AlumnoDualID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Matricula)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ApellidoP)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ApellidoM)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Telefono)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Cuatrimestre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Tipo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Promedio)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Domicilio.Direccion)
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            }
                         </tbody>
                     </table>
                 </div>
@@ -126,17 +103,28 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <input type="hidden" value="0" id="txtId">
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtAlumnoDualID">CURP</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtAlumnoDualID" name="AlumnoDualID">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtMatricula">Matricula</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtMatricula" name="Matricula">
+                                    </div>
                                     <div class="form-group col-sm-6">
                                         <label for="txtNombre">Nombre</label>
                                         <input type="text" class="form-control form-control-sm input-validar" id="txtNombre" name="Nombre">
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="txtCorreo">Correo</label>
-                                        <input type="email" class="form-control form-control-sm input-validar" id="txtCorreo" name="Correo">
+                                        <label for="txtApellidoP">Apellido Paterno</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtApellidoP" name="ApellidoP">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtApellidoM">Apellido Materno</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtApellidoM" name="ApellidoM">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -145,23 +133,56 @@
                                         <input type="text" class="form-control form-control-sm input-validar" id="txtTelefono" name="Telefono">
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="cboRol">Rol</label>
-                                        <select class="form-control form-control-sm" id="cboRol">
-                                            <option value="1">Administrador</option>
-                                        </select>
+                                        <label for="txtCorreo">Correo</label>
+                                        <input type="email" class="form-control form-control-sm input-validar" id="txtCorreo" name="Correo">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtCuatrimestre">Cuatrimestre</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCuatrimestre" name="Cuatrimestre">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtTipo">TipoAlumno</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtTipo" name="Tipo">
                                     </div>
                                 </div>
                                 <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtPromedio">Promedio</label>
+                                        <input type="number" class="form-control form-control-sm input-validar" id="txtPromedio" name="Promedio">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtFechaRegistro">FechaRegistro</label>
+                                        <input type="date" class="form-control form-control-sm input-validar" id="txtFechaRegistro" name="FechaRegistro">
+                                    </div>
                                     <div class="form-group col-sm-6">
                                         <label for="cboEstado">Estado</label>
                                         <select class="form-control form-control-sm" id="cboEstado">
                                             <option value="1">Activo</option>
                                             <option value="0">No Activo</option>
                                         </select>
+                                    </div> 
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtProgramaEducativoID">PE</label>
+                                        <input type="number" class="form-control form-control-sm input-validar" id="txtProgramaEducativoID" name="ProgramaEducativoID">
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="txtFoto">Foto</label>
-                                        <input class="form-control-file" type="file" id="txtFoto" />
+                                        <label for="cboRolID">RolID</label>
+                                        <select class="form-control form-control-sm" id="cboRolID">
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtDomicilioID">DomicilioID</label>
+                                        <input type="number" class="form-control form-control-sm input-validar" id="txtDomicilioID" name="DomicilioID">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtEstatusID">Estatus</label>
+                                        <input type="number" class="form-control form-control-sm input-validar" id="txtEstatusID" name="EstatusID">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtBecaDualID">Beca</label>
+                                        <input type="number" class="form-control form-control-sm input-validar" id="txtBecaDualID" name="ProgramaEducativoID">
                                     </div>
                                 </div>
                             </div>
@@ -194,6 +215,6 @@
     <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
     <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
 
-    <!-- SOLO ES DE EJEMPLO - IGNORAR -->
-    <script src="~/js/vistas/datatables-demo.js"></script>
+    <!-- VistasJS -->
+    <script src="~/js/vistas/AlumnosDuales_Index.js"></script>
 }

@@ -27,18 +27,15 @@ namespace sistemaDual.Migrations
                     b.Property<string>("AlumnoDualID")
                         .HasColumnType("nvarchar(18)");
 
-                    b.Property<string>("AsignaturaID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("AsignaturaID")
+                        .HasColumnType("int");
 
                     b.Property<double?>("AsignaturaAmount")
                         .HasColumnType("float");
 
-                    b.Property<int>("AsignaturaID1")
-                        .HasColumnType("int");
-
                     b.HasKey("AlumnoDualID", "AsignaturaID");
 
-                    b.HasIndex("AsignaturaID1");
+                    b.HasIndex("AsignaturaID");
 
                     b.ToTable("AlumnoAsignaturas");
                 });
@@ -62,6 +59,10 @@ namespace sistemaDual.Migrations
                     b.Property<int?>("BecaDualID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Clave")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Correo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -70,6 +71,9 @@ namespace sistemaDual.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("DomicilioID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EsActivo")
                         .HasColumnType("int");
 
                     b.Property<int?>("EstatusID")
@@ -202,7 +206,7 @@ namespace sistemaDual.Migrations
 
                     b.HasKey("AsignaturaID");
 
-                    b.ToTable("AsignaturaAD", (string)null);
+                    b.ToTable("Asignatura", (string)null);
                 });
 
             modelBuilder.Entity("sistemaDual.Models.BecaDual", b =>
@@ -284,6 +288,12 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.Configuracion", b =>
                 {
+                    b.Property<int>("ConfiguracionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConfiguracionID"));
+
                     b.Property<string>("Propiedad")
                         .HasColumnType("nvarchar(max)");
 
@@ -292,6 +302,8 @@ namespace sistemaDual.Migrations
 
                     b.Property<string>("Valor")
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ConfiguracionID");
 
                     b.ToTable("Configuracion", (string)null);
                 });
@@ -387,7 +399,7 @@ namespace sistemaDual.Migrations
 
                     b.HasKey("EstatusID");
 
-                    b.ToTable("EstatusAD", (string)null);
+                    b.ToTable("Estatus");
                 });
 
             modelBuilder.Entity("sistemaDual.Models.MentorAcademico", b =>
@@ -405,6 +417,10 @@ namespace sistemaDual.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Clave")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Correo")
                         .IsRequired()
@@ -595,7 +611,7 @@ namespace sistemaDual.Migrations
 
                     b.HasOne("sistemaDual.Models.Asignatura", "Asignatura")
                         .WithMany("AlumnoAsignaturas")
-                        .HasForeignKey("AsignaturaID1")
+                        .HasForeignKey("AsignaturaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

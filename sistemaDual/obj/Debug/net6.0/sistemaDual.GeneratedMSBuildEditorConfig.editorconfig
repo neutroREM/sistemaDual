@@ -15,10 +15,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\farao\source\repos\sistemaDual\sistemaDual
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AlumnosDuales/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vc0R1YWxlc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AlumnosDuales/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vc0R1YWxlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
