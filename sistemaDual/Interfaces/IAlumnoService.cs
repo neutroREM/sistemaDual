@@ -1,4 +1,4 @@
-﻿using sistemaDual.Models;
+﻿ using sistemaDual.Models;
 
 namespace sistemaDual.Interfaces
 {

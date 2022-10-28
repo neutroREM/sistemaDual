@@ -18,7 +18,7 @@ namespace sistemaDual.Implementation
         {
             try
             {
-                TEntity entity = await _context.Set<TEntity>().FirstAsync(filter);
+                TEntity entity = await _context.Set<TEntity>().FirstOrDefaultAsync(filter);
                 return entity;
             }
             catch

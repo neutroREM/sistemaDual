@@ -19,17 +19,13 @@ namespace sistemaDual.Implementation
             _correoService = correoService;
         }
 
-        async Task<List<AlumnoDual>> IAlumnoService.Lista()
+        public async Task<List<AlumnoDual>> Lista()
         {
             IQueryable<AlumnoDual> query = await _repository.Consultar();
-            return query.Include(r => r.Rol)
-                .Include(pe => pe.ProgramaEducativo)
-                .Include(dm => dm.Domicilio)
-                .Include(e => e.Estatus)
-                .ToList();
+            return query.Include(r => r.Rol).ToList();
         }
 
-        async Task<AlumnoDual> IAlumnoService.Crear(AlumnoDual entidad, string urlPlantillaCorreo)
+        public async Task<AlumnoDual> Crear(AlumnoDual entidad, string urlPlantillaCorreo = "")
         {
             AlumnoDual alumno_existe = await _repository.Obtener(u => u.Correo == entidad.Correo);
             if(alumno_existe != null)
@@ -41,6 +37,7 @@ namespace sistemaDual.Implementation
             {
                 string clave_generada = _utilidadesService.GenerarClave();
                 entidad.Clave = _utilidadesService.ConvertirSha256(clave_generada);
+                //entidad.FechaRegistro = DateTime.Now;
 
                 AlumnoDual alumnoDual = await _repository.Crear(entidad);
 
@@ -75,8 +72,8 @@ namespace sistemaDual.Implementation
                         await _correoService.EnviarCorreo(alumnoDual.Correo, "Cuenta registrada", htmlCorreo);
                 }
                 IQueryable<AlumnoDual> query = await _repository.Consultar(u => u.AlumnoDualID == alumnoDual.AlumnoDualID);
-                alumnoDual = query.Include(r => r.RolID).First();
-
+                alumnoDual = query.Include(r => r.Rol).First();
+                 
                 return alumnoDual;
             }
 
@@ -86,7 +83,7 @@ namespace sistemaDual.Implementation
             }
         }
 
-        async Task<AlumnoDual> IAlumnoService.Editar(AlumnoDual entidad)
+        public async Task<AlumnoDual> Editar(AlumnoDual entidad)
         {
             AlumnoDual alumno_existe = await _repository.Obtener(u => u.Correo == entidad.Correo);
             if (alumno_existe != null)
@@ -105,6 +102,8 @@ namespace sistemaDual.Implementation
                 alumno_editar.Telefono = entidad.Telefono;
                 alumno_editar.Correo = entidad.Correo;
                 alumno_editar.RolID = entidad.RolID;
+                alumno_editar.EsActivo = entidad.EsActivo;
+                //alumno_editar.FechaEditar = DateTime.Now;
 
                 bool resp = await _repository.Editar(alumno_editar);
 

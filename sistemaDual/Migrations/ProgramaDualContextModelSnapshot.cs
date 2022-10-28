@@ -25,7 +25,7 @@ namespace sistemaDual.Migrations
             modelBuilder.Entity("sistemaDual.Models.AlumnoAsignatura", b =>
                 {
                     b.Property<string>("AlumnoDualID")
-                        .HasColumnType("nvarchar(18)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("AsignaturaID")
                         .HasColumnType("int");
@@ -43,82 +43,58 @@ namespace sistemaDual.Migrations
             modelBuilder.Entity("sistemaDual.Models.AlumnoDual", b =>
                 {
                     b.Property<string>("AlumnoDualID")
-                        .HasMaxLength(18)
-                        .HasColumnType("nvarchar(18)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ApellidoM")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ApellidoP")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("BecaDualID")
                         .HasColumnType("int");
 
                     b.Property<string>("Clave")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Correo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Cuatrimestre")
+                    b.Property<string>("Cuatrimestre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DomicilioID")
                         .HasColumnType("int");
 
-                    b.Property<int>("DomicilioID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EsActivo")
-                        .HasColumnType("int");
+                    b.Property<bool?>("EsActivo")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("EstatusID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("FechaContratado")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("FechaEgreso")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("FechaIngreso")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("FechaReingreso")
+                    b.Property<DateTime?>("FechaRegistro")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Matricula")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ProgramaEducativoID")
                         .HasColumnType("int");
 
-                    b.Property<double>("Promedio")
+                    b.Property<double?>("Promedio")
                         .HasColumnType("float");
 
                     b.Property<int?>("RolID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Telefono")
-                        .HasMaxLength(12)
-                        .HasColumnType("int");
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Tipo")
-                        .HasColumnType("int");
+                    b.Property<string>("Tipo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AlumnoDualID");
 
@@ -138,7 +114,7 @@ namespace sistemaDual.Migrations
             modelBuilder.Entity("sistemaDual.Models.AlumnoMentor", b =>
                 {
                     b.Property<string>("AlumnoDualID")
-                        .HasColumnType("nvarchar(18)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("MentorEmpresarialID")
                         .HasColumnType("nvarchar(18)");
@@ -245,7 +221,7 @@ namespace sistemaDual.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("AlumnoDualID")
-                        .HasColumnType("nvarchar(18)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AreaConocimiento")
                         .IsRequired()
@@ -628,9 +604,7 @@ namespace sistemaDual.Migrations
 
                     b.HasOne("sistemaDual.Models.Domicilio", "Domicilio")
                         .WithMany("AlumnosDual")
-                        .HasForeignKey("DomicilioID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DomicilioID");
 
                     b.HasOne("sistemaDual.Models.Estatus", "Estatus")
                         .WithMany("AlumnosDuales")

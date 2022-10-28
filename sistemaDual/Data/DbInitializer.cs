@@ -56,7 +56,7 @@ namespace sistemaDual.Data
 
             var alumnos = new AlumnoDual[]
             {
-                new AlumnoDual{AlumnoDualID="EAMR000814HMCSJLA6", Matricula="1319104647", Nombre="Raul", ApellidoP="Estrada", ApellidoM="Mejia",Telefono=132933,DomicilioID=2, Correo="dhamarloka90@gmail.com", Clave="13191046", Cuatrimestre=Cuatrimestre.Decimo, Tipo=Tipo.NuevoIngreso, Promedio=8.0, EsActivo = 1, RolID=2, EstatusID = 1,FechaRegistro=DateTime.Now}
+                new AlumnoDual{AlumnoDualID="EAMR000814HMCSJLA6", Matricula="1319104647", Nombre="Raul", ApellidoP="Estrada", ApellidoM="Mejia",Telefono="132933",DomicilioID=2, Correo="dhamarloka90@gmail.com", Cuatrimestre="Decimo", Tipo="NuevoIngreso", Promedio=8.0, EsActivo = true, RolID=1, EstatusID = 1,FechaRegistro=DateTime.Now}
             };
             foreach(AlumnoDual alumno in alumnos)
             {
@@ -67,7 +67,7 @@ namespace sistemaDual.Data
             var conf = new Configuracion[]
             {
                 new Configuracion{Recurso="Servicio_Correo", Propiedad="correo", Valor="neutrorem90@gmail.com"},
-                new Configuracion{Recurso="Servicio_Correo", Propiedad="valor", Valor="qdbqmtjysvalihzh"},
+                new Configuracion{Recurso="Servicio_Correo", Propiedad="clave", Valor="qdbqmtjysvalihzh"},
                 new Configuracion{Recurso="Servicio_Correo", Propiedad="alias", Valor="sistemadual.com"},
                 new Configuracion{Recurso="Servicio_Correo", Propiedad="host", Valor="smtp.gmail.com"},
                 new Configuracion{Recurso="Servicio_Correo", Propiedad="puerto", Valor="587"}

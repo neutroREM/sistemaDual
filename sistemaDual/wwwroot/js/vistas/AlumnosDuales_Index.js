@@ -1,4 +1,6 @@
-﻿const MODEL_BASE = {
+﻿
+//Modelado de los datos del Estudiante
+const MODEL_BASE = {
     alumnoDualID: "",
     matricula: "",
     nombre: "",
@@ -6,22 +8,15 @@
     apellidoM: "",
     telefono: "",
     correo: "",
-    cuatrimestre: "",
-    tipo: "",
-    promedio: "",
+    rolID: 0,
     fechaRegistro: "",
-    esActivo: "",
-    programaEducativoID: "",
-    rolID: "",
-    domicilioID: "",
-    estatusID: "",
-    becaDualID:""
+    esActivo: 1,
 }
 
-let table;
 
+let tableData;
 $(document).ready(function () {
-
+    //Mostrar Roles
     fetch("/AlumnosDuales/ListaRoles")
         .then(response => {
             return response.ok ? response.json() : Promise.reject(response);
@@ -29,14 +24,14 @@ $(document).ready(function () {
         .then(responseJson => {
             if (responseJson.length > 0) {
                 responseJson.forEach((item) => {
-                    $("#cboRolID").append(
+                    $("#cboRol").append(
                         $("<option>").val(item.rolID).text(item.descripcion)
                     )
                 })
             }
         })
-
-    $('#tbdata').DataTable({
+    //Mostrar Estudiantes
+    tableData = $('#tbdata').DataTable({
         responsive: true,
          "ajax": {
              "url": 'AlumnosDuales/Lista',
@@ -51,23 +46,16 @@ $(document).ready(function () {
              { "data": "apellidoM" },
              { "data": "telefono" },
              { "data": "correo" },
-             { "data": "cuatrimestre" },
-             { "data": "tipo" },
-             { "data": "promedio" },
+             { "data": "descripcion" },
              { "data": "fechaRegistro" },
              {
                  "data": "esActivo", render: function (data) {
                      if (data == 1)
                          return '<span class="badge badge-info">Activo</span>';
                      else
-                         return '<span class="badge badge-info">No activo</span>';
+                         return '<span class="badge badge-danger">No activo</span>';
                  }
              },
-             { "data": "programaEducativoID" },
-             { "data": "rolID" },
-             { "data": "domicilioID" },
-             { "data": "estatusID" },
-             { "data": "becaDualID" },
              {
                  "defaultContent": '<button class="btn btn-primary btn-editar btn-sm mr-2"><i class="fas fa-pencil-alt"></i></button>' +
                      '<button class="btn btn-danger btn-eliminar btn-sm"><i class="fas fa-trash-alt"></i></button>',
@@ -105,17 +93,9 @@ function mostrarModal(modelo = MODEL_BASE) {
     $("#txtApellidoM").val(modelo.apellidoM)
     $("#txtTelefono").val(modelo.telefono)
     $("#txtCorreo").val(modelo.correo)
-    $("#txtCuatrimestre").val(modelo.cuatrimestre)
-    $("#txtTipo").val(modelo.tipo)
-    $("#txtPromedio").val(modelo.promedio)
+    $("#cboRol").val(modelo.rolID == 0 ? $("#cboRol option:first").val() : modelo.rolID)
     $("#txtFechaRegistro").val(modelo.fechaRegistro)
     $("#cboEstado").val(modelo.esActivo)
-    $("#txtProgramaEducativoID").val(modelo.programaEducativoID)
-    $("#cboRolID").val(modelo.rolID == 0 ? $("#cboRolID option.first").val() : modelo.rolID)
-    $("#txtDomicilioID").val(modelo.domicilioID)
-    $("#txtEstatusID").val(modelo.estatusID)
-    $("#txtBecaDualID").val(modelo.becaDualID)
-
     $("#modalData").modal("show")
 }
 
@@ -125,7 +105,7 @@ $("#btnNuevo").click(function () {
 
 $("#btnGuardar").click(function () {
 
-    debugger;
+
     const inputs = $("input.input-validar").serializeArray();
     const inputs_sin_valor = inputs.filter((item) => item.value.trim() == "")
 
@@ -142,43 +122,118 @@ $("#btnGuardar").click(function () {
     modelo["nombre"] = $("#txtNombre").val()
     modelo["apellidoP"] = $("#txtApellidoP").val()
     modelo["apellidoM"] = $("#txtApellidoM").val()
-    modelo["telefono"] = $("#txtTelefono").val()
+    modelo["telefono"] = $("#txtTelefono").val()  
     modelo["correo"] = $("#txtCorreo").val()
-    modelo["cuatrimestre"] = $("#txtCuatrimestre").val()
-    modelo["tipo"] = $("#txtTipo").val()
-    modelo["promedio"] = $("#txtPromedio").val()
+    modelo["rolID"] = $("#cboRol").val()
     modelo["fechaRegistro"] = $("#txtFechaRegistro").val()
     modelo["esActivo"] = $("#cboEstado").val()
-    modelo["ProgramaEducativoID"] = $("#txtProgramaEducativoID").val()
-    modelo["rolID"] = $("#cboRolID").val()
-    modelo["domicilioID"] = $("#txtDomicilioID").val()
-    modelo["estatusID"] = $("#txtEstatusID").val()
-    modelo["becaDualID"] = $("#txtBecaDualID").val()
+
 
     const formData = new FormData();
     formData.append("modelo", JSON.stringify(modelo))
 
     $("#modalData").find("div.modal-content").LoadingOverlay("show"); 
 
-    if (modelo.alumnoDualID == 0) {
-
-        fetch("AlumnosDuales/Create", {
+    if (modelo.alumnoDualID != null) {
+        //Registrar Estudiante
+        fetch("/AlumnosDuales/Create", {
             method: "POST",
             body: formData
         })
             .then(response => {
-            $("#modalData").find("div.modal-content").LoadingOverlay("hide"); 
-            return response.ok ? response.json() : Promise.reject(response);
+                $("#modalData").find("div.modal-content").LoadingOverlay("hide");
+                return response.ok ? response.json() : Promise.reject(response);
             })
-            .then(reponseJson => {
-                if (reponseJson.estado) {
-                    table.row.add(responseJson.objeto).draw(false)
+            .then(responseJson => {
+                if (responseJson.estado) {
+                    tableData.row.add(responseJson.objeto).draw(false)
                     $("#modalData").modal("hide")
-                    swal("Listo!", "Estudiante Registrado", "success")
+                    swal("Correcto", "Estudiante registrado", "success")
                 } else {
-                    swal("NoCompletado!", "Estudiante No Registrado", "error")
+                    swal("Problema", responseJson.mensaje, "error")
                 }
             })
-
+    } else {
+        //Editar Estudiante
+        fetch("/AlumnosDuales/Editar", {
+            method: "PUT",
+            body: formData
+        })
+            .then(response => {
+                $("#modalData").find("div.modal-content").LoadingOverlay("hide");
+                return response.ok ? response.json() : Promise.reject(response);
+            })
+            .then(responseJson => {
+                if (responseJson.estado) {
+                    tableData.row(selectFila).data(responseJson.objeto).draw(false);
+                    selectFila = null;
+                    $("#modalData").modal("hide")
+                    swal("Correcto", "Datos actualizados", "success")
+                } else {
+                    swal("Problema", "Datos no modificados", "Error")
+                }
+            })
     }
+})
+
+//Mostrar modal con datos del Estudiante
+let selectFila;
+$("#tbdata tbody").on("click", ".btn-editar", function () {
+
+    //Seleccionar responsivamente el boton
+    if ($(this).closest("tr").hasClass("child")) {
+        selectFila = $(this).closest("tr").prev();
+    } else {
+        selectFila = $(this).closest("tr");
+    }
+    const data = tableData.row(selectFila).data();
+    mostrarModal(data);
+})
+
+
+
+//Eliminar Estudiante
+$("#tbdata tbody").on("click", ".btn-eliminar", function () {
+
+    let fila;
+    //Seleccionar responsivamente el boton
+    if ($(this).closest("tr").hasClass("child")) {
+        fila = $(this).closest("tr").prev();
+    } else {
+        fila = $(this).closest("tr");
+    }
+    const data = tableData.row(fila).data();
+
+    swal({
+        title: "¿Realizar Acción?",
+        text: `Eliminar Estudiante "${data.nombre}"`,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Si, eliminar",
+        cancelButtonText: "No, cancelar",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+        function (respuesta) {
+            if (respuesta) {
+                $(".showSweetAlert").LoadingOverlay("show");
+                fetch(`/AlumnosDuales/Eliminar?AlumnoDualID=${data.alumnoDualID}`, {
+                    method: "DELETE"
+                })
+                    .then(response => {
+                        $(".showSweetAlert").LoadingOverlay("hide");
+                        return response.ok ? response.json() : Promise.reject(response);
+                    })
+                    .then(responseJson => {
+                        if (responseJson.estado) {
+                            tableData.row(fila).remove().draw()
+                            swal("Correcto", "Estudiante eliminated", "success")
+                        } else {
+                            swal("Problema", responseJson.mensaje, "error")
+                        }
+                    })
+            }
+        }
+    )
 })

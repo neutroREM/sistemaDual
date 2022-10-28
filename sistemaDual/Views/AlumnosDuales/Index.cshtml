@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "AlumnosDual";
+    ViewData["Title"] = "AlumnosDuales";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -46,37 +46,16 @@
                                     Telefono
                                 </th>
                                 <th>
-                                   Correo
+                                    Correo
                                 </th>
                                 <th>
-                                    Cuatrimestre
-                                </th>
-                                <th>
-                                    Tipo
-                                </th>
-                                <th>
-                                    Promedio
+                                    Rol    
                                 </th>
                                 <th>
                                     FechaRegistro
                                 </th>
                                 <th>
                                     EsActivo
-                                </th>
-                                <th>
-                                    ProgramaEducativoID
-                                </th>
-                                <th>
-                                    RolID
-                                </th>
-                                <th>
-                                    DomicilioID
-                                </th>
-                                <th>
-                                    EstatusID
-                                </th>
-                                <th>
-                                    BecaDualID
                                 </th>
                                 <th>
                                     Acciones
@@ -134,25 +113,18 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="txtCorreo">Correo</label>
-                                        <input type="email" class="form-control form-control-sm input-validar" id="txtCorreo" name="Correo">
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCorreo" name="Correo">
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="txtCuatrimestre">Cuatrimestre</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCuatrimestre" name="Cuatrimestre">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtTipo">TipoAlumno</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtTipo" name="Tipo">
+                                        <label for="cboRol">Rol</label>
+                                        <select class="form-control form-control-sm" id="cboRol">
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-sm-6">
-                                        <label for="txtPromedio">Promedio</label>
-                                        <input type="number" class="form-control form-control-sm input-validar" id="txtPromedio" name="Promedio">
-                                    </div>
-                                    <div class="form-group col-sm-6">
                                         <label for="txtFechaRegistro">FechaRegistro</label>
-                                        <input type="date" class="form-control form-control-sm input-validar" id="txtFechaRegistro" name="FechaRegistro">
+                                        <input type="datetime-local" class="form-control form-control-sm input-validar" id="txtFechaRegistro" name="FechaRegistro">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="cboEstado">Estado</label>
@@ -163,38 +135,15 @@
                                     </div> 
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtProgramaEducativoID">PE</label>
-                                        <input type="number" class="form-control form-control-sm input-validar" id="txtProgramaEducativoID" name="ProgramaEducativoID">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="cboRolID">RolID</label>
-                                        <select class="form-control form-control-sm" id="cboRolID">
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtDomicilioID">DomicilioID</label>
-                                        <input type="number" class="form-control form-control-sm input-validar" id="txtDomicilioID" name="DomicilioID">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtEstatusID">Estatus</label>
-                                        <input type="number" class="form-control form-control-sm input-validar" id="txtEstatusID" name="EstatusID">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtBecaDualID">Beca</label>
-                                        <input type="number" class="form-control form-control-sm input-validar" id="txtBecaDualID" name="ProgramaEducativoID">
-                                    </div>
+                                    
+
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <img id="imgUsuario" style="max-width:200px;" src="https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?w=300" class="rounded mx-auto d-block" alt="Foto usuario">
-                            </div>
-
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary btn-sm" type="button" id="btnGuardar">Guardar</button>
+                    <button class="btn btn-primary btn-sm" id="btnGuardar">Guardar</button>
                     <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

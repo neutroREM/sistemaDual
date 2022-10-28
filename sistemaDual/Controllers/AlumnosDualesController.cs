@@ -28,12 +28,12 @@ namespace sistemaDual.Controllers
             _rolService = rolService;
         }
 
-        // GET: AlumnosDuales
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
 
+        // GET: AlumnosDuales/ListaRoles
         [HttpGet]
         public async Task<IActionResult> ListaRoles()
         {
@@ -41,6 +41,7 @@ namespace sistemaDual.Controllers
             return StatusCode(StatusCodes.Status200OK, rolViewModels);
         }
 
+        // GET: AlumnosDuales/Lista
         [HttpGet]
         public async Task<IActionResult> Lista()
         {
@@ -50,7 +51,6 @@ namespace sistemaDual.Controllers
 
         // POST: AlumnosDuales/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] string modelo)
         {
             GenericResponse<AlumnoDualViewModel> response = new GenericResponse<AlumnoDualViewModel>();
@@ -59,9 +59,9 @@ namespace sistemaDual.Controllers
             {
                 AlumnoDualViewModel alumnoDualVM = JsonConvert.DeserializeObject<AlumnoDualViewModel>(modelo);
 
-                string urlPlantilla = $"{this.Request.Scheme}://{this.Request.Host}/Plantilla/EnviarClave?correo=[correo]&clave=[clave]";
+                string urlPlantillaCorreo = $"{this.Request.Scheme}://{this.Request.Host}/Plantilla/EnviarClave?correo=[correo]&clave=[clave]";
 
-                AlumnoDual alumno_creado = await _alumnoService.Crear(_mapper.Map<AlumnoDual>(alumnoDualVM), urlPlantilla);
+                AlumnoDual alumno_creado = await _alumnoService.Crear(_mapper.Map<AlumnoDual>(alumnoDualVM), urlPlantillaCorreo);
 
                 alumnoDualVM = _mapper.Map<AlumnoDualViewModel>(alumno_creado);
 
@@ -77,9 +77,8 @@ namespace sistemaDual.Controllers
         }
 
 
-        // POST: AlumnosDuales/Edit/5
+        // POST: AlumnosDuales/Editar
         [HttpPut]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Editar([FromForm] string modelo)
         {
             GenericResponse<AlumnoDualViewModel> response = new GenericResponse<AlumnoDualViewModel>();
@@ -103,9 +102,8 @@ namespace sistemaDual.Controllers
 
 
 
-        // POST: AlumnosDuales/Delete/5
+        // POST: AlumnosDuales/Eliminar/AlumnoDualID
         [HttpDelete]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Eliminar(string alumnoDualID)
         {
             GenericResponse<string> response = new GenericResponse<string>();
