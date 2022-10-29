@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "b20pVf8IoBn+wqYHYcR2B4+wyH97TlOB3SXK41FEDfs=",
+  "Hash": "RbvYWIgQmPi2cIsCd7SDveUoTlVLalM3Ss5fQZ+wRfU=",
   "Source": "sistemaDual",
   "BasePath": "_content/sistemaDual",
   "Mode": "Default",
@@ -304,6 +304,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\vistas\\datatables-demo.js"
+    },
+    {
+      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\Empresa_Index.js",
+      "SourceId": "sistemaDual",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\",
+      "BasePath": "_content/sistemaDual",
+      "RelativePath": "js/vistas/Empresa_Index.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\vistas\\Empresa_Index.js"
+    },
+    {
+      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\Universidad_Index.js",
+      "SourceId": "sistemaDual",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\",
+      "BasePath": "_content/sistemaDual",
+      "RelativePath": "js/vistas/Universidad_Index.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\vistas\\Universidad_Index.js"
     },
     {
       "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\scss\\_buttons.scss",

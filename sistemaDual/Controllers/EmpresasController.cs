@@ -2,201 +2,106 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using sistemaDual.Data;
+using sistemaDual.Interfaces;
 using sistemaDual.Models;
 using sistemaDual.Models.ViewModels;
+using sistemaDual.Utilidades.Response;
 
 namespace sistemaDual.Controllers
 {
     public class EmpresasController : Controller
     {
-        private readonly ProgramaDualContext _context;
+        private readonly IMapper _mapper;
+        private readonly IEmpresaService _empresaService;
 
-        public EmpresasController(ProgramaDualContext context)
+        public EmpresasController(IMapper mapper, IEmpresaService empresaService)
         {
-            _context = context;
+            _mapper = mapper;
+            _empresaService = empresaService;   
         }
 
-        // GET: Empresas
-        public async Task<IActionResult> Index()
+        //
+        public IActionResult Index()
         {
-            var programaDualContext = _context.Empresas.Include(e => e.Domicilio);
-            return View(await programaDualContext.ToListAsync());
-        }
-
-        // GET: Empresas/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.Empresas == null)
-            {
-                return NotFound();
-            }
-
-            var empresa = await _context.Empresas
-                .Include(e => e.Domicilio)
-                .FirstOrDefaultAsync(m => m.EmpresaID == id);
-            if (empresa == null)
-            {
-                return NotFound();
-            }
-
-            return View(empresa);
-        }
-
-        // GET: Empresas/Create
-        public IActionResult Create()
-        {
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID");
             return View();
         }
 
-        // POST: Empresas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //
+        [HttpGet]
+        public async Task<IActionResult> Lista()
+        {
+            List<EmpresaViewModel> empresaViewModels = _mapper.Map<List<EmpresaViewModel>>(await _empresaService.Lista());
+            return StatusCode(StatusCodes.Status200OK, new { data = empresaViewModels });
+        }
+
+        //
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmpresaID,RazonS,NombreC,SectorS,RepresentanteL,CorreoR,Direccion,Colonia,Municipio,CodigoPostal")] EmpresaViewModel model)
+        public async Task<IActionResult> Crear([FromForm] string modelo)
         {
-            if (ModelState.IsValid)
+            GenericResponse<EmpresaViewModel> response = new GenericResponse<EmpresaViewModel>();
+            try
             {
-                string empID = model.EmpresaID;
-                string rs = model.RazonS;
-                string nomC = model.NombreC;
-                string sectS = model.SectorS;
-                string repL = model.RepresentanteL;
-                string correoR = model.RepresentanteL;
+                EmpresaViewModel empresaVM = JsonConvert.DeserializeObject<EmpresaViewModel>(modelo);
 
-                string dir = model.Direccion;
-                string col = model.Colonia;
-                string mun = model.Municipio;
-                string cp = model.CodigoPostal;
+                Empresa empresa_creada = await _empresaService.Crear(_mapper.Map<Empresa>(empresaVM));
 
-                var domi = new Domicilio()
-                {
+                empresaVM = _mapper.Map<EmpresaViewModel>(empresa_creada);
 
-                    Direccion = dir,
-                    Colonia = col,
-                    Municipio = mun,
-                    CodigoPostal = cp
-                };
-                _context.Add(domi);
-                await _context.SaveChangesAsync();
+                response.Estado = true;
+                response.Objeto = empresaVM;
 
-                var empresa = new Empresa()
-                {
-                    EmpresaID = empID,
-                    RazonS = rs,
-                    NombreC = nomC,
-                    SectorS = sectS,
-                    RepresentanteL = repL,
-                    CorreoR = correoR,
-                    DomicilioID = domi.DomicilioID
-                };
-                _context.Add(empresa);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            }catch(Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
             }
-            
-            return View(model);
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // GET: Empresas/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        //
+        [HttpPut]
+        public async Task<IActionResult> Editar([FromForm] string modelo)
         {
-            if (id == null || _context.Empresas == null)
-            {
-                return NotFound();
-            }
+            GenericResponse<EmpresaViewModel> response = new GenericResponse<EmpresaViewModel>();
 
-            var empresa = await _context.Empresas.FindAsync(id);
-            if (empresa == null)
+            try
             {
-                return NotFound();
+                EmpresaViewModel empresaVM = JsonConvert.DeserializeObject<EmpresaViewModel>(modelo);
+                Empresa empresa_editada = await _empresaService.Editar(_mapper.Map<Empresa>(empresaVM));
+
+                empresaVM = _mapper.Map<EmpresaViewModel>(empresa_editada);
+                response.Estado = true;
+                response.Objeto = empresaVM;
             }
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", empresa.DomicilioID);
-            return View(empresa);
+            catch(Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // POST: Empresas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("EmpresaID,RazonS,NombreC,SectorS,RepresentanteL,CorreoR,DomicilioID")] Empresa empresa)
+        //
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(string empresaID)
         {
-            if (id != empresa.EmpresaID)
+            GenericResponse<string> response = new GenericResponse<string>();
+            try
             {
-                return NotFound();
+                response.Estado = await _empresaService.Eliminar(empresaID);
             }
-
-            if (ModelState.IsValid)
+            catch(Exception ex)
             {
-                try
-                {
-                    _context.Update(empresa);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmpresaExists(empresa.EmpresaID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                response.Estado = false;
+                response.Mensaje = ex.Message;
             }
-            ViewData["DomicilioID"] = new SelectList(_context.Domicilios, "DomicilioID", "DomicilioID", empresa.DomicilioID);
-            return View(empresa);
-        }
-
-        // GET: Empresas/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null || _context.Empresas == null)
-            {
-                return NotFound();
-            }
-
-            var empresa = await _context.Empresas
-                .Include(e => e.Domicilio)
-                .FirstOrDefaultAsync(m => m.EmpresaID == id);
-            if (empresa == null)
-            {
-                return NotFound();
-            }
-
-            return View(empresa);
-        }
-
-        // POST: Empresas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            if (_context.Empresas == null)
-            {
-                return Problem("Entity set 'ProgramaDualContext.Empresas'  is null.");
-            }
-            var empresa = await _context.Empresas.FindAsync(id);
-            if (empresa != null)
-            {
-                _context.Empresas.Remove(empresa);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool EmpresaExists(string id)
-        {
-          return _context.Empresas.Any(e => e.EmpresaID == id);
+            return StatusCode(StatusCodes.Status200OK, response);
         }
     }
 }

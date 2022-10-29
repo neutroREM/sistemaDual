@@ -5,15 +5,15 @@ namespace sistemaDual.Models
     public class Domicilio
     {
         public int DomicilioID { get; set; }
-        [StringLength(60)]
-        public string Direccion { get; set; }
-        [StringLength(30)]
-        public string Colonia { get; set; }
-        [StringLength(30)]
-        public string Municipio { get; set; }
-        [StringLength(5)]
-        public string CodigoPostal { get; set; }
-        [StringLength(30)]
+
+        public string? Direccion { get; set; }
+
+        public string? Colonia { get; set; }
+
+        public string? Municipio { get; set; }
+
+        public string? CodigoPostal { get; set; }
+
         public string? Otros { get; set; }
 
         public ICollection<AlumnoDual> AlumnosDual { get; set; }

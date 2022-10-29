@@ -123,22 +123,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9taWNpbGlvc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Empresas/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Empresas/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Empresas/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Empresas/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYXNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Empresas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -249,22 +233,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Universidades/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdmVyc2lkYWRlc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Universidades/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdmVyc2lkYWRlc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Universidades/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdmVyc2lkYWRlc1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Universidades/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdmVyc2lkYWRlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Universidades/Index.cshtml]

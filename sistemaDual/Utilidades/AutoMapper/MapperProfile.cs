@@ -19,11 +19,18 @@ namespace sistemaDual.Utilidades.AutoMapper
             #region Universidad
             CreateMap<Universidad, UniversidadViewModel>()
                 .ForMember(dest => dest.Direccion,
-                opt => opt.MapFrom(src => src.Domicilio));
+                opt => opt.MapFrom(src => src.Domicilio.Direccion))
+                .ForMember(dest => dest.Colonia,
+                opt => opt.MapFrom(src => src.Domicilio.Colonia))
+                .ForMember(dest => dest.Municipio,
+                opt => opt.MapFrom(src => src.Domicilio.Municipio))
+                .ForMember(dest => dest.CodigoPostal,
+                opt => opt.MapFrom(src => src.Domicilio.CodigoPostal))
+                .ForMember(dest => dest.Otros,
+                opt => opt.MapFrom(src => src.Domicilio.Otros)).ReverseMap();
 
-            CreateMap<Universidad, UniversidadViewModel>()
-                .ForMember(dest => dest.Direccion,
-                opt => opt.Ignore());
+   
+
             #endregion
 
             #region ProgramaEducativo

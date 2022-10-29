@@ -20,6 +20,8 @@ builder.Services.AddScoped<ICorreoService, CorreoService>();
 builder.Services.AddScoped<IUtilidadesService, UtilidadesService>();
 builder.Services.AddScoped<IRolService, RolService>();
 builder.Services.AddScoped<IAlumnoService, AlumnoService>();
+builder.Services.AddScoped<IEmpresaService, EmpresaService>();
+builder.Services.AddScoped<IUniversidadService, UniversidadService>();
 
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(MapperProfile));

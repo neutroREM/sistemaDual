@@ -32,7 +32,7 @@ namespace sistemaDual.Implementation
             {
                 throw new TaskCanceledException("El correo ya esta registrado");
             }
-
+            
             try
             {
                 string clave_generada = _utilidadesService.GenerarClave();
