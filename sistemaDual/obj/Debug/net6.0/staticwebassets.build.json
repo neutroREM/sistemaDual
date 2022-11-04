@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RbvYWIgQmPi2cIsCd7SDveUoTlVLalM3Ss5fQZ+wRfU=",
+  "Hash": "dTANjrvfFlhwvZ30zrhKasSr8vLtlV02FjVDmEgcVSs=",
   "Source": "sistemaDual",
   "BasePath": "_content/sistemaDual",
   "Mode": "Default",
@@ -323,12 +323,12 @@
       "OriginalItemSpec": "wwwroot\\js\\vistas\\Empresa_Index.js"
     },
     {
-      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\Universidad_Index.js",
+      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\Universidades_Index.js",
       "SourceId": "sistemaDual",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\",
       "BasePath": "_content/sistemaDual",
-      "RelativePath": "js/vistas/Universidad_Index.js",
+      "RelativePath": "js/vistas/Universidades_Index.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -337,7 +337,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\vistas\\Universidad_Index.js"
+      "OriginalItemSpec": "wwwroot\\js\\vistas\\Universidades_Index.js"
     },
     {
       "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\scss\\_buttons.scss",

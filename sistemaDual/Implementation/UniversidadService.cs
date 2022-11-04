@@ -64,7 +64,7 @@ namespace sistemaDual.Implementation
 
                 
  
-                bool resp = await _repository.Editar(entidad);
+                bool resp = await _repository.Editar(uni_editar);
                 if (!resp)
                     throw new TaskCanceledException("No se pudo registrar");
 

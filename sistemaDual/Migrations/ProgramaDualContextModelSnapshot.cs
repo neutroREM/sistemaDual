@@ -229,7 +229,7 @@ namespace sistemaDual.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("EmpresaID")
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Etapa")
                         .IsRequired()
@@ -293,28 +293,19 @@ namespace sistemaDual.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DomicilioID"));
 
                     b.Property<string>("CodigoPostal")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Colonia")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Municipio")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Otros")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DomicilioID");
 
@@ -324,35 +315,31 @@ namespace sistemaDual.Migrations
             modelBuilder.Entity("sistemaDual.Models.Empresa", b =>
                 {
                     b.Property<string>("EmpresaID")
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CorreoR")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DomicilioID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("FechaCambio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NombreC")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RazonS")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RepresentanteL")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SectorS")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EmpresaID");
 
@@ -444,7 +431,7 @@ namespace sistemaDual.Migrations
 
                     b.Property<string>("EmpresaID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -476,7 +463,7 @@ namespace sistemaDual.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("UniversidadID")
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Version")
                         .IsRequired()
@@ -525,7 +512,7 @@ namespace sistemaDual.Migrations
 
                     b.Property<string>("UniversidadID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ResponsableInstitucionalID");
 
@@ -559,16 +546,19 @@ namespace sistemaDual.Migrations
             modelBuilder.Entity("sistemaDual.Models.Universidad", b =>
                 {
                     b.Property<string>("UniversidadID")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("DomicilioID")
+                    b.Property<int?>("DomicilioID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("FechaCambio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NombreU")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UniversidadID");
 
@@ -727,9 +717,7 @@ namespace sistemaDual.Migrations
                 {
                     b.HasOne("sistemaDual.Models.Domicilio", "Domicilio")
                         .WithMany("Universidades")
-                        .HasForeignKey("DomicilioID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DomicilioID");
 
                     b.Navigation("Domicilio");
                 });

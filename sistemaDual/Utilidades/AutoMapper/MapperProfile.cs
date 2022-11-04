@@ -28,9 +28,6 @@ namespace sistemaDual.Utilidades.AutoMapper
                 opt => opt.MapFrom(src => src.Domicilio.CodigoPostal))
                 .ForMember(dest => dest.Otros,
                 opt => opt.MapFrom(src => src.Domicilio.Otros)).ReverseMap();
-
-   
-
             #endregion
 
             #region ProgramaEducativo

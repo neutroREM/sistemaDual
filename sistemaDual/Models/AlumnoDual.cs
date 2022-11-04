@@ -8,6 +8,7 @@ namespace sistemaDual.Models
     {
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [StringLength(18)]
         public string AlumnoDualID { get; set; }
 
         public string? Matricula { get; set; }

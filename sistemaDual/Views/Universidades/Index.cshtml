@@ -1,14 +1,11 @@
-﻿@model IEnumerable<sistemaDual.Models.Universidad>
-
+﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Universidades";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Estilos{
-    <!-- ============================================================
-    =ESTILOS PARA ESTA PAGINA
-    ===============================================================-->
+  
     <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
@@ -23,8 +20,8 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#modalData"><i class="fas fa-user-plus"></i> Nueva Universidad</button>
-                    <a asp-action="Create">Create New</a>
+                    <button class="btn btn-success" id="btnNuevo"><i class="fas fa-user-plus"></i> Nueva Universidad</button>
+                    
                 </div>
             </div>
             <hr />
@@ -34,13 +31,25 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.UniversidadID)
+                                    CCT
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.NombreU)
+                                    Nombre de la Universidad
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Domicilio)
+                                    DomicilioID
+                                </th>
+                                <th>
+                                    Direccion 
+                                </th>
+                                <th>
+                                    Colonia 
+                                </th>
+                                <th>
+                                    Municipio
+                                </th>
+                                <th>
+                                    C.P  
                                 </th>
                                 <th>
                                     Acciones
@@ -48,27 +57,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(var item in Model){
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UniversidadID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NombreU)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Domicilio.Direccion)
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            }
+                
                         </tbody>
                     </table>
                 </div>
@@ -76,7 +65,7 @@
         </div>
     </div>
 
-    <!--  Modal-->
+    <!--  Modal -->
     <div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -88,48 +77,45 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <input type="hidden" value="0" id="txtId">
+                        <input type="hidden" value="0" id="txtDomicilioID">
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="form-row">
                                     <div class="form-group col-sm-6">
-                                        <label for="txtNombre">Nombre</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtNombre" name="Nombre">
+                                        <label for="txtUniversidadID">CCT</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtUniversidadID" name="UniversidadID">
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="txtCorreo">Correo</label>
-                                        <input type="email" class="form-control form-control-sm input-validar" id="txtCorreo" name="Correo">
+                                        <label for="txtNombreU">Nombre</label>
+                                        <input type="email" class="form-control form-control-sm input-validar" id="txtNombreU" name="NombreU">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-sm-6">
-                                        <label for="txtTelefono">Telefono</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtTelefono" name="Telefono">
+                                        <label for="txtDireccion">Direccion</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtDireccion" name="Direccion">
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="cboRol">Rol</label>
-                                        <select class="form-control form-control-sm" id="cboRol">
-                                            <option value="1">Administrador</option>
-                                        </select>
+                                        <label for="txtColonia">Colonia</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtColonia" name="Colonia">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-sm-6">
-                                        <label for="cboEstado">Estado</label>
-                                        <select class="form-control form-control-sm" id="cboEstado">
-                                            <option value="1">Activo</option>
-                                            <option value="0">No Activo</option>
-                                        </select>
+                                        <label for="txtMunicipio">Municipio</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtMunicipio" name="Municipio">
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="txtFoto">Foto</label>
-                                        <input class="form-control-file" type="file" id="txtFoto" />
+                                        <label for="txtCodigoPostal">C.P</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCodigoPostal" name="CodigoPostal">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtOtros">Otros</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtOtros" name="Otros">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <img id="imgUsuario" style="max-width:200px;" src="https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?w=300" class="rounded mx-auto d-block" alt="Foto usuario">
-                            </div>
+                           
 
                         </div>
                     </form>
@@ -158,8 +144,8 @@
     <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
     <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
 
-    <!-- SOLO ES DE EJEMPLO - IGNORAR -->
-    <script src="~/js/vistas/datatables-demo.js"></script>
+    <!-- Vistas JS -->
+    <script src="~/js/vistas/Universidades_Index.js"></script>
 }
 
 
