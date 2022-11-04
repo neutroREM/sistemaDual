@@ -85,12 +85,12 @@ $("#btnGuardar").click(function () {
     const modelo = structuredClone(MODEL_BASE);
     modelo["universidadID"] = $("#txtUniversidadID").val()
     modelo["nombreU"] = $("#txtNombreU").val()
-    modelo["domicilioID"] = parseInt($("#txtDomicilioID").val())
     modelo["direccion"] = $("#txtDireccion").val()
     modelo["colonia"] = $("#txtColonia").val()
     modelo["municipio"] = $("#txtMunicipio").val()
     modelo["codigoPostal"] = $("#txtCodigoPostal").val()
     modelo["otros"] = $("#txtOtros").val()
+    modelo["domicilioID"] = parseInt($("#txtDomicilioID").val())
 
     const formData = new FormData();
     formData.append("modelo", JSON.stringify(modelo))

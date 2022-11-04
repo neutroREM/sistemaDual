@@ -70,7 +70,7 @@ namespace sistemaDual.Controllers
         [HttpPut]
         public async Task<IActionResult> Editar([FromForm] string modelo)
         {
-            GenericResponse<EmpresaViewModel> response = new GenericResponse<EmpresaViewModel>();
+            GenericResponse<UniversidadViewModel> response = new GenericResponse<UniversidadViewModel>();
             try
             {
                 UniversidadViewModel universidadVM = JsonConvert.DeserializeObject<UniversidadViewModel>(modelo);

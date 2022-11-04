@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dTANjrvfFlhwvZ30zrhKasSr8vLtlV02FjVDmEgcVSs=",
+  "Hash": "q37iMI0s3hCU4snHeauyfIn/7P2wU7/vuRMeerxjQL0=",
   "Source": "sistemaDual",
   "BasePath": "_content/sistemaDual",
   "Mode": "Default",
@@ -306,12 +306,12 @@
       "OriginalItemSpec": "wwwroot\\js\\vistas\\datatables-demo.js"
     },
     {
-      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\Empresa_Index.js",
+      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\Empresas_Index.js",
       "SourceId": "sistemaDual",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\",
       "BasePath": "_content/sistemaDual",
-      "RelativePath": "js/vistas/Empresa_Index.js",
+      "RelativePath": "js/vistas/Empresas_Index.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -320,7 +320,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\vistas\\Empresa_Index.js"
+      "OriginalItemSpec": "wwwroot\\js\\vistas\\Empresas_Index.js"
     },
     {
       "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\Universidades_Index.js",

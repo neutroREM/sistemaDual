@@ -7,7 +7,7 @@ namespace sistemaDual.Models
     {
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string? EmpresaID { get; set; }
+        public string EmpresaID { get; set; }
 
         public string? RazonS { get; set; }
 

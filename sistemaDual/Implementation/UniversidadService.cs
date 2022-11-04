@@ -56,6 +56,7 @@ namespace sistemaDual.Implementation
                 uni_editar.UniversidadID = entidad.UniversidadID;
                 uni_editar.NombreU = entidad.NombreU;
                 uni_editar.FechaCambio = DateTime.Now;
+                uni_editar.DomicilioID = entidad.DomicilioID;
                 uni_editar.Domicilio.Direccion = entidad.Domicilio.Direccion;
                 uni_editar.Domicilio.Colonia = entidad.Domicilio.Colonia;
                 uni_editar.Domicilio.Municipio = entidad.Domicilio.Municipio;

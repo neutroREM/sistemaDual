@@ -44,16 +44,9 @@ namespace sistemaDual.Implementation
 
         public async Task<Empresa> Editar(Empresa modelo)
         {
-            Empresa empresa_existe = await _repository.Obtener(r => r.EmpresaID == modelo.EmpresaID);
-            if (empresa_existe != null)
-                throw new TaskCanceledException("Esta UE ya esta registrada este RFC");
-
             try
             {
-                IQueryable<Empresa> query = await _repository.Consultar(e => e.EmpresaID == modelo.EmpresaID);
-
-                Empresa empresa_editar = query.First();
-
+                Empresa empresa_editar = await _repository.Obtener(i => i.EmpresaID == modelo.EmpresaID);
                 empresa_editar.EmpresaID = modelo.EmpresaID;
                 empresa_editar.RazonS = modelo.RazonS;
                 empresa_editar.NombreC = modelo.NombreC;
@@ -68,8 +61,8 @@ namespace sistemaDual.Implementation
                 if (!resp) 
                     throw new TaskCanceledException("No se pudo registrar");
 
-                Empresa empresa_editada = query.Include(d => d.Domicilio).First();
-                return empresa_editada;
+                //Empresa empresa_editada = query.Include(d => d.Domicilio).First();
+                return empresa_editar;
             }
             catch
             {

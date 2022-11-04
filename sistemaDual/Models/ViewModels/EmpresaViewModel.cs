@@ -20,9 +20,6 @@
 
         public int? DomicilioID { get; set; }
 
-        public static implicit operator EmpresaViewModel(UniversidadViewModel v)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

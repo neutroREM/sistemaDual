@@ -1,4 +1,4 @@
-﻿@model IEnumerable<sistemaDual.Models.Empresa>
+﻿
 
 @{
     ViewData["Title"] = "Empresas";
@@ -22,8 +22,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#modalData"><i class="fas fa-plus-circle"></i> Nueva Empresa</button>
-                    <a asp-action="Create">Create New</a>
+                    <button class="btn btn-success" id="btnNuevo"><i class="fas fa-plus-circle"></i> Nueva Empresa</button>
                 </div>
             </div>
             <hr />
@@ -33,65 +32,31 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.EmpresaID)
+                                    RFC
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.RazonS)
+                                    Razon Social
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.NombreC)
+                                    Nombre Comercial
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.SectorS)
+                                    Sector Social
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.RepresentanteL)
+                                    Representante Legal
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.CorreoR)
+                                    Correo
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Domicilio)
-                                </th>
+
                                 <th>
                                     Acciones
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(var item in Model){
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.EmpresaID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.RazonS)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NombreC)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.SectorS)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.RepresentanteL)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CorreoR)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Domicilio.Direccion)
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            }
+                            
                         </tbody>
                     </table>
                 </div>
@@ -111,23 +76,42 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <input type="hidden" value="0" id="txtId">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-8">
                                 <div class="form-row">
                                     <div class="form-group col-sm-6">
-                                        <label for="txtDescripcion">Descripcion</label>
-                                        <input type="text" class="form-control form-control-sm" id="txtDescripcion">
+                                        <label for="txtEmpresaID">RFC</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtEmpresaID" name="EmpresaID">
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="cboEstado">Estado</label>
-                                        <select class="form-control form-control-sm" id="cboEstado">
-                                            <option value="1">Activo</option>
-                                            <option value="0">No Activo</option>
-                                        </select>
+                                        <label for="txtRazonS">Razón Social</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtRazonS" name="RazonS">
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtNombreC">Nombre Comercial</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtNombreC" name="NombreC">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtSectorS">Sector Social</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtSectorS" name="SectorS">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtRepresentanteL">Representante Legal</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtRepresentanteL" name="RepresentanteL">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtCorreoR">Correo</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCorreoR" name="CorreoR">
+                                    </div>
+                                    
+                                </div>
                             </div>
+
+
                         </div>
                     </form>
                 </div>
@@ -156,5 +140,5 @@
     <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
 
     <!-- SOLO ES DE EJEMPLO - IGNORAR -->
-    <script src="~/js/vistas/datatables-demo.js"></script>
+    <script src="~/js/vistas/Empresas_Index.js"></script>
 }
