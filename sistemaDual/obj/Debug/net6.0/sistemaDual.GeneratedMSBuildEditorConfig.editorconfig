@@ -19,26 +19,6 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vc0R1YWxlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AsesoresInstitucionales/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNlc29yZXNJbnN0aXR1Y2lvbmFsZXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AsesoresInstitucionales/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNlc29yZXNJbnN0aXR1Y2lvbmFsZXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AsesoresInstitucionales/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNlc29yZXNJbnN0aXR1Y2lvbmFsZXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AsesoresInstitucionales/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNlc29yZXNJbnN0aXR1Y2lvbmFsZXNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AsesoresInstitucionales/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNlc29yZXNJbnN0aXR1Y2lvbmFsZXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Asignaturas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpZ25hdHVyYXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -139,40 +119,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/MentoresAcademicos/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudG9yZXNBY2FkZW1pY29zXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/MentoresAcademicos/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudG9yZXNBY2FkZW1pY29zXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/MentoresAcademicos/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudG9yZXNBY2FkZW1pY29zXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/MentoresAcademicos/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudG9yZXNBY2FkZW1pY29zXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/MentoresAcademicos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudG9yZXNBY2FkZW1pY29zXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/MentoresEmpresariales/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudG9yZXNFbXByZXNhcmlhbGVzXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/MentoresEmpresariales/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudG9yZXNFbXByZXNhcmlhbGVzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/MentoresEmpresariales/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudG9yZXNFbXByZXNhcmlhbGVzXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/MentoresEmpresariales/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudG9yZXNFbXByZXNhcmlhbGVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/MentoresEmpresariales/Index.cshtml]
@@ -185,22 +133,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Plantilla/RestablecerClave.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhXFJlc3RhYmxlY2VyQ2xhdmUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ProgramasEducativos/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFzRWR1Y2F0aXZvc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ProgramasEducativos/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFzRWR1Y2F0aXZvc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ProgramasEducativos/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFzRWR1Y2F0aXZvc1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ProgramasEducativos/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFzRWR1Y2F0aXZvc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ProgramasEducativos/Index.cshtml]

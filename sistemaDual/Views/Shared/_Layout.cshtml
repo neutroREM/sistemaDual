@@ -55,8 +55,6 @@
                 <div id="collapseAdministracion" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="@Url.Action("Index","AlumnosDuales")">Alumnos</a>
-                        <a class="collapse-item" asp-controller="Empresas" asp-action="Index">Empresas</a>
-                        <a class="collapse-item" asp-controller="Universidades" asp-action="Index">Universidades</a>
                     </div>
                 </div>
             </li>
@@ -65,12 +63,12 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventario">
                     <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Inventario</span>
+                    <span>Unidades Económicas</span>
                 </a>
                 <div id="collapseInventario" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="categorias.html">Categorias</a>
-                        <a class="collapse-item" href="productos.html">Productos</a>
+                        <a class="collapse-item" asp-controller="Empresas" asp-action="Index">Empresas</a>
+                        <a class="collapse-item" asp-controller="MentoresEmpresariales" asp-action="Index">Mentores</a>
                     </div>
                 </div>
             </li>
@@ -79,12 +77,15 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
                     <i class="fas fa-fw fa-tags"></i>
-                    <span>Ventas</span>
+                    <span>Institución</span>
                 </a>
                 <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="nueva_venta.html">Nueva Venta</a>
-                        <a class="collapse-item" href="historial_venta.html">Historial Venta</a>
+                        <a class="collapse-item" asp-controller="Universidades" asp-action="Index">Universidad</a>
+                        <a class="collapse-item" asp-controller="ProgramasEducativos" asp-action="Index">ProgramaEducativo</a>
+                        <a class="collapse-item" asp-controller="ResoponsablesInstitucionales" asp-action="Index">ResponsableInstitucional</a>
+                        <a class="collapse-item" asp-controller="AsesoresInstitucionales" asp-action="Index">AsesorInstitucional</a>
+                        <a class="collapse-item" asp-controller="MentoresAcademicos" asp-action="Index">MentoresAcademicos</a>
                     </div>
                 </div>
             </li>
@@ -93,11 +94,13 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Reportes</span>
+                    <span>Asignaturas</span>
                 </a>
                 <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="reporte_venta.html">Reporte de Ventas</a>
+                        <a class="collapse-item" asp-controller="Asignaturas" asp-action="Index">Asignaturas</a>
+                        <a class="collapse-item" asp-controller="AlumnosAsignaturas" asp-action="Index">Estudiantes</a>
+                        <a class="collapse-item" asp-controller="AlumnosMentores" asp-action="Index">Mentores</a>
                     </div>
                 </div>
             </li>

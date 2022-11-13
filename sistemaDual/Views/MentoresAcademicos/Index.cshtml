@@ -1,53 +1,151 @@
-﻿@model IEnumerable<sistemaDual.Models.MentorAcademico>
-
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewData["Title"] = "MentoresAcademicos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApellidoP)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApellidoM)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProgramaEducativo)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApellidoP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApellidoM)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProgramaEducativo.Nombre)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MentorAcademicoID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MentorAcademicoID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MentorAcademicoID">Delete</a>
-            </td>
-        </tr>
+@section Estilos{
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
 }
-    </tbody>
-</table>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Lista de Mentores Academicos</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <button class="btn btn-success" id="btnNuevo"><i class="fas fa-user-plus"></i> Nuevo Mentor</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    MentorAcademicoID
+                                </th>
+                                <th>
+                                    CURP
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    ApellidoPaterno
+                                </th>
+                                <th>
+                                    ApellidoMaterno
+                                </th>
+                                <th>
+                                    Correo
+                                </th>
+                                <th>
+                                    Telefono
+                                </th>
+                                <th>
+                                    Programa Educativo
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Modal-->
+    <div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6>Detalles del Mentor</h6>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="hidden" value="0" id="txtMentorAcademicoID">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtCurp">CURP</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCurp" name="Curp">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtNombre">Nombre</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtNombre" name="Nombre">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtApellidoP">ApellidoPaterno</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtApellidoP" name="ApellidoP">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtApellidoM">ApellidoMaterno</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtApellidoM" name="ApellidoM">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtCorreo">Correo</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCorreo" name="Correo">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="txtTelefono">Telefono</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtTelefono" name="Telefono">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="cboPrograma">PE</label>
+                                        <select class="form-control form-control-sm" id="cboPrograma">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-sm" type="button" id="btnGuardar">Guardar</button>
+                    <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @section Scripts{
+    <!-- ============================================================
+    =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+
+    <!-- SOLO ES DE EJEMPLO - IGNORAR -->
+    <script src="~/js/vistas/MentoresAcademicos_Index.js"></script>
+}

@@ -22,6 +22,9 @@ builder.Services.AddScoped<IRolService, RolService>();
 builder.Services.AddScoped<IAlumnoService, AlumnoService>();
 builder.Services.AddScoped<IEmpresaService, EmpresaService>();
 builder.Services.AddScoped<IUniversidadService, UniversidadService>();
+builder.Services.AddScoped<IMentorEmpresarialService, MentorEmpresarialService>();
+builder.Services.AddScoped<IProgramaEducativoService, ProgramaEducativoService>();
+builder.Services.AddScoped<IMentorAcademicoService, MentorAcademicoService>();
 
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(MapperProfile));

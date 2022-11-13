@@ -2,176 +2,118 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using sistemaDual.Data;
+using sistemaDual.Implementation;
+using sistemaDual.Interfaces;
 using sistemaDual.Models;
 using sistemaDual.Models.ViewModels;
+using sistemaDual.Utilidades.Response;
 
 namespace sistemaDual.Controllers
 {
     public class MentoresAcademicosController : Controller
     {
-        private readonly ProgramaDualContext _context;
+        private readonly IMapper _mapper;
+        private readonly IMentorAcademicoService _mentorService;
+        private readonly IProgramaEducativoService _programaService;
 
-        public MentoresAcademicosController(ProgramaDualContext context)
+        public MentoresAcademicosController(IMapper mapper, IMentorAcademicoService mentorService, IProgramaEducativoService programaService)
         {
-            _context = context;
+            _mapper = mapper;
+            _mentorService = mentorService;
+            _programaService = programaService;
         }
 
         // GET: MentorAcademicoes
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var programaDualContext = _context.MentoresAcademicos.Include(m => m.ProgramaEducativo);
-            return View(await programaDualContext.ToListAsync());
-        }
-
-        // GET: MentorAcademicoes/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.MentoresAcademicos == null)
-            {
-                return NotFound();
-            }
-
-            var mentorAcademico = await _context.MentoresAcademicos
-                .Include(m => m.ProgramaEducativo)
-                .FirstOrDefaultAsync(m => m.MentorAcademicoID == id);
-            if (mentorAcademico == null)
-            {
-                return NotFound();
-            }
-
-            return View(mentorAcademico);
-        }
-
-        // GET: MentorAcademicoes/Create
-        public IActionResult Create()
-        {
-            ViewData["ProgramaEducativoID"] = new SelectList(_context.ProgramasEducativos, "ID", "Nombre");
             return View();
         }
 
-        // POST: MentorAcademicoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // GET: MentoresAcademicos/ListaProgramas
+        [HttpGet]
+        public async Task<IActionResult> ListaProgramas()
+        {
+            List<ProgramaEducativoViewModel> programaVM = _mapper.Map<List<ProgramaEducativoViewModel>>(await _programaService.Lista());
+            return StatusCode(StatusCodes.Status200OK, programaVM);
+        }
+
+        // GET: MentoresAcademicos/Lista
+        [HttpGet]
+        public async Task<IActionResult> Lista()
+        {
+            List<MentorAcademicoViewModel> mentorVM = _mapper.Map<List<MentorAcademicoViewModel>>(await _mentorService.Lista());
+            return StatusCode(StatusCodes.Status200OK, new { data = mentorVM });
+        }
+
+        // POST: MentoresEmpresariales/Crear
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MentorAcademicoID,Nombre,ApellidoP,ApellidoM,ProgramaEducativoID")] MentorAcademicoViewModel model)
+        public async Task<IActionResult> Crear([FromForm] string modelo)
         {
-            if (ModelState.IsValid)
+            GenericResponse<MentorAcademicoViewModel> response = new GenericResponse<MentorAcademicoViewModel>();
+
+            try
             {
-                var mentorA = new MentorAcademico()
-                {
-                    MentorAcademicoID = model.MentorAcademicoID,
-                    Nombre = model.Nombre,
-                    ApellidoP = model.ApellidoP,
-                    ApellidoM = model.ApellidoM,
-                    ProgramaEducativoID = model.ProgramaEducativoID
-                };
-                _context.Add(mentorA);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                MentorAcademicoViewModel mentorVM = JsonConvert.DeserializeObject<MentorAcademicoViewModel>(modelo);
+               
+                MentorAcademico mentor_creado = await _mentorService.Crear(_mapper.Map<MentorAcademico>(mentorVM));
+                mentorVM = _mapper.Map<MentorAcademicoViewModel>(mentor_creado);
+
+                response.Estado = true;
+                response.Objeto = mentorVM;
             }
-            ViewData["ProgramaEducativoID"] = new SelectList(_context.ProgramasEducativos, "ID", "Nombre", model.ProgramaEducativoID);
-            return View(model);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // GET: MentorAcademicoes/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        // PUT: MentoresAcademicos/Editar
+        [HttpPut]
+        public async Task<IActionResult> Editar([FromForm] string modelo)
         {
-            if (id == null || _context.MentoresAcademicos == null)
-            {
-                return NotFound();
-            }
+            GenericResponse<MentorAcademicoViewModel> response = new GenericResponse<MentorAcademicoViewModel>();
 
-            var mentorAcademico = await _context.MentoresAcademicos.FindAsync(id);
-            if (mentorAcademico == null)
+            try
             {
-                return NotFound();
+                MentorAcademicoViewModel mentorVM = JsonConvert.DeserializeObject<MentorAcademicoViewModel>(modelo);
+
+                MentorAcademico mentor_creado = await _mentorService.Editar(_mapper.Map<MentorAcademico>(mentorVM));
+                mentorVM = _mapper.Map<MentorAcademicoViewModel>(mentor_creado);
+
+                response.Estado = true;
+                response.Objeto = mentorVM;
             }
-            ViewData["ProgramaEducativoID"] = new SelectList(_context.ProgramasEducativos, "ID", "Nombre", mentorAcademico.ProgramaEducativoID);
-            return View(mentorAcademico);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // POST: MentorAcademicoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("MentorAcademicoID,Nombre,ApellidoP,ApellidoM,ProgramaEducativoID")] MentorAcademico mentorAcademico)
+        // DELETE: MentoresAcademicos/Eliminar/MentorAcademicoID
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(int mentorAcademicoID)
         {
-            if (id != mentorAcademico.MentorAcademicoID)
+            GenericResponse<MentorAcademicoViewModel> response = new GenericResponse<MentorAcademicoViewModel>();
+            try
             {
-                return NotFound();
+                response.Estado = await _mentorService.Eliminar(mentorAcademicoID);
             }
-
-            if (ModelState.IsValid)
+            catch (Exception ex)
             {
-                try
-                {
-                    _context.Update(mentorAcademico);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MentorAcademicoExists(mentorAcademico.MentorAcademicoID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                response.Estado = false;
+                response.Mensaje = ex.Message;
             }
-            ViewData["ProgramaEducativoID"] = new SelectList(_context.ProgramasEducativos, "ID", "Nombre", mentorAcademico.ProgramaEducativoID);
-            return View(mentorAcademico);
-        }
-
-        // GET: MentorAcademicoes/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null || _context.MentoresAcademicos == null)
-            {
-                return NotFound();
-            }
-
-            var mentorAcademico = await _context.MentoresAcademicos
-                .Include(m => m.ProgramaEducativo)
-                .FirstOrDefaultAsync(m => m.MentorAcademicoID == id);
-            if (mentorAcademico == null)
-            {
-                return NotFound();
-            }
-
-            return View(mentorAcademico);
-        }
-
-        // POST: MentorAcademicoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            if (_context.MentoresAcademicos == null)
-            {
-                return Problem("Entity set 'ProgramaDualContext.MentoresAcademicos'  is null.");
-            }
-            var mentorAcademico = await _context.MentoresAcademicos.FindAsync(id);
-            if (mentorAcademico != null)
-            {
-                _context.MentoresAcademicos.Remove(mentorAcademico);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool MentorAcademicoExists(string id)
-        {
-          return _context.MentoresAcademicos.Any(e => e.MentorAcademicoID == id);
+            return StatusCode(StatusCodes.Status200OK, response);
         }
     }
 }

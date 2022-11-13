@@ -2,174 +2,118 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using sistemaDual.Data;
+using sistemaDual.Implementation;
+using sistemaDual.Interfaces;
 using sistemaDual.Models;
 using sistemaDual.Models.ViewModels;
+using sistemaDual.Utilidades.Response;
 
 namespace sistemaDual.Controllers
 {
     public class ProgramasEducativosController : Controller
     {
-        private readonly ProgramaDualContext _context;
+        private readonly IProgramaEducativoService _programaService;
+        private readonly IUniversidadService _universidadService;
+        private readonly IMapper _mapper;
 
-        public ProgramasEducativosController(ProgramaDualContext context)
+        public ProgramasEducativosController(IProgramaEducativoService programaService, IMapper mapper, IUniversidadService universidadService)
         {
-            _context = context;
+            _programaService = programaService;
+            _universidadService = universidadService;
+            _mapper = mapper;   
         }
 
-        // GET: ProgramaEducativoes
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var programaDualContext = _context.ProgramasEducativos.Include(p => p.Universidad);
-            return View(await programaDualContext.ToListAsync());
-        }
-
-        // GET: ProgramaEducativoes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.ProgramasEducativos == null)
-            {
-                return NotFound();
-            }
-
-            var programaEducativo = await _context.ProgramasEducativos
-                .Include(p => p.Universidad)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (programaEducativo == null)
-            {
-                return NotFound();
-            }
-
-            return View(programaEducativo);
-        }
-
-        // GET: ProgramaEducativoes/Create
-        public IActionResult Create()
-        {
-            ViewData["UniversidadID"] = new SelectList(_context.Universidades, "UniversidadID", "UniversidadID");
             return View();
         }
 
-        // POST: ProgramaEducativoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // GET: MentoresEmpresariales/ListaUniversidades
+        [HttpGet]
+        public async Task<IActionResult> ListaUniversidades()
+        {
+            List<UniversidadViewModel> empresaVM = _mapper.Map<List<UniversidadViewModel>>(await _universidadService.Lista());
+            return StatusCode(StatusCodes.Status200OK, empresaVM);
+        }
+
+        public async Task<IActionResult> Lista()
+        {
+            List<ProgramaEducativoViewModel> programaVM = _mapper.Map<List<ProgramaEducativoViewModel>>(await _programaService.Lista());
+            return StatusCode(StatusCodes.Status200OK, new { data = programaVM });
+        }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nombre,Version,UniversidadID")] ProgramaEducativoViewModel model)
+        public async Task<IActionResult> Crear([FromForm] string modelo)
         {
-            if (ModelState.IsValid)
+            GenericResponse<ProgramaEducativoViewModel> response = new GenericResponse<ProgramaEducativoViewModel>();
+            try
             {
-                var programaE = new ProgramaEducativo()
-                {
-                    Nombre = model.Nombre,
-                    Version = model.Version,
-                    UniversidadID = model.UniversidadID
-                };
-                _context.Add(programaE);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ProgramaEducativoViewModel programaVM = JsonConvert.DeserializeObject<ProgramaEducativoViewModel>(modelo);
+
+                ProgramaEducativo programa_creado = await _programaService.Crear(_mapper.Map<ProgramaEducativo>(programaVM));
+
+                programaVM = _mapper.Map<ProgramaEducativoViewModel>(programa_creado);
+
+                response.Estado = true;
+                response.Objeto = programaVM;
+
             }
-            
-            return View(model);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // GET: ProgramaEducativoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.ProgramasEducativos == null)
-            {
-                return NotFound();
-            }
 
-            var programaEducativo = await _context.ProgramasEducativos.FindAsync(id);
-            if (programaEducativo == null)
+
+        [HttpPut]
+        public async Task<IActionResult> Editar([FromForm] string modelo)
+        {
+            GenericResponse<ProgramaEducativoViewModel> response = new GenericResponse<ProgramaEducativoViewModel>();
+            try
             {
-                return NotFound();
+                ProgramaEducativoViewModel programaVM = JsonConvert.DeserializeObject<ProgramaEducativoViewModel>(modelo);
+
+                ProgramaEducativo programa_editado = await _programaService.Editar(_mapper.Map<ProgramaEducativo>(programaVM));
+
+                programaVM = _mapper.Map<ProgramaEducativoViewModel>(programa_editado);
+
+                response.Estado = true;
+                response.Objeto = programaVM;
+
             }
-            ViewData["UniversidadID"] = new SelectList(_context.Universidades, "UniversidadID", "UniversidadID", programaEducativo.UniversidadID);
-            return View(programaEducativo);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // POST: ProgramaEducativoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Nombre,Version,UniversidadID")] ProgramaEducativo programaEducativo)
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(int programaEducativoID)
         {
-            if (id != programaEducativo.ID)
+            GenericResponse<ProgramaEducativoViewModel> response = new GenericResponse<ProgramaEducativoViewModel>();
+            try
             {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
+                response.Estado = await _programaService.Eliminar(programaEducativoID);
+
+            }
+            catch (Exception ex)
             {
-                try
-                {
-                    _context.Update(programaEducativo);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProgramaEducativoExists(programaEducativo.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                response.Estado = false;
+                response.Mensaje = ex.Message;
             }
-            ViewData["UniversidadID"] = new SelectList(_context.Universidades, "UniversidadID", "UniversidadID", programaEducativo.UniversidadID);
-            return View(programaEducativo);
-        }
-
-        // GET: ProgramaEducativoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.ProgramasEducativos == null)
-            {
-                return NotFound();
-            }
-
-            var programaEducativo = await _context.ProgramasEducativos
-                .Include(p => p.Universidad)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (programaEducativo == null)
-            {
-                return NotFound();
-            }
-
-            return View(programaEducativo);
-        }
-
-        // POST: ProgramaEducativoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.ProgramasEducativos == null)
-            {
-                return Problem("Entity set 'ProgramaDualContext.ProgramasEducativos'  is null.");
-            }
-            var programaEducativo = await _context.ProgramasEducativos.FindAsync(id);
-            if (programaEducativo != null)
-            {
-                _context.ProgramasEducativos.Remove(programaEducativo);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ProgramaEducativoExists(int id)
-        {
-          return _context.ProgramasEducativos.Any(e => e.ID == id);
+            return StatusCode(StatusCodes.Status200OK, response);
         }
     }
 }

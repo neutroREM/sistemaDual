@@ -2,179 +2,125 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using sistemaDual.Data;
+using sistemaDual.Implementation;
+using sistemaDual.Interfaces;
 using sistemaDual.Models;
 using sistemaDual.Models.ViewModels;
+using sistemaDual.Utilidades.Response;
 
 namespace sistemaDual.Controllers
 {
     public class MentoresEmpresarialesController : Controller
     {
-        private readonly ProgramaDualContext _context;
+        private readonly IMapper _mapper;
+        private readonly IMentorEmpresarialService _empresarialService;
+        private readonly IEmpresaService _empresaService;
 
-        public MentoresEmpresarialesController(ProgramaDualContext context)
+        public MentoresEmpresarialesController(IMapper mapper, IMentorEmpresarialService empresarialService, IEmpresaService empresaService)
         {
-            _context = context;
+            _mapper = mapper;
+            _empresarialService = empresarialService;
+            _empresaService = empresaService;
         }
 
         // GET: MentoresEmpresariales
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var programaDualContext = _context.MentoresEmpresariales.Include(m => m.Empresa);
-            return View(await programaDualContext.ToListAsync());
-        }
-
-        // GET: MentoresEmpresariales/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.MentoresEmpresariales == null)
-            {
-                return NotFound();
-            }
-
-            var mentorEmpresarial = await _context.MentoresEmpresariales
-                .Include(m => m.Empresa)
-                .FirstOrDefaultAsync(m => m.MentorEmpresarialID == id);
-            if (mentorEmpresarial == null)
-            {
-                return NotFound();
-            }
-
-            return View(mentorEmpresarial);
-        }
-
-        // GET: MentoresEmpresariales/Create
-        public IActionResult Create()
-        {
-            ViewData["EmpresaID"] = new SelectList(_context.Empresas, "EmpresaID", "EmpresaID");
+          
             return View();
         }
 
-        // POST: MentoresEmpresariales/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        // GET: MentoresEmpresariales/ListaEmpresas
+        [HttpGet]
+        public async Task<IActionResult> ListaEmpresas()
+        {
+            List<EmpresaViewModel> empresaVM = _mapper.Map<List<EmpresaViewModel>>(await _empresaService.Lista());
+            return StatusCode(StatusCodes.Status200OK, empresaVM);
+        }
+
+        // GET: MentoresEmpresariales/Lista
+        [HttpGet]
+        public async Task<IActionResult> Lista()
+        {
+            List<MentorEmpresarialViewModel> mentorVM = _mapper.Map<List<MentorEmpresarialViewModel>>(await _empresarialService.Lista());
+            return StatusCode(StatusCodes.Status200OK, new { data = mentorVM });
+        }
+
+
+        // POST: MentoresEmpresariales/Crear
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MentorEmpresarialID,ApellidoP,ApellidoM,Correo,Telefono,Cargo,EmpresaID")] MentorEmpresarialViewModel model)
+        public async Task<IActionResult> Crear([FromForm] string modelo)
         {
-            if (ModelState.IsValid)
+            GenericResponse<MentorEmpresarialViewModel> response = new GenericResponse<MentorEmpresarialViewModel>();
+
+            try
             {
-                var mentorE = new MentorEmpresarial()
-                {
-                    MentorEmpresarialID = model.MentorEmpresarialID,
-                    Nombre = model.Nombre,
-                    ApellidoP = model.ApellidoP,
-                    ApellidoM = model.ApellidoM,
-                    Correo = model.Correo,
-                    Telefono = model.Telefono,
-                    Cargo = model.Cargo,
-                    EmpresaID = model.EmpresaID
-                };
-                _context.Add(mentorE);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                MentorEmpresarialViewModel mentorVM = JsonConvert.DeserializeObject<MentorEmpresarialViewModel>(modelo);
+                string urlPlantillaCorreo = $"{this.Request.Scheme}://{this.Request.Host}/Plantilla/EnviarClave?correo=[correo]&clave=[clave]";
+
+                MentorEmpresarial mentor_creado = await _empresarialService.Crear(_mapper.Map<MentorEmpresarial>(mentorVM), urlPlantillaCorreo);
+                mentorVM = _mapper.Map<MentorEmpresarialViewModel>(mentor_creado);
+
+                response.Estado = true;
+                response.Objeto = mentorVM;
             }
-            ViewData["EmpresaID"] = new SelectList(_context.Empresas, "EmpresaID", "EmpresaID", model.EmpresaID);
-            return View(model);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // GET: MentoresEmpresariales/Edit/5
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null || _context.MentoresEmpresariales == null)
-            {
-                return NotFound();
-            }
 
-            var mentorEmpresarial = await _context.MentoresEmpresariales.FindAsync(id);
-            if (mentorEmpresarial == null)
+        // PUT: MentoresEmpresariales/Editar
+        [HttpPut]
+        public async Task<IActionResult> Editar([FromForm] string modelo)
+        {
+            GenericResponse<MentorEmpresarialViewModel> response = new GenericResponse<MentorEmpresarialViewModel>();
+
+            try
             {
-                return NotFound();
+                MentorEmpresarialViewModel mentorVM = JsonConvert.DeserializeObject<MentorEmpresarialViewModel>(modelo);
+
+                MentorEmpresarial mentor_creado = await _empresarialService.Editar(_mapper.Map<MentorEmpresarial>(mentorVM));
+                mentorVM = _mapper.Map<MentorEmpresarialViewModel>(mentor_creado);
+
+                response.Estado = true;
+                response.Objeto = mentorVM;
             }
-            ViewData["EmpresaID"] = new SelectList(_context.Empresas, "EmpresaID", "EmpresaID", mentorEmpresarial.EmpresaID);
-            return View(mentorEmpresarial);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // POST: MentoresEmpresariales/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("MentorEmpresarialID,ApellidoP,ApellidoM,Correo,Telefono,Cargo,EmpresaID")] MentorEmpresarial mentorEmpresarial)
+        // DELETE: MentoresEmpresariales/Eliminar/MentorEmpresarialID
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(int mentorEmpresarialID)
         {
-            if (id != mentorEmpresarial.MentorEmpresarialID)
-            {
-                return NotFound();
-            }
+            GenericResponse<MentorEmpresarialViewModel> response = new GenericResponse<MentorEmpresarialViewModel>();
 
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _context.Update(mentorEmpresarial);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MentorEmpresarialExists(mentorEmpresarial.MentorEmpresarialID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["EmpresaID"] = new SelectList(_context.Empresas, "EmpresaID", "EmpresaID", mentorEmpresarial.EmpresaID);
-            return View(mentorEmpresarial);
-        }
 
-        // GET: MentoresEmpresariales/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null || _context.MentoresEmpresariales == null)
+                response.Estado = await _empresarialService.Eliminar(mentorEmpresarialID);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                response.Estado = false;
+                response.Mensaje = ex.Message;
             }
-
-            var mentorEmpresarial = await _context.MentoresEmpresariales
-                .Include(m => m.Empresa)
-                .FirstOrDefaultAsync(m => m.MentorEmpresarialID == id);
-            if (mentorEmpresarial == null)
-            {
-                return NotFound();
-            }
-
-            return View(mentorEmpresarial);
-        }
-
-        // POST: MentoresEmpresariales/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            if (_context.MentoresEmpresariales == null)
-            {
-                return Problem("Entity set 'ProgramaDualContext.MentoresEmpresariales'  is null.");
-            }
-            var mentorEmpresarial = await _context.MentoresEmpresariales.FindAsync(id);
-            if (mentorEmpresarial != null)
-            {
-                _context.MentoresEmpresariales.Remove(mentorEmpresarial);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool MentorEmpresarialExists(string id)
-        {
-          return _context.MentoresEmpresariales.Any(e => e.MentorEmpresarialID == id);
+            return StatusCode(StatusCodes.Status200OK, response);
         }
     }
 }

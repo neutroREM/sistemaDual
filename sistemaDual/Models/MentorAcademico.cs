@@ -5,29 +5,23 @@ namespace sistemaDual.Models
 {
     public class MentorAcademico
     {
-        [Required]
+        public int MentorAcademicoID { get; set; }
+
         [StringLength(18)]
-        [Display(Name = "CURP")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string MentorAcademicoID { get; set; }
+        public string? CURP { get; set; }
 
-        [Required]
         [StringLength(20)]
-        [Display(Name = "Nombre Completo")]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
 
-        [Required]
         [StringLength(20)]
-        [Display(Name = "Apellido Paterno")]
-        public string ApellidoP { get; set; }
+        public string? ApellidoP { get; set; }
 
-        [Required]
         [StringLength(20)]
-        [Display(Name = "Apellido Materno")]
-        public string ApellidoM { get; set; }
+        public string? ApellidoM { get; set; }
 
-        public string Correo { get; set; }
-        public string Clave { get; set; }
+        public string? Correo { get; set; }
+
+        public string? Telefono { get; set; }
 
         public int? ProgramaEducativoID { get; set; }
         public ProgramaEducativo? ProgramaEducativo { get; set; }

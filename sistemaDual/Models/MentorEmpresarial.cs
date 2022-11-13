@@ -5,42 +5,32 @@ namespace sistemaDual.Models
 {
     public class MentorEmpresarial
     {
-        [Required]
+
+        public int MentorEmpresarialID { get; set; }
+
         [StringLength(18)]
-        [Display(Name = "CURP")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string MentorEmpresarialID { get; set; }
+        public string? CURP { get; set; }
 
-        [Required]
         [StringLength(20)]
-        [Display(Name = "Apellido Paterno")]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
 
-        [Required]
         [StringLength(20)]
-        [Display(Name = "Apellido Paterno")]
-        public string ApellidoP { get; set; }
+        public string? ApellidoP { get; set; }
 
-        [Required]
         [StringLength(20)]
-        [Display(Name = "Apellido Materno")]
-        public string ApellidoM { get; set; }
+        public string? ApellidoM { get; set; }
 
-        [Required]
-        [Display(Name = "Correo Mentor")]
-        [EmailAddress]
-        public string Correo { get; set; }
+        public string? Correo { get; set; }
 
-        [Required]
-        [StringLength(12)]
-        public int Telefono { get; set; }
+        public string? Clave { get; set; }
 
-        [Required]
+        public string? Telefono { get; set; }
+
         [StringLength(30)]
-        public string Cargo { get; set; }
+        public string? Cargo { get; set; }
 
-        public string EmpresaID { get; set; }
-        public Empresa Empresa { get; set; }
+        public string? EmpresaID { get; set; }
+        public Empresa? Empresa { get; set; }
 
         public ICollection<AlumnoMentor> AlumnoMentores { get; set; }
 

@@ -6,6 +6,8 @@ const MODEL_DATA = {
     sectorS: "",
     representanteL: "",
     correoR: "",
+    domicilioID: 0,
+    direccion: ""
 }
 
 
@@ -26,6 +28,8 @@ $(document).ready(function () {
              { "data": "sectorS" },
              { "data": "representanteL" },
              { "data": "correoR" },
+             { "data": "domicilioID", "visible": false, "searchable": false },
+             { "data": "direccion"},
              {
                  "defaultContent": '<button class="btn btn-primary btn-editar btn-sm mr-2"><i class="fas fa-pencil-alt"></i></button>' +
                      '<button class="btn btn-danger btn-eliminar btn-sm"><i class="fas fa-trash-alt"></i></button>',
@@ -62,6 +66,7 @@ function mostrarModal(modelo = MODEL_DATA) {
     $("#txtRepresentanteL").val(modelo.representanteL)
     $("#txtCorreoR").val(modelo.correoR)
     $("#txtDomicilioID").val(modelo.domicilioID)
+    $("#txtDireccion").val(modelo.direccion)
     $("#modalData").modal("show")
 }
 
@@ -103,13 +108,15 @@ $("#btnGuardar").click(function () {
     modelo["sectorS"] = $("#txtSectorS").val()
     modelo["representanteL"] = $("#txtRepresentanteL").val()
     modelo["correoR"] = $("#txtCorreoR").val()
+    modelo["domicilioID"] = parseInt($("#txtDomicilioID").val())
+    modelo["direccion"] = $("#txtDireccion").val()
 
     const formData = new FormData();
     formData.append("modelo", JSON.stringify(modelo))
 
     $("#modalData").find("div.modal-content").LoadingOverlay("show");
 
-    if (modelo.domicilioID == null) {
+    if (modelo.domicilioID == 0) {
         //
         fetch("/Empresas/Crear", {
             method: "POST",
@@ -123,7 +130,7 @@ $("#btnGuardar").click(function () {
                 if (responseJson.estado) {
                     tableData.row.add(responseJson.objeto).draw(false)
                     $("#modalData").modal("hide")
-                    swal("Correcto", "Universidad Registrada", "success")
+                    swal("Correcto", "Unidad Empresarial Registrada", "success")
                 } else {
                     swal("Problema", responseJson.mensaje, "error")
                 }
@@ -166,7 +173,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
 
     swal({
         title: "¿Realizar Acción?",
-        text: `Eliminar Estudiante "${data.nombre}"`,
+        text: `Eliminar UE "${data.nombreC}"`,
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -188,7 +195,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
                     .then(responseJson => {
                         if (responseJson.estado) {
                             tableData.row(fila).remove().draw()
-                            swal("Correcto", "Empresa retirada", "success")
+                            swal("Correcto", "UE retirada", "success")
                         } else {
                             swal("Problema", responseJson.mensaje, "error")
                         }

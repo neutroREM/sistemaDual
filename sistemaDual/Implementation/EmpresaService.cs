@@ -46,7 +46,9 @@ namespace sistemaDual.Implementation
         {
             try
             {
-                Empresa empresa_editar = await _repository.Obtener(i => i.EmpresaID == modelo.EmpresaID);
+                IQueryable<Empresa> query = await _repository.Consultar(i => i.EmpresaID == modelo.EmpresaID);
+                Empresa empresa_editar = query.First();
+
                 empresa_editar.EmpresaID = modelo.EmpresaID;
                 empresa_editar.RazonS = modelo.RazonS;
                 empresa_editar.NombreC = modelo.NombreC;
@@ -55,6 +57,9 @@ namespace sistemaDual.Implementation
                 empresa_editar.CorreoR = modelo.CorreoR;
                 empresa_editar.FechaCambio = DateTime.Now;
                 empresa_editar.DomicilioID = modelo.DomicilioID;
+               
+
+               
 
                 bool resp = await _repository.Editar(empresa_editar);
 

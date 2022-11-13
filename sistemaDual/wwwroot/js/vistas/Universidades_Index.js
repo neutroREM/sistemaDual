@@ -166,7 +166,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
 
     swal({
         title: "¿Realizar Acción?",
-        text: `Eliminar Universidad "${data.nombre}"`,
+        text: `Eliminar Universidad "${data.nombreU}"`,
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -188,7 +188,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
                     .then(responseJson => {
                         if (responseJson.estado) {
                             tableData.row(fila).remove().draw()
-                            swal("Correcto", "uni remove", "success")
+                            swal("Correcto", "Universidad Eliminada", "success")
                         } else {
                             swal("Problema", responseJson.mensaje, "error")
                         }

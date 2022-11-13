@@ -32,17 +32,19 @@ namespace sistemaDual.Utilidades.AutoMapper
 
             #region ProgramaEducativo
             CreateMap<ProgramaEducativo, ProgramaEducativoViewModel>()
-                .ForMember(dest => dest.UniversidadID,
-                opt => opt.MapFrom(src => src.Universidad));
+                .ForMember(dest => dest.NombreU,
+                opt => opt.MapFrom(src => src.Universidad.NombreU));
             
             CreateMap<ProgramaEducativoViewModel, ProgramaEducativo>()
-                .ForMember(dest => dest.UniversidadID,
+                .ForMember(dest => dest.Universidad,
                 opt => opt.Ignore());
             #endregion
 
             #region Empresa
             CreateMap<Empresa, EmpresaViewModel>()
-                .ReverseMap();
+                .ForMember(dest => dest.Direccion,
+                opt => opt.MapFrom(src => src.Domicilio.Direccion)).ReverseMap();
+
             #endregion
 
             #region Estatus
@@ -71,21 +73,21 @@ namespace sistemaDual.Utilidades.AutoMapper
 
             #region MentorEmpresarial
             CreateMap<MentorEmpresarial, MentorEmpresarialViewModel>()
-                .ForMember(dest => dest.EmpresaID,
-                opt => opt.MapFrom(src => src.Empresa));
+                .ForMember(dest => dest.NombreC,
+                opt => opt.MapFrom(src => src.Empresa.NombreC));
 
-            CreateMap<MentorEmpresarial, MentorEmpresarialViewModel>()
-                .ForMember(dest => dest.EmpresaID,
+            CreateMap<MentorEmpresarialViewModel, MentorEmpresarial>()
+                .ForMember(dest => dest.Empresa,
                 opt => opt.Ignore());
             #endregion
 
             #region MentorAcademico
             CreateMap<MentorAcademico, MentorAcademicoViewModel>()
-                .ForMember(dest => dest.ProgramaEducativoID,
-                opt => opt.MapFrom(src => src.ProgramaEducativo));
+                .ForMember(dest => dest.NombreP,
+                opt => opt.MapFrom(src => src.ProgramaEducativo.NombreP));
 
-            CreateMap<MentorAcademico, MentorAcademicoViewModel>()
-                .ForMember(dest => dest.ProgramaEducativoID,
+            CreateMap<MentorAcademicoViewModel, MentorAcademico>()
+                .ForMember(dest => dest.ProgramaEducativo,
                 opt => opt.Ignore());
             #endregion
 

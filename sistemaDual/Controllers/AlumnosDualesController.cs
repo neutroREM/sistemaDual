@@ -102,7 +102,7 @@ namespace sistemaDual.Controllers
 
 
 
-        // POST: AlumnosDuales/Eliminar/AlumnoDualID
+        // DELETE: AlumnosDuales/Eliminar/AlumnoDualID
         [HttpDelete]
         public async Task<IActionResult> Eliminar(string alumnoDualID)
         {

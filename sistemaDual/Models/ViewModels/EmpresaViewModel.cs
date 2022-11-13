@@ -20,6 +20,8 @@
 
         public int? DomicilioID { get; set; }
 
+        public string? Direccion { get; set; }
+
 
     }
 }

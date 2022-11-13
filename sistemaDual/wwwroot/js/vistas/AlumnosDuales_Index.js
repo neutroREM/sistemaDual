@@ -228,7 +228,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
                     .then(responseJson => {
                         if (responseJson.estado) {
                             tableData.row(fila).remove().draw()
-                            swal("Correcto", "Estudiante eliminated", "success")
+                            swal("Correcto", "Estudiante eliminado", "success")
                         } else {
                             swal("Problema", responseJson.mensaje, "error")
                         }

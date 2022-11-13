@@ -45,8 +45,8 @@ namespace sistemaDual.Implementation
         public async Task<Universidad> Editar(Universidad entidad)
         {
             Universidad universidad_existe = await _repository.Obtener(i => i.UniversidadID == entidad.UniversidadID);
-            if (universidad_existe != null)
-                throw new TaskCanceledException("Esta univesidad ya esta registrada");
+            if (universidad_existe == null)
+                throw new TaskCanceledException("Esta univesidad no esta registrada");
 
             try
             {
