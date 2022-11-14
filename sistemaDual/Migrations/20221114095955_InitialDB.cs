@@ -198,14 +198,16 @@ namespace sistemaDual.Migrations
                 name: "ResponsableInstitucional",
                 columns: table => new
                 {
-                    ResponsableInstitucionalID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    ApellidoP = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    ApellidoM = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<int>(type: "int", maxLength: 12, nullable: false),
-                    Cargo = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    UniversidadID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ResponsableInstitucionalID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CURP = table.Column<string>(type: "nvarchar(18)", maxLength: 18, nullable: true),
+                    NombreR = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    ApellidoP = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    ApellidoM = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cargo = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    UniversidadID = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -214,8 +216,7 @@ namespace sistemaDual.Migrations
                         name: "FK_ResponsableInstitucional_Universidad_UniversidadID",
                         column: x => x.UniversidadID,
                         principalTable: "Universidad",
-                        principalColumn: "UniversidadID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "UniversidadID");
                 });
 
             migrationBuilder.CreateTable(
@@ -275,10 +276,14 @@ namespace sistemaDual.Migrations
                 name: "AsesorInstitucional",
                 columns: table => new
                 {
-                    AsesorInstitucionalID = table.Column<string>(type: "nvarchar(18)", maxLength: 18, nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    ApellidoP = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    ApellidoM = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    AsesorInstitucionalID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CURP = table.Column<string>(type: "nvarchar(18)", maxLength: 18, nullable: true),
+                    NombreA = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    ApellidoP = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    ApellidoM = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProgramaEducativoID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

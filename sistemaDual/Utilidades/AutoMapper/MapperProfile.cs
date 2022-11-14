@@ -27,7 +27,14 @@ namespace sistemaDual.Utilidades.AutoMapper
                 .ForMember(dest => dest.CodigoPostal,
                 opt => opt.MapFrom(src => src.Domicilio.CodigoPostal))
                 .ForMember(dest => dest.Otros,
-                opt => opt.MapFrom(src => src.Domicilio.Otros)).ReverseMap();
+                opt => opt.MapFrom(src => src.Domicilio.Otros));
+
+            CreateMap<UniversidadViewModel, Universidad>()
+                .ForMember(dest => dest.Domicilio,
+                opt => opt.Ignore());
+
+
+
             #endregion
 
             #region ProgramaEducativo

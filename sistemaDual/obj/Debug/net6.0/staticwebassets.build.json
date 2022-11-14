@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZNUJdT210utK+HFvtI0REysohQEpX/bdySfi2OJnkHE=",
+  "Hash": "JOD4FNm77O7RBKvc2GXRSqnJfSPCg+JJp5dBNTYR4b0=",
   "Source": "sistemaDual",
   "BasePath": "_content/sistemaDual",
   "Mode": "Default",
@@ -255,6 +255,23 @@
       "OriginalItemSpec": "wwwroot\\js\\vistas\\AlumnosDuales_Index.js"
     },
     {
+      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\AsesorInstitucional_Index.js",
+      "SourceId": "sistemaDual",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\",
+      "BasePath": "_content/sistemaDual",
+      "RelativePath": "js/vistas/AsesorInstitucional_Index.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\vistas\\AsesorInstitucional_Index.js"
+    },
+    {
       "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\chart-bar-demo.js",
       "SourceId": "sistemaDual",
       "SourceType": "Discovered",
@@ -372,6 +389,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\vistas\\ProgramasEducativos_Index.js"
+    },
+    {
+      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\ResponsableInstitucional_Index.js",
+      "SourceId": "sistemaDual",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\",
+      "BasePath": "_content/sistemaDual",
+      "RelativePath": "js/vistas/ResponsableInstitucional_Index.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\vistas\\ResponsableInstitucional_Index.js"
     },
     {
       "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\Universidades_Index.js",

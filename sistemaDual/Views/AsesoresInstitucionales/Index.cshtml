@@ -1,8 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "ResponsableInstitucional";
+    ViewData["Title"] = "AsesorInstitucional";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <div class="card shadow mb-4">
                         <div class="card-header py-3 bg-second-primary">
@@ -21,8 +20,8 @@
                                                             <input type="text" class="form-control form-control-sm input-validar" id="txtCurp" name="Curp">
                                                         </div>
                                                         <div class="form-group col-sm-6">
-                                                            <label for="txtNombreR">Nombre del Responsable</label>
-                                                            <input type="text" class="form-control form-control-sm input-validar" id="txtNombreR" name="NombreR">
+                                                            <label for="txtNombreA">Nombre del Asesor</label>
+                                                            <input type="text" class="form-control form-control-sm input-validar" id="txtNombreA" name="NombreA">
                                                         </div>
                                                 </div>
                                                 <div class="form-row">
@@ -41,18 +40,14 @@
                                                         <input type="text" class="form-control form-control-sm input-validar" id="txtCorreo" name="Correo">
                                                     </div>
                                                     <div class="form-group col-sm-6">
-                                                        <label for="txtTelefono">Telefono</label>
+                                                        <label for="txtTelefono">CódigoPostal</label>
                                                         <input type="text" class="form-control form-control-sm input-validar" id="txtTelefono" name="Telefono">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-sm-6">
-                                                        <label for="txtCargo">Cargo</label>
-                                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCargo" name="Cargo">
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                         <label for="cboUniversidad">Universidad</label>
-                                                         <select class="form-control form-control-sm" id="cboUniversidad">
+                                                         <label for="cboPrograma">ProgramaEducativo</label>
+                                                         <select class="form-control form-control-sm" id="cboPrograma">
                                                          </select>
                                                     </div>
                                                 </div>
@@ -72,12 +67,8 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
 @section Scripts{
 
     <!-- Vistas JS -->
-    <script src="~/js/vistas/ResponsableInstitucional_Index.js"></script>
+    <script src="~/js/vistas/AsesorInstitucional_Index.js"></script>
 }

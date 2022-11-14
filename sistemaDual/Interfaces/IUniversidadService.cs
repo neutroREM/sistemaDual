@@ -10,8 +10,6 @@ namespace sistemaDual.Interfaces
 
         Task<Universidad> Editar(Universidad entidad);
 
-        Task<bool> Eliminar(string UniversidadID);
-
-        Task<Universidad> ObtenerXCCT(string UniversidadID);
+        Task<Universidad> Obtener();
     }
 }

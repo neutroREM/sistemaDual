@@ -66,8 +66,8 @@ namespace sistemaDual.Controllers
             return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        //ERROROR
-        [HttpPut]
+        //
+        [HttpPost]
         public async Task<IActionResult> Editar([FromForm] string modelo)
         {
             GenericResponse<UniversidadViewModel> response = new GenericResponse<UniversidadViewModel>();
@@ -90,13 +90,15 @@ namespace sistemaDual.Controllers
         }
 
         //
-        [HttpDelete]
-        public async Task<IActionResult> Eliminar(string universidadID)
+        [HttpGet]
+        public async Task<IActionResult> Obtener()
         {
-            GenericResponse<string> response = new GenericResponse<string>();
+            GenericResponse<UniversidadViewModel> response = new GenericResponse<UniversidadViewModel>();
             try
             {
-                response.Estado = await _univeridadService.Eliminar(universidadID);
+                UniversidadViewModel UniversidadVM = _mapper.Map<UniversidadViewModel>(await _univeridadService.Obtener());
+                response.Estado = true;
+                response.Objeto = UniversidadVM;
             }
             catch(Exception ex)
             {

@@ -12,7 +12,7 @@ using sistemaDual.Data;
 namespace sistemaDual.Migrations
 {
     [DbContext(typeof(ProgramaDualContext))]
-    [Migration("20221112084221_InitialDB")]
+    [Migration("20221114095955_InitialDB")]
     partial class InitialDB
     {
         /// <inheritdoc />
@@ -132,27 +132,36 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.AsesorInstitucional", b =>
                 {
-                    b.Property<string>("AsesorInstitucionalID")
-                        .HasMaxLength(18)
-                        .HasColumnType("nvarchar(18)");
+                    b.Property<int>("AsesorInstitucionalID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AsesorInstitucionalID"));
 
                     b.Property<string>("ApellidoM")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ApellidoP")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
+                    b.Property<string>("CURP")
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
+
+                    b.Property<string>("Correo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreA")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<int?>("ProgramaEducativoID")
                         .HasColumnType("int");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AsesorInstitucionalID");
 
@@ -484,39 +493,39 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.ResponsableInstitucional", b =>
                 {
-                    b.Property<string>("ResponsableInstitucionalID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ResponsableInstitucionalID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResponsableInstitucionalID"));
 
                     b.Property<string>("ApellidoM")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ApellidoP")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("CURP")
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
+
                     b.Property<string>("Cargo")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Correo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
+                    b.Property<string>("NombreR")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("Telefono")
-                        .HasMaxLength(12)
-                        .HasColumnType("int");
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UniversidadID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ResponsableInstitucionalID");
@@ -709,9 +718,7 @@ namespace sistemaDual.Migrations
                 {
                     b.HasOne("sistemaDual.Models.Universidad", "Universidad")
                         .WithMany("ResponsablesInstitucionales")
-                        .HasForeignKey("UniversidadID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UniversidadID");
 
                     b.Navigation("Universidad");
                 });

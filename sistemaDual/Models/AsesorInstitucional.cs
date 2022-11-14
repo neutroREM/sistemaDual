@@ -5,26 +5,23 @@ namespace sistemaDual.Models
 {
     public class AsesorInstitucional
     {
-        [Required]
+        public int AsesorInstitucionalID { get; set; }
+
         [StringLength(18)]
-        [Display(Name = "CURP")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string AsesorInstitucionalID { get; set; }
+        public string? CURP { get; set; }
 
-        [Required]
         [StringLength(20)]
-        [Display(Name = "Nombre Completo")]
-        public string Nombre { get; set; }
+        public string? NombreA { get; set; }
 
-        [Required]
         [StringLength(20)]
-        [Display(Name = "Apellido Paterno")]
-        public string ApellidoP { get; set; }
+        public string? ApellidoP { get; set; }
 
-        [Required]
         [StringLength(20)]
-        [Display(Name = "Apellido Materno")]
-        public string ApellidoM { get; set; }
+        public string? ApellidoM { get; set; }
+
+        public string? Correo { get; set; }
+
+        public string? Telefono { get; set; }
 
         public int? ProgramaEducativoID { get; set; }
         public ProgramaEducativo? ProgramaEducativo { get; set; }

@@ -13,7 +13,27 @@ namespace sistemaDual.Data
                 return;
             }
 
-            
+
+            var asesor = new AsesorInstitucional[]
+            {
+                new AsesorInstitucional{CURP = "1"}
+            };
+            foreach (AsesorInstitucional ases in asesor)
+            {
+                context.AsesoresInstitucionales.Add(ases);
+            }
+            context.SaveChanges();
+
+            var responsable = new ResponsableInstitucional[]
+            {
+                new ResponsableInstitucional{CURP = "1"}
+            };
+            foreach(ResponsableInstitucional resp in responsable)
+            {
+                context.ResponsablesInstitucionales.Add(resp);
+            }
+            context.SaveChanges();
+
             var estatus = new Estatus[]
             {
                 new Estatus{Descripcion="Activo"},
@@ -81,7 +101,7 @@ namespace sistemaDual.Data
 
             var universidades = new Universidad[]
             {
-                new Universidad{UniversidadID="15EPO0003Y", NombreU="Universidad Politecnica de Tecamac", DomicilioID=1}
+                new Universidad{UniversidadID="15EPO0003Y", NombreU="Universidad Politecnica de Tecamac", DomicilioID=1, FechaRegistro=DateTime.Now}
             };
             foreach(Universidad u in universidades)
             {

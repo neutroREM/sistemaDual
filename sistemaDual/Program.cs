@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using sistemaDual.Data;
 using sistemaDual.Implementation;
 using sistemaDual.Interfaces;
+using sistemaDual.Models;
 using sistemaDual.Utilidades.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,8 @@ builder.Services.AddScoped<IUniversidadService, UniversidadService>();
 builder.Services.AddScoped<IMentorEmpresarialService, MentorEmpresarialService>();
 builder.Services.AddScoped<IProgramaEducativoService, ProgramaEducativoService>();
 builder.Services.AddScoped<IMentorAcademicoService, MentorAcademicoService>();
+builder.Services.AddScoped<IResponsableInstitucionalService, ResposanbleInstitucionalService>();
+builder.Services.AddScoped<IAsesorInstitucionalService, AsesorInstitucionalService>();
 
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(MapperProfile));

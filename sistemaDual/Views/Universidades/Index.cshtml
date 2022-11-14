@@ -4,145 +4,69 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Estilos{
-  
-    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
-}
-
-
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-second-primary">
-            <h6 class="m-0 font-weight-bold text-white">Lista de Universidades</h6>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-3">
-                    <button class="btn btn-success" id="btnNuevo"><i class="fas fa-user-plus"></i> Nueva Universidad</button>
-                    
-                </div>
-            </div>
-            <hr />
-            <div class="row">
-                <div class="col-sm-12">
-                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>
-                                    CCT
-                                </th>
-                                <th>
-                                    Nombre de la Universidad
-                                </th>
-                                <th>
-                                    DomicilioID
-                                </th>
-                                <th>
-                                    Direccion 
-                                </th>
-                                <th>
-                                    Colonia 
-                                </th>
-                                <th>
-                                    Municipio
-                                </th>
-                                <th>
-                                    C.P  
-                                </th>
-                                <th>
-                                    Acciones
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--  Modal -->
-    <div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6>Detalle Usuario</h6>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <input type="hidden" value="0" id="txtDomicilioID">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <div class="form-row">
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtUniversidadID">CCT</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtUniversidadID" name="UniversidadID">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtNombreU">Nombre</label>
-                                        <input type="email" class="form-control form-control-sm input-validar" id="txtNombreU" name="NombreU">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtDireccion">Direccion</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtDireccion" name="Direccion">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtColonia">Colonia</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtColonia" name="Colonia">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtMunicipio">Municipio</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtMunicipio" name="Municipio">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtCodigoPostal">C.P</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCodigoPostal" name="CodigoPostal">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtOtros">Otros</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtOtros" name="Otros">
-                                    </div>
+<div class="card shadow mb-4">
+                        <div class="card-header py-3 bg-second-primary">
+                            <h6 class="m-0 font-weight-bold text-white">Datos del Negocio</h6>
+                        </div>
+                        <div class="card-body">
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-row">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="txtUniversidadID">CCT</label>
+                                                            <input type="text" class="form-control form-control-sm input-validar" id="txtUniversidadID" name="UniversidadID">
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="txtNombreU">Nombre de la Universidad</label>
+                                                            <input type="text" class="form-control form-control-sm input-validar" id="txtNombreU" name="NombreU">
+                                                        </div>
+                                                </div>
+                                                <div class="form-row">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="txtDireccion">Direccion</label>
+                                                            <input type="text" class="form-control form-control-sm input-validar" id="txtDireccion" name="Direccion">
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="txtColonia">Colonia</label>
+                                                            <input type="text" class="form-control form-control-sm input-validar" id="txtColonia" name="Colonia">
+                                                        </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-sm-6">
+                                                        <label for="txtMunicipio">Municipio</label>
+                                                        <input type="text" class="form-control form-control-sm input-validar" id="txtMunicipio" name="Municipio">
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label for="txtCodigoPostal">CódigoPostal</label>
+                                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCodigoPostal" name="CodigoPostal">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <button class="btn btn-success btn-sm" type="button" id="btnGuardarCambios">Guardar Cambios</button>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+    
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                           
-
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary btn-sm" type="button" id="btnGuardar">Guardar</button>
-                    <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div>
+   
+                      
 
 
 
     @section Scripts{
-    <!-- ============================================================
-    =SCRIPTS PARA ESTA PAGINA
-    ===============================================================-->
-    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
-
-    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
-    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
-    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
-    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
 
     <!-- Vistas JS -->
     <script src="~/js/vistas/Universidades_Index.js"></script>

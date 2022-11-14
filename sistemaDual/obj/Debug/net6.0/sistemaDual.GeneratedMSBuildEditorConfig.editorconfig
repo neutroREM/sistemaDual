@@ -19,6 +19,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vc0R1YWxlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/AsesoresInstitucionales/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNlc29yZXNJbnN0aXR1Y2lvbmFsZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Asignaturas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpZ25hdHVyYXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -137,22 +141,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ProgramasEducativos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFzRWR1Y2F0aXZvc1xJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ResponsablesInstitucionales/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzcG9uc2FibGVzSW5zdGl0dWNpb25hbGVzXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ResponsablesInstitucionales/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzcG9uc2FibGVzSW5zdGl0dWNpb25hbGVzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ResponsablesInstitucionales/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzcG9uc2FibGVzSW5zdGl0dWNpb25hbGVzXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ResponsablesInstitucionales/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzcG9uc2FibGVzSW5zdGl0dWNpb25hbGVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/ResponsablesInstitucionales/Index.cshtml]
