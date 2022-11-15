@@ -23,40 +23,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNlc29yZXNJbnN0aXR1Y2lvbmFsZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Asignaturas/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpZ25hdHVyYXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Asignaturas/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpZ25hdHVyYXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Asignaturas/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpZ25hdHVyYXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Asignaturas/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpZ25hdHVyYXNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Asignaturas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpZ25hdHVyYXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/BecasDuales/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVjYXNEdWFsZXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/BecasDuales/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVjYXNEdWFsZXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/BecasDuales/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVjYXNEdWFsZXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/BecasDuales/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVjYXNEdWFsZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/BecasDuales/Index.cshtml]

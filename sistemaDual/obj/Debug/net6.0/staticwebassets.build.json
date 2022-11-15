@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JOD4FNm77O7RBKvc2GXRSqnJfSPCg+JJp5dBNTYR4b0=",
+  "Hash": "Mmu0bKWpdMOJPptYAeiKq/IOH7kp1uC++FTi6XyEzp8=",
   "Source": "sistemaDual",
   "BasePath": "_content/sistemaDual",
   "Mode": "Default",
@@ -270,6 +270,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\vistas\\AsesorInstitucional_Index.js"
+    },
+    {
+      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\Asignaturas_Index.js",
+      "SourceId": "sistemaDual",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\",
+      "BasePath": "_content/sistemaDual",
+      "RelativePath": "js/vistas/Asignaturas_Index.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\vistas\\Asignaturas_Index.js"
+    },
+    {
+      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\BecasDuales_Index.js",
+      "SourceId": "sistemaDual",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\",
+      "BasePath": "_content/sistemaDual",
+      "RelativePath": "js/vistas/BecasDuales_Index.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\vistas\\BecasDuales_Index.js"
     },
     {
       "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\chart-bar-demo.js",

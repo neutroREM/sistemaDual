@@ -61,11 +61,11 @@
 
             <!-- Nav Item - Inventario Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventario">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUE">
                     <i class="fas fa-fw fa-clipboard-list"></i>
                     <span>Unidades Económicas</span>
                 </a>
-                <div id="collapseInventario" class="collapse" data-parent="#accordionSidebar">
+                <div id="collapseUE" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" asp-controller="Empresas" asp-action="Index">Empresas</a>
                         <a class="collapse-item" asp-controller="MentoresEmpresariales" asp-action="Index">Mentores</a>
@@ -75,11 +75,11 @@
 
             <!-- Nav Item - Venta Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInst">
                     <i class="fas fa-fw fa-tags"></i>
                     <span>Institución</span>
                 </a>
-                <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
+                <div id="collapseInst" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" asp-controller="Universidades" asp-action="Index">Universidad</a>
                         <a class="collapse-item" asp-controller="ProgramasEducativos" asp-action="Index">ProgramaEducativo</a>
@@ -92,15 +92,28 @@
 
             <!-- Nav Item - Reportes Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAsignaturas">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Asignaturas</span>
                 </a>
-                <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
+                <div id="collapseAsignaturas" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" asp-controller="Asignaturas" asp-action="Index">Asignaturas</a>
                         <a class="collapse-item" asp-controller="AlumnosAsignaturas" asp-action="Index">Estudiantes</a>
                         <a class="collapse-item" asp-controller="AlumnosMentores" asp-action="Index">Mentores</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBecas">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Becas</span>
+                </a>
+                <div id="collapseBecas" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-controller="BecasDuales" asp-action="Index">Becas</a>
+
                     </div>
                 </div>
             </li>

@@ -2,169 +2,106 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using sistemaDual.Data;
+using sistemaDual.Interfaces;
 using sistemaDual.Models;
 using sistemaDual.Models.ViewModels;
+using sistemaDual.Utilidades.Response;
 
 namespace sistemaDual.Controllers
 {
     public class AsignaturasController : Controller
     {
-        private readonly ProgramaDualContext _context;
+        private readonly IMapper _mapper;
+        private readonly IAsignaturaService _asignaturaService;
 
-        public AsignaturasController(ProgramaDualContext context)
+        public AsignaturasController(IMapper mapper, IAsignaturaService asignaturaService)
         {
-            _context = context;
+            _mapper = mapper;
+            _asignaturaService = asignaturaService;
         }
 
-        // GET: Asignaturas
-        public async Task<IActionResult> Index()
+
+        public IActionResult Index()
         {
-              return View(await _context.Asignaturas.ToListAsync());
+              return View();
         }
 
-        // GET: Asignaturas/Details/5
-        public async Task<IActionResult> Details(int? id)
+
+        //
+        [HttpGet]
+        public async Task<IActionResult> Lista()
         {
-            if (id == null || _context.Asignaturas == null)
-            {
-                return NotFound();
-            }
-
-            var asignatura = await _context.Asignaturas
-                .FirstOrDefaultAsync(m => m.AsignaturaID == id);
-            if (asignatura == null)
-            {
-                return NotFound();
-            }
-
-            return View(asignatura);
+            List<AsignaturaViewModel> asignaturaVM = _mapper.Map<List<AsignaturaViewModel>>(await _asignaturaService.Lista());
+            return StatusCode(StatusCodes.Status200OK, new { data = asignaturaVM });
         }
 
-        // GET: Asignaturas/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Asignaturas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AsignaturaID,Nombre,Periodo,Competencia,Actividad")] AsignaturaViewModel model)
+        public async Task<IActionResult> Crear([FromForm] string modelo)
         {
-            if (ModelState.IsValid)
+            GenericResponse<AsignaturaViewModel> response = new GenericResponse<AsignaturaViewModel>();
+            try
             {
-                var asignatura = new Asignatura()
-                {
-                    AsignaturaID = model.AsignaturaID,
-                    Nombre = model.Nombre,
-                    Periodo = model.Periodo,
-                    Competencia = model.Competencia,
-                    Actividad = model.Actividad
-                };
-                _context.Add(asignatura);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                AsignaturaViewModel asignaturaVM = JsonConvert.DeserializeObject<AsignaturaViewModel>(modelo);
+
+                Asignatura asignatura_creada = await _asignaturaService.Crear(_mapper.Map<Asignatura>(asignaturaVM));
+                asignaturaVM = _mapper.Map<AsignaturaViewModel>(asignatura_creada);
+
+                response.Estado = true;
+                response.Objeto = asignaturaVM;
             }
-            return View(model);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // GET: Asignaturas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        //
+        [HttpPut]
+        public async Task<IActionResult> Editar([FromForm] string modelo)
         {
-            if (id == null || _context.Asignaturas == null)
+            GenericResponse<AsignaturaViewModel> response = new GenericResponse<AsignaturaViewModel>();
+            try
             {
-                return NotFound();
-            }
+                AsignaturaViewModel asignaturaVM = JsonConvert.DeserializeObject<AsignaturaViewModel>(modelo);
 
-            var asignatura = await _context.Asignaturas.FindAsync(id);
-            if (asignatura == null)
-            {
-                return NotFound();
+                Asignatura asignatura_editada = await _asignaturaService.Editar(_mapper.Map<Asignatura>(asignaturaVM));
+                asignaturaVM = _mapper.Map<AsignaturaViewModel>(asignatura_editada);
+
+                response.Estado = true;
+                response.Objeto = asignaturaVM;
             }
-            return View(asignatura);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // POST: Asignaturas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AsignaturaID,Nombre,Periodo,Competencia,Actividad")] Asignatura asignatura)
+        //
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(int asignaturaID)
         {
-            if (id != asignatura.AsignaturaID)
+            GenericResponse<AsignaturaViewModel> response = new GenericResponse<AsignaturaViewModel>();
+            try
             {
-                return NotFound();
+                response.Estado = await _asignaturaService.Eliminar(asignaturaID);
             }
-
-            if (ModelState.IsValid)
+            catch (Exception ex)
             {
-                try
-                {
-                    _context.Update(asignatura);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AsignaturaExists(asignatura.AsignaturaID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                response.Estado = false;
+                response.Mensaje = ex.Message;
             }
-            return View(asignatura);
-        }
-
-        // GET: Asignaturas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Asignaturas == null)
-            {
-                return NotFound();
-            }
-
-            var asignatura = await _context.Asignaturas
-                .FirstOrDefaultAsync(m => m.AsignaturaID == id);
-            if (asignatura == null)
-            {
-                return NotFound();
-            }
-
-            return View(asignatura);
-        }
-
-        // POST: Asignaturas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Asignaturas == null)
-            {
-                return Problem("Entity set 'ProgramaDualContext.Asignaturas'  is null.");
-            }
-            var asignatura = await _context.Asignaturas.FindAsync(id);
-            if (asignatura != null)
-            {
-                _context.Asignaturas.Remove(asignatura);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool AsignaturaExists(int id)
-        {
-          return _context.Asignaturas.Any(e => e.AsignaturaID == id);
+            return StatusCode(StatusCodes.Status200OK, response);
         }
     }
 }

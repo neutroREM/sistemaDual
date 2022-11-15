@@ -66,7 +66,6 @@ namespace sistemaDual.Implementation
         {
             try
             {
-
                 IQueryable<Universidad> query = await _repository.Consultar(i => i.UniversidadID == "15EPO0003Y");
                 Universidad uni_encontrada = query.Include(d => d.Domicilio).First();
                 return uni_encontrada;

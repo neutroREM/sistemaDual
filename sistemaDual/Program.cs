@@ -28,6 +28,8 @@ builder.Services.AddScoped<IProgramaEducativoService, ProgramaEducativoService>(
 builder.Services.AddScoped<IMentorAcademicoService, MentorAcademicoService>();
 builder.Services.AddScoped<IResponsableInstitucionalService, ResposanbleInstitucionalService>();
 builder.Services.AddScoped<IAsesorInstitucionalService, AsesorInstitucionalService>();
+builder.Services.AddScoped<IBecaDualService, BecaDualService>();
+builder.Services.AddScoped<IAsignaturaService, AsignaturaService>();
 
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(MapperProfile));

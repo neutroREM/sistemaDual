@@ -6,7 +6,7 @@
 
         public string Fuente { get; set; }
 
-        public TipoBeca TipoBeca { get; set; }
+        public string TipoBeca { get; set; }
 
         public string Periocidad { get; set; }
 

@@ -2,169 +2,107 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using sistemaDual.Data;
+using sistemaDual.Interfaces;
 using sistemaDual.Models;
 using sistemaDual.Models.ViewModels;
+using sistemaDual.Utilidades.Response;
 
 namespace sistemaDual.Controllers
 {
     public class BecasDualesController : Controller
     {
-        private readonly ProgramaDualContext _context;
+        private readonly IMapper _mapper;
+        private readonly IBecaDualService _becaService;
 
-        public BecasDualesController(ProgramaDualContext context)
+        public BecasDualesController(IMapper mapper, IBecaDualService becaService)
         {
-            _context = context;
+           _mapper = mapper;
+            _becaService = becaService;
         }
 
-        // GET: BecaDuals
-        public async Task<IActionResult> Index()
+     
+        public IActionResult Index()
         {
-              return View(await _context.BecasDuales.ToListAsync());
+              return View();
         }
 
-        // GET: BecaDuals/Details/5
-        public async Task<IActionResult> Details(int? id)
+        //
+        [HttpGet]
+        public async Task<IActionResult> Lista()
         {
-            if (id == null || _context.BecasDuales == null)
-            {
-                return NotFound();
-            }
-
-            var becaDual = await _context.BecasDuales
-                .FirstOrDefaultAsync(m => m.BecaDUalID == id);
-            if (becaDual == null)
-            {
-                return NotFound();
-            }
-
-            return View(becaDual);
+            List<BecaDualViewModel> becaVM = _mapper.Map<List<BecaDualViewModel>>(await _becaService.Lista());
+            return StatusCode(StatusCodes.Status200OK, new { data = becaVM });
         }
 
-        // GET: BecaDuals/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: BecaDuals/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BecaDUalID,Fuente,TipoBeca,Periocidad,Duracion")] BecaDualViewModel model)
+        public async Task<IActionResult> Crear([FromForm] string modelo)
         {
-            if (ModelState.IsValid)
+            GenericResponse<BecaDualViewModel> response = new GenericResponse<BecaDualViewModel>();
+            try
             {
-                var becaD = new BecaDual()
-                {
-                    BecaDUalID = model.BecaDUalID,
-                    Fuente = model.Fuente,
-                    TipoBeca = model.TipoBeca,
-                    Periocidad = model.Periocidad,
-                    Duracion = model.Duracion,
-                };
-                _context.Add(becaD);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                BecaDualViewModel becaVM = JsonConvert.DeserializeObject<BecaDualViewModel>(modelo);
+
+                BecaDual beca_creada = await _becaService.Crear(_mapper.Map<BecaDual>(becaVM));
+                becaVM = _mapper.Map<BecaDualViewModel>(beca_creada);
+
+                response.Estado = true;
+                response.Objeto = becaVM;
             }
-            return View(model);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // GET: BecaDuals/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.BecasDuales == null)
-            {
-                return NotFound();
-            }
 
-            var becaDual = await _context.BecasDuales.FindAsync(id);
-            if (becaDual == null)
+        //
+        [HttpPut]
+        public async Task<IActionResult> Editar([FromForm] string modelo)
+        {
+            GenericResponse<BecaDualViewModel> response = new GenericResponse<BecaDualViewModel>();
+            try
             {
-                return NotFound();
+                BecaDualViewModel becaVM = JsonConvert.DeserializeObject<BecaDualViewModel>(modelo);
+
+                BecaDual beca_editada = await _becaService.Editar(_mapper.Map<BecaDual>(becaVM));
+                becaVM = _mapper.Map<BecaDualViewModel>(beca_editada);
+
+                response.Estado = true;
+                response.Objeto = becaVM;
             }
-            return View(becaDual);
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // POST: BecaDuals/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BecaDUalID,Fuente,TipoBeca,Periocidad,Duracion")] BecaDual becaDual)
+
+        //
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(int becaDualID)
         {
-            if (id != becaDual.BecaDUalID)
+            GenericResponse<BecaDualViewModel> response = new GenericResponse<BecaDualViewModel>();
+            try
             {
-                return NotFound();
+                response.Estado = await _becaService.Eliminar(becaDualID);
             }
-
-            if (ModelState.IsValid)
+            catch (Exception ex)
             {
-                try
-                {
-                    _context.Update(becaDual);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BecaDualExists(becaDual.BecaDUalID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                response.Estado = false;
+                response.Mensaje = ex.Message;
             }
-            return View(becaDual);
-        }
-
-        // GET: BecaDuals/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.BecasDuales == null)
-            {
-                return NotFound();
-            }
-
-            var becaDual = await _context.BecasDuales
-                .FirstOrDefaultAsync(m => m.BecaDUalID == id);
-            if (becaDual == null)
-            {
-                return NotFound();
-            }
-
-            return View(becaDual);
-        }
-
-        // POST: BecaDuals/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.BecasDuales == null)
-            {
-                return Problem("Entity set 'ProgramaDualContext.BecasDuales'  is null.");
-            }
-            var becaDual = await _context.BecasDuales.FindAsync(id);
-            if (becaDual != null)
-            {
-                _context.BecasDuales.Remove(becaDual);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool BecaDualExists(int id)
-        {
-          return _context.BecasDuales.Any(e => e.BecaDUalID == id);
+            return StatusCode(StatusCodes.Status200OK, response);
         }
     }
 }

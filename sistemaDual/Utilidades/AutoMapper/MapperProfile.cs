@@ -62,6 +62,10 @@ namespace sistemaDual.Utilidades.AutoMapper
             CreateMap<BecaDual, BecaDualViewModel>().ReverseMap();
             #endregion
 
+            #region Asignatura
+            CreateMap<Asignatura, AsignaturaViewModel>().ReverseMap();
+            #endregion
+
             #region AlumnoDual
             CreateMap<AlumnoDual, AlumnoDualViewModel>()
                 .ForMember(dest => dest.Descripcion,

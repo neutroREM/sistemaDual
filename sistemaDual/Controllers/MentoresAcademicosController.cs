@@ -85,8 +85,8 @@ namespace sistemaDual.Controllers
             {
                 MentorAcademicoViewModel mentorVM = JsonConvert.DeserializeObject<MentorAcademicoViewModel>(modelo);
 
-                MentorAcademico mentor_creado = await _mentorService.Editar(_mapper.Map<MentorAcademico>(mentorVM));
-                mentorVM = _mapper.Map<MentorAcademicoViewModel>(mentor_creado);
+                MentorAcademico mentor_editado = await _mentorService.Editar(_mapper.Map<MentorAcademico>(mentorVM));
+                mentorVM = _mapper.Map<MentorAcademicoViewModel>(mentor_editado);
 
                 response.Estado = true;
                 response.Objeto = mentorVM;
