@@ -2,7 +2,9 @@
 {
     public class EmpresaViewModel
     {
-        public string EmpresaID { get; set; }
+        public int EmpresaID { get; set; }
+
+        public string? RFC { get; set; }
         
         public string? RazonS { get; set; }
 
@@ -17,11 +19,6 @@
         public DateTime? FechaRegistro { get; set; }
 
         public DateTime? FechaCambio { get; set; }
-
-        public int? DomicilioID { get; set; }
-
-        public string? Direccion { get; set; }
-
 
     }
 }

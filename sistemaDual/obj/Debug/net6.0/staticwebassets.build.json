@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Mmu0bKWpdMOJPptYAeiKq/IOH7kp1uC++FTi6XyEzp8=",
+  "Hash": "HF8Y22wE9l1mjPlBjoWY9HSkrX0RXhahh5FE38tG+DI=",
   "Source": "sistemaDual",
   "BasePath": "_content/sistemaDual",
   "Mode": "Default",
@@ -406,6 +406,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\vistas\\MentoresEmpresariales_Index.js"
+    },
+    {
+      "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\Nuevo_Proyecto.js",
+      "SourceId": "sistemaDual",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\",
+      "BasePath": "_content/sistemaDual",
+      "RelativePath": "js/vistas/Nuevo_Proyecto.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\vistas\\Nuevo_Proyecto.js"
     },
     {
       "Identity": "C:\\Users\\farao\\source\\repos\\sistemaDual\\sistemaDual\\wwwroot\\js\\vistas\\ProgramasEducativos_Index.js",

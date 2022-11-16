@@ -18,7 +18,7 @@
 
         public string? Cargo { get; set; }
 
-        public string? EmpresaID { get; set; } 
+        public int? EmpresaID { get; set; } 
 
         public string? NombreC { get; set; }
     }

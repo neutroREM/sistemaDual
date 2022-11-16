@@ -26,8 +26,7 @@ namespace sistemaDual.Utilidades.AutoMapper
                 opt => opt.MapFrom(src => src.Domicilio.Municipio))
                 .ForMember(dest => dest.CodigoPostal,
                 opt => opt.MapFrom(src => src.Domicilio.CodigoPostal))
-                .ForMember(dest => dest.Otros,
-                opt => opt.MapFrom(src => src.Domicilio.Otros));
+                ;
 
             CreateMap<UniversidadViewModel, Universidad>()
                 .ForMember(dest => dest.Domicilio,
@@ -49,8 +48,7 @@ namespace sistemaDual.Utilidades.AutoMapper
 
             #region Empresa
             CreateMap<Empresa, EmpresaViewModel>()
-                .ForMember(dest => dest.Direccion,
-                opt => opt.MapFrom(src => src.Domicilio.Direccion)).ReverseMap();
+                .ReverseMap();
 
             #endregion
 

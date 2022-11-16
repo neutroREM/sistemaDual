@@ -46,7 +46,7 @@ namespace sistemaDual.Implementation
         {
             try
             {
-                Universidad uni_editar = await _repository.Obtener(i => i.UniversidadID == "15EPO0003Y");
+                Universidad uni_editar = await _repository.Obtener(i => i.CCT == "15EPO0003Y");
                 uni_editar.NombreU = entidad.NombreU;
                 uni_editar.FechaCambio = DateTime.Now;
 
@@ -66,7 +66,7 @@ namespace sistemaDual.Implementation
         {
             try
             {
-                IQueryable<Universidad> query = await _repository.Consultar(i => i.UniversidadID == "15EPO0003Y");
+                IQueryable<Universidad> query = await _repository.Consultar(i => i.CCT == "15EPO0003Y");
                 Universidad uni_encontrada = query.Include(d => d.Domicilio).First();
                 return uni_encontrada;
             }

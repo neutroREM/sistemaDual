@@ -23,6 +23,8 @@ namespace sistemaDual.Models
 
         public string? Telefono { get; set; }
 
+        public DateTime? FechaRegistro { get; set; }
+
         public int? ProgramaEducativoID { get; set; }
         public ProgramaEducativo? ProgramaEducativo { get; set; }
     }

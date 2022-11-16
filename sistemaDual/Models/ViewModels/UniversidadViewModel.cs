@@ -5,11 +5,11 @@ namespace sistemaDual.Models.ViewModels
 {
     public class UniversidadViewModel
     {
-        public string UniversidadID { get; set; }
+        public int UniversidadID { get; set; }
+
+        public string? CCT { get; set; }
 
         public string? NombreU { get; set; }
-
-        public DateTime? FechaRegistro { get; set; }
 
         public int? DomicilioID { get; set; }
 
@@ -20,9 +20,6 @@ namespace sistemaDual.Models.ViewModels
         public string? Municipio { get; set; }
         
         public string? CodigoPostal { get; set; }
-        
-        public string? Otros { get; set; }
-
 
     }
 }

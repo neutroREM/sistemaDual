@@ -99,8 +99,7 @@
                 <div id="collapseAsignaturas" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" asp-controller="Asignaturas" asp-action="Index">Asignaturas</a>
-                        <a class="collapse-item" asp-controller="AlumnosAsignaturas" asp-action="Index">Estudiantes</a>
-                        <a class="collapse-item" asp-controller="AlumnosMentores" asp-action="Index">Mentores</a>
+
                     </div>
                 </div>
             </li>
@@ -113,6 +112,21 @@
                 <div id="collapseBecas" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" asp-controller="BecasDuales" asp-action="Index">Becas</a>
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProyecto">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Catalago Proyectos</span>
+                </a>
+                <div id="collapseProyecto" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-controller="CatalagoProyectos" asp-action="NuevoProyecto">Nuevo</a>
+                        <a class="collapse-item" asp-controller="CatalagoProyectos" asp-action="HistorialProyectos">Historial</a>
 
                     </div>
                 </div>

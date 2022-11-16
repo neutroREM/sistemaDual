@@ -27,8 +27,6 @@ namespace sistemaDual.Implementation
             }
         }
 
-
-
         public async Task<ResponsableInstitucional> GuardarCambios(ResponsableInstitucional entidad)
         {
             try

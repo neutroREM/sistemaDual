@@ -16,7 +16,7 @@ namespace sistemaDual.Implementation
         public async Task<List<Empresa>> Lista()
         {
             IQueryable<Empresa> query = await _repository.Consultar();
-            return query.Include(d => d.Domicilio).ToList();
+            return query.ToList();
         }
 
         public async Task<Empresa> Crear(Empresa modelo)
@@ -33,7 +33,7 @@ namespace sistemaDual.Implementation
                     throw new TaskCanceledException("No se pudo registrar a la UE");
 
                 IQueryable<Empresa> query = await _repository.Consultar(u => u.EmpresaID == nueva_empresa.EmpresaID);
-                nueva_empresa = query.Include(d => d.Domicilio).First();
+                nueva_empresa = query.First();
                 return nueva_empresa;
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace sistemaDual.Implementation
                 empresa_editar.RepresentanteL = modelo.RepresentanteL;
                 empresa_editar.CorreoR = modelo.CorreoR;
                 empresa_editar.FechaCambio = DateTime.Now;
-                empresa_editar.DomicilioID = modelo.DomicilioID;
+                
                
 
                
@@ -75,7 +75,7 @@ namespace sistemaDual.Implementation
             }
         }
 
-        public async Task<bool> Eliminar(string EmpresaID)
+        public async Task<bool> Eliminar(int EmpresaID)
         {
             try
             {
@@ -92,10 +92,10 @@ namespace sistemaDual.Implementation
             }
         }
 
-        public async Task<Empresa> ObtenerXRFC(string EmpresaID)
+        public async Task<Empresa> ObtenerXRFC(int EmpresaID)
         {
             IQueryable<Empresa> query = await _repository.Consultar(i => i.EmpresaID == EmpresaID);
-            Empresa result = query.Include(d => d.Domicilio).FirstOrDefault();
+            Empresa result = query.First();
             return result;
         }
     }

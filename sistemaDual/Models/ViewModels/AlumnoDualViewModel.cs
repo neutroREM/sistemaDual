@@ -4,7 +4,9 @@ namespace sistemaDual.Models.ViewModels
 {
     public class AlumnoDualViewModel
     {
-        public string AlumnoDualID { get; set; }
+        public int AlumnoDualID { get; set; }
+
+        public string? CURP { get; set; }
 
         public string? Matricula { get; set; }
 
@@ -21,8 +23,6 @@ namespace sistemaDual.Models.ViewModels
         public int? RolID { get; set; }
 
         public string? Descripcion { get; set; }
-
-        public DateTime? FechaRegistro { get; set; }
 
         public int? EsActivo { get; set; }
 

@@ -2,188 +2,82 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using sistemaDual.Data;
+using sistemaDual.Interfaces;
 using sistemaDual.Models;
 using sistemaDual.Models.ViewModels;
+using sistemaDual.Utilidades.Response;
 
 namespace sistemaDual.Controllers
 {
     public class CatalagoProyectosController : Controller
     {
-        private readonly ProgramaDualContext _context;
+        private readonly IMapper _mapper;
+        private readonly ICatalagoProyectoService _proyectoService;
 
-        public CatalagoProyectosController(ProgramaDualContext context)
+        public CatalagoProyectosController(IMapper mapper, ICatalagoProyectoService proyectoService)
         {
-            _context = context;
+            _mapper = mapper;
+            _proyectoService = proyectoService;    
         }
 
-        // GET: CatalagoProyectos
-        public async Task<IActionResult> Index()
+        public IActionResult NuevoProyecto()
         {
-            var programaDualContext = _context.CatalagoProyectos.Include(c => c.AlumnoDual).Include(c => c.Empresa);
-            return View(await programaDualContext.ToListAsync());
-        }
-
-        // GET: CatalagoProyectos/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.CatalagoProyectos == null)
-            {
-                return NotFound();
-            }
-
-            var catalagoProyecto = await _context.CatalagoProyectos
-                .Include(c => c.AlumnoDual)
-                .Include(c => c.Empresa)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (catalagoProyecto == null)
-            {
-                return NotFound();
-            }
-
-            return View(catalagoProyecto);
-        }
-
-        // GET: CatalagoProyectos/Create
-        public IActionResult Create()
-        {
-            ViewData["AlumnoDualID"] = new SelectList(_context.AlumnosDuales, "AlumnoDualID", "AlumnoDualID");
-            ViewData["EmpresaID"] = new SelectList(_context.Empresas, "EmpresaID", "EmpresaID");
             return View();
         }
 
-        // POST: CatalagoProyectos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Nombre,Etapa,AreaConocimiento,NumHoras,FechaInicio,FechaTermino,Estatus,FechaCambioEstatus,AlumnoDualID,EmpresaID")] CatalagoProyectoViewModel model)
+        public IActionResult HistorialProyectos()
         {
-            if (ModelState.IsValid)
-            {
-                var catalagoP = new CatalagoProyecto()
-                {
-                    ID = model.ID,
-                    Nombre = model.Nombre,
-                    Etapa = model.Etapa,
-                    AreaConocimiento = model.AreaConocimiento,
-                    NumHoras = model.NumHoras,
-                    FechaInicio = model.FechaInicio,
-                    FechaTermino = model.FechaTermino,
-                    
-                    FechaCambioEstatus = model.FechaCambioEstatus,
-                    AlumnoDualID = model.AlumnoDualID,
-                    EmpresaID = model.EmpresaID
-                };
-                _context.Add(catalagoP);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AlumnoDualID"] = new SelectList(_context.AlumnosDuales, "AlumnoDualID", "AlumnoDualID", model.AlumnoDualID);
-            ViewData["EmpresaID"] = new SelectList(_context.Empresas, "EmpresaID", "EmpresaID", model.EmpresaID);
-            return View(model);
+            return View();
         }
 
-        // GET: CatalagoProyectos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        //
+        [HttpGet]
+        public async Task<IActionResult> ObtenerAlumnos(string busqueda)
         {
-            if (id == null || _context.CatalagoProyectos == null)
-            {
-                return NotFound();
-            }
-
-            var catalagoProyecto = await _context.CatalagoProyectos.FindAsync(id);
-            if (catalagoProyecto == null)
-            {
-                return NotFound();
-            }
-            ViewData["AlumnoDualID"] = new SelectList(_context.AlumnosDuales, "AlumnoDualID", "AlumnoDualID", catalagoProyecto.AlumnoDualID);
-            ViewData["EmpresaID"] = new SelectList(_context.Empresas, "EmpresaID", "EmpresaID", catalagoProyecto.EmpresaID);
-            return View(catalagoProyecto);
+            List<AlumnoDualViewModel> alumnoVM = _mapper.Map<List<AlumnoDualViewModel>>(await _proyectoService.ObtenerAlumnos(busqueda));
+            return StatusCode(StatusCodes.Status200OK, alumnoVM);
         }
 
-        // POST: CatalagoProyectos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Nombre,Etapa,AreaConocimiento,NumHoras,FechaInicio,FechaTermino,Estatus,FechaCambioEstatus,AlumnoDualID,EmpresaID")] CatalagoProyecto catalagoProyecto)
+        //
+        [HttpGet]
+        public async Task<IActionResult> ObtenerEmpresas(string busqueda)
         {
-            if (id != catalagoProyecto.ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(catalagoProyecto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CatalagoProyectoExists(catalagoProyecto.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AlumnoDualID"] = new SelectList(_context.AlumnosDuales, "AlumnoDualID", "AlumnoDualID", catalagoProyecto.AlumnoDualID);
-            ViewData["EmpresaID"] = new SelectList(_context.Empresas, "EmpresaID", "EmpresaID", catalagoProyecto.EmpresaID);
-            return View(catalagoProyecto);
+            List<EmpresaViewModel> empresaVM = _mapper.Map<List<EmpresaViewModel>>(await _proyectoService.ObtenerEmpresas(busqueda));
+            return StatusCode(StatusCodes.Status200OK, empresaVM);
         }
 
-        // GET: CatalagoProyectos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        //
+        [HttpGet]
+        public async Task<IActionResult> RegistrarProyecto([FromBody] CatalagoProyectoViewModel modelo)
         {
-            if (id == null || _context.CatalagoProyectos == null)
+            GenericResponse<CatalagoProyectoViewModel> response = new GenericResponse<CatalagoProyectoViewModel>();
+            try
             {
-                return NotFound();
-            }
+                CatalagoProyecto proyecto_creado = await _proyectoService.Registrar(_mapper.Map<CatalagoProyecto>(modelo));
+                modelo = _mapper.Map<CatalagoProyectoViewModel>(proyecto_creado);
 
-            var catalagoProyecto = await _context.CatalagoProyectos
-                .Include(c => c.AlumnoDual)
-                .Include(c => c.Empresa)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (catalagoProyecto == null)
+                response.Estado = true;
+                response.Objeto = modelo;
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                response.Estado = true;
+                response.Mensaje = ex.Message;
             }
-
-            return View(catalagoProyecto);
+            return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        // POST: CatalagoProyectos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpGet]
+        public async Task<IActionResult> Historial(string numeroProyecto, string fechaInicio, string fechaFin)
         {
-            if (_context.CatalagoProyectos == null)
-            {
-                return Problem("Entity set 'ProgramaDualContext.CatalagoProyectos'  is null.");
-            }
-            var catalagoProyecto = await _context.CatalagoProyectos.FindAsync(id);
-            if (catalagoProyecto != null)
-            {
-                _context.CatalagoProyectos.Remove(catalagoProyecto);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            List<CatalagoProyectoViewModel> historialProyectoVM = _mapper.Map<List<CatalagoProyectoViewModel>>(await _proyectoService.Historial(numeroProyecto, fechaInicio, fechaFin));
+            return StatusCode(StatusCodes.Status200OK, historialProyectoVM);
         }
 
-        private bool CatalagoProyectoExists(int id)
-        {
-          return _context.CatalagoProyectos.Any(e => e.ID == id);
-        }
     }
 }

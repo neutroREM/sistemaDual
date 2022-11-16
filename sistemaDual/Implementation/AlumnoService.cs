@@ -37,8 +37,7 @@ namespace sistemaDual.Implementation
             {
                 string clave_generada = _utilidadesService.GenerarClave();
                 entidad.Clave = _utilidadesService.ConvertirSha256(clave_generada);
-                //entidad.FechaRegistro = DateTime.Now;
-
+                entidad.FechaRegistro = DateTime.Now;
                 AlumnoDual alumnoDual = await _repository.Crear(entidad);
 
                 if (alumnoDual.AlumnoDualID == null)
@@ -96,14 +95,14 @@ namespace sistemaDual.Implementation
                 AlumnoDual alumno_editar = query.First();
                 alumno_editar.AlumnoDualID = entidad.AlumnoDualID;
                 alumno_editar.Matricula = entidad.Matricula;
-                alumno_editar.Nombre = entidad.Nombre;
+                alumno_editar.NombreA = entidad.NombreA;
                 alumno_editar.ApellidoP = entidad.ApellidoP;
                 alumno_editar.ApellidoM = entidad.ApellidoM;
                 alumno_editar.Telefono = entidad.Telefono;
                 alumno_editar.Correo = entidad.Correo;
                 alumno_editar.RolID = entidad.RolID;
                 alumno_editar.EsActivo = entidad.EsActivo;
-                //alumno_editar.FechaEditar = DateTime.Now;
+                alumno_editar.FechaCambios = DateTime.Now;
 
                 bool resp = await _repository.Editar(alumno_editar);
 
@@ -121,7 +120,7 @@ namespace sistemaDual.Implementation
             }
         }
 
-        async Task<bool> IAlumnoService.Eliminar(string AlumnoDualID)
+        async Task<bool> IAlumnoService.Eliminar(int AlumnoDualID)
         {
             try
             {
@@ -151,7 +150,7 @@ namespace sistemaDual.Implementation
 
         async Task<AlumnoDual> IAlumnoService.ObtenerXCurp(string curp)
         {
-            IQueryable<AlumnoDual> query = await _repository.Consultar(u => u.AlumnoDualID == curp);
+            IQueryable<AlumnoDual> query = await _repository.Consultar(u => u.CURP == curp);
             AlumnoDual result = query.Include(r => r.Rol).FirstOrDefault();
 
             return result;
@@ -178,7 +177,7 @@ namespace sistemaDual.Implementation
             }
         }
 
-        async Task<bool> IAlumnoService.CambiarClave(string alumnoID, string clave, string claveNueva)
+        async Task<bool> IAlumnoService.CambiarClave(int alumnoID, string clave, string claveNueva)
         {
             try
             {

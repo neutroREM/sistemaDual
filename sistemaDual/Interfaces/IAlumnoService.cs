@@ -10,7 +10,7 @@ namespace sistemaDual.Interfaces
 
         Task<AlumnoDual> Editar(AlumnoDual entidad);
 
-        Task<bool> Eliminar(string AlumnoDualID);
+        Task<bool> Eliminar(int AlumnoDualID);
 
         Task<AlumnoDual> ObtenerXCredenciales(string correo, string clave);
 
@@ -18,7 +18,7 @@ namespace sistemaDual.Interfaces
 
         Task<bool> GuardarPeril(AlumnoDual entidad);
 
-        Task<bool> CambiarClave (string alumnoID, string clave, string claveNueva);
+        Task<bool> CambiarClave (int alumnoID, string clave, string claveNueva);
 
         Task<bool> RestablecerClave (string correo, string urlPlantillaCorreo = "");
     }

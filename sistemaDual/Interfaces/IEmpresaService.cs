@@ -10,8 +10,8 @@ namespace sistemaDual.Interfaces
 
         Task<Empresa> Editar(Empresa modelo);
 
-        Task<bool> Eliminar(string EmpresaID);
+        Task<bool> Eliminar(int EmpresaID);
 
-        Task<Empresa> ObtenerXRFC(string EmpresaID);
+        Task<Empresa> ObtenerXRFC(int EmpresaID);
     }
 }

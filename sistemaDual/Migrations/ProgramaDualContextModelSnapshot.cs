@@ -24,13 +24,13 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.AlumnoAsignatura", b =>
                 {
-                    b.Property<string>("AlumnoDualID")
-                        .HasColumnType("nvarchar(18)");
-
-                    b.Property<int?>("AsignaturaID")
+                    b.Property<int>("AlumnoDualID")
                         .HasColumnType("int");
 
-                    b.Property<double?>("AsignaturaAmount")
+                    b.Property<int>("AsignaturaID")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("AsignaturaCalificacion")
                         .HasColumnType("float");
 
                     b.HasKey("AlumnoDualID", "AsignaturaID");
@@ -42,9 +42,11 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.AlumnoDual", b =>
                 {
-                    b.Property<string>("AlumnoDualID")
-                        .HasMaxLength(18)
-                        .HasColumnType("nvarchar(18)");
+                    b.Property<int>("AlumnoDualID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AlumnoDualID"));
 
                     b.Property<string>("ApellidoM")
                         .HasColumnType("nvarchar(max)");
@@ -54,6 +56,10 @@ namespace sistemaDual.Migrations
 
                     b.Property<int?>("BecaDualID")
                         .HasColumnType("int");
+
+                    b.Property<string>("CURP")
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
 
                     b.Property<string>("Clave")
                         .HasColumnType("nvarchar(max)");
@@ -73,13 +79,16 @@ namespace sistemaDual.Migrations
                     b.Property<int?>("EstatusID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("FechaCambios")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("FechaRegistro")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Matricula")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("NombreA")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ProgramaEducativoID")
@@ -114,8 +123,8 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.AlumnoMentor", b =>
                 {
-                    b.Property<string>("AlumnoDualID")
-                        .HasColumnType("nvarchar(18)");
+                    b.Property<int>("AlumnoDualID")
+                        .HasColumnType("int");
 
                     b.Property<int>("MentorEmpresarialID")
                         .HasColumnType("int");
@@ -150,6 +159,9 @@ namespace sistemaDual.Migrations
                     b.Property<string>("Correo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NombreA")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -176,19 +188,22 @@ namespace sistemaDual.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AsignaturaID"));
 
                     b.Property<string>("Actividad")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Competencia")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
+                    b.Property<DateTime?>("FechaCambios")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NombreAsignatura")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Periodo")
-                        .HasColumnType("int");
+                    b.Property<string>("Periodo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AsignaturaID");
 
@@ -197,73 +212,74 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.BecaDual", b =>
                 {
-                    b.Property<int>("BecaDUalID")
+                    b.Property<int>("BecaDualID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BecaDUalID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BecaDualID"));
 
-                    b.Property<DateTime>("Duracion")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Duracion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fuente")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Periocidad")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TipoBeca")
-                        .HasColumnType("int");
+                    b.Property<string>("TipoBeca")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("BecaDUalID");
+                    b.HasKey("BecaDualID");
 
                     b.ToTable("BecaDual", (string)null);
                 });
 
             modelBuilder.Entity("sistemaDual.Models.CatalagoProyecto", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("CatalagoProyectoID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CatalagoProyectoID"));
 
-                    b.Property<string>("AlumnoDualID")
-                        .HasColumnType("nvarchar(18)");
+                    b.Property<int?>("AlumnoDualID")
+                        .HasColumnType("int");
 
                     b.Property<string>("AreaConocimiento")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("EmpresaID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("EmpresaID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Etapa")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime?>("FechaCambioEstatus")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaInicio")
+                    b.Property<DateTime?>("FechaInicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaTermino")
+                    b.Property<DateTime?>("FechaRegistro")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
+                    b.Property<DateTime?>("FechaTermino")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NombreProyecto")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("NumHoras")
+                    b.Property<int?>("NumHoras")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.Property<string>("NumeroProyecto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CatalagoProyectoID");
 
                     b.HasIndex("AlumnoDualID");
 
@@ -324,14 +340,20 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.Empresa", b =>
                 {
-                    b.Property<string>("EmpresaID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("EmpresaID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmpresaID"));
 
                     b.Property<string>("CorreoR")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DomicilioID")
+                    b.Property<int?>("DomicilioID")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("EsActivo")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("FechaCambio")
                         .HasColumnType("datetime2");
@@ -340,6 +362,9 @@ namespace sistemaDual.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NombreC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RFC")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RazonS")
@@ -367,7 +392,6 @@ namespace sistemaDual.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EstatusID"));
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EstatusID");
@@ -445,8 +469,8 @@ namespace sistemaDual.Migrations
                     b.Property<string>("Correo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmpresaID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("EmpresaID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasMaxLength(20)
@@ -462,6 +486,31 @@ namespace sistemaDual.Migrations
                     b.ToTable("MentorEmpresarial", (string)null);
                 });
 
+            modelBuilder.Entity("sistemaDual.Models.NumeroCorrelativo", b =>
+                {
+                    b.Property<int>("NumeroCorrelativoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NumeroCorrelativoID"));
+
+                    b.Property<int?>("CantidadDigitos")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("FechaActualizacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Gestion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UltimoNumero")
+                        .HasColumnType("int");
+
+                    b.HasKey("NumeroCorrelativoID");
+
+                    b.ToTable("NumeroCorrelativo", (string)null);
+                });
+
             modelBuilder.Entity("sistemaDual.Models.ProgramaEducativo", b =>
                 {
                     b.Property<int>("ProgramaEducativoID")
@@ -474,8 +523,8 @@ namespace sistemaDual.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("UniversidadID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("UniversidadID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Version")
                         .HasMaxLength(15)
@@ -515,6 +564,9 @@ namespace sistemaDual.Migrations
                     b.Property<string>("Correo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NombreR")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -522,8 +574,8 @@ namespace sistemaDual.Migrations
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UniversidadID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("UniversidadID")
+                        .HasColumnType("int");
 
                     b.HasKey("ResponsableInstitucionalID");
 
@@ -556,8 +608,14 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.Universidad", b =>
                 {
-                    b.Property<string>("UniversidadID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UniversidadID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UniversidadID"));
+
+                    b.Property<string>("CCT")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DomicilioID")
                         .HasColumnType("int");
@@ -639,7 +697,7 @@ namespace sistemaDual.Migrations
                         .IsRequired();
 
                     b.HasOne("sistemaDual.Models.MentorEmpresarial", "MentorEmpresarial")
-                        .WithMany("AlumnoMentores")
+                        .WithMany("AlumnosMentores")
                         .HasForeignKey("MentorEmpresarialID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -675,13 +733,9 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.Empresa", b =>
                 {
-                    b.HasOne("sistemaDual.Models.Domicilio", "Domicilio")
+                    b.HasOne("sistemaDual.Models.Domicilio", null)
                         .WithMany("Empresas")
-                        .HasForeignKey("DomicilioID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Domicilio");
+                        .HasForeignKey("DomicilioID");
                 });
 
             modelBuilder.Entity("sistemaDual.Models.MentorAcademico", b =>
@@ -771,7 +825,7 @@ namespace sistemaDual.Migrations
 
             modelBuilder.Entity("sistemaDual.Models.MentorEmpresarial", b =>
                 {
-                    b.Navigation("AlumnoMentores");
+                    b.Navigation("AlumnosMentores");
                 });
 
             modelBuilder.Entity("sistemaDual.Models.ProgramaEducativo", b =>

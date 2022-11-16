@@ -26,6 +26,7 @@ namespace sistemaDual.Implementation
 
             try
             {
+                entidad.FechaRegistro = DateTime.Now;
                 Asignatura nueva_asignatura = await _repository.Crear(entidad);
                 if (entidad.AsignaturaID == 0)
                     throw new TaskCanceledException("No se puedo registrar la Asignatura");
@@ -54,6 +55,7 @@ namespace sistemaDual.Implementation
                 editar_asignatura.Periodo = entidad.Periodo;
                 editar_asignatura.Competencia = entidad.Competencia ;
                 editar_asignatura.Actividad = entidad.Actividad;
+                editar_asignatura.FechaCambios = DateTime.Now;
 
                 bool resp = await _repository.Editar(editar_asignatura);
                 if (!resp)

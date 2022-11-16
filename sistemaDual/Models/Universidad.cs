@@ -7,8 +7,9 @@ namespace sistemaDual.Models
     public class Universidad
     {
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string UniversidadID { get; set; }
+        public int UniversidadID { get; set; }
+
+        public string? CCT { get; set; }
 
         public string? NombreU { get; set; }
 
@@ -20,8 +21,8 @@ namespace sistemaDual.Models
 
         public Domicilio? Domicilio { get; set; }
 
-        public ICollection<ProgramaEducativo> ProgramaEducativos { get; set; }
-        public ICollection<ResponsableInstitucional> ResponsablesInstitucionales { get; set; }
+        public ICollection<ProgramaEducativo>? ProgramaEducativos { get; set; }
+        public ICollection<ResponsableInstitucional>? ResponsablesInstitucionales { get; set; }
         
     }
 }

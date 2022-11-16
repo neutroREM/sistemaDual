@@ -27,6 +27,7 @@ namespace sistemaDual.Data
         public DbSet<Estatus> Estatus { get; set; }
         public DbSet<Configuracion> Configuraciones { get; set; }
         public DbSet<Rol> Roles { get; set; }
+        public DbSet<NumeroCorrelativo> NumerosCorrelativos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,6 +49,7 @@ namespace sistemaDual.Data
                 .HasKey(c => new { c.AlumnoDualID, c.AsignaturaID});
             modelBuilder.Entity<Configuracion>().ToTable("Configuracion");
             modelBuilder.Entity<Rol>().ToTable("Rol");
+            modelBuilder.Entity<NumeroCorrelativo>().ToTable("NumeroCorrelativo");
         }
     }
 }

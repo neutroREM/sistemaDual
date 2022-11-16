@@ -104,7 +104,7 @@ namespace sistemaDual.Controllers
 
         // DELETE: AlumnosDuales/Eliminar/AlumnoDualID
         [HttpDelete]
-        public async Task<IActionResult> Eliminar(string alumnoDualID)
+        public async Task<IActionResult> Eliminar(int alumnoDualID)
         {
             GenericResponse<string> response = new GenericResponse<string>();
 

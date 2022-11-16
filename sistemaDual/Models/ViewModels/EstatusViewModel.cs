@@ -3,6 +3,6 @@
     public class EstatusViewModel
     {
         public int EstatusID { get; set; }
-        public string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
     }
 }

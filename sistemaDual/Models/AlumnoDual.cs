@@ -6,14 +6,14 @@ namespace sistemaDual.Models
 
     public class AlumnoDual
     {
+        public int AlumnoDualID { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [StringLength(18)]
-        public string AlumnoDualID { get; set; }
+        public string? CURP { get; set; }
 
         public string? Matricula { get; set; }
 
-        public string? Nombre { get; set; }
+        public string? NombreA { get; set; }
 
         public string? ApellidoP { get; set; }
 
@@ -32,16 +32,16 @@ namespace sistemaDual.Models
         public Double? Promedio { get; set; }
 
         public DateTime? FechaRegistro { get; set; }
-
-        //public DateTime? FechaEditar { get; set; }
+        
+        public DateTime? FechaCambios { get; set; }
 
         public bool? EsActivo { get; set; }
+
+        public int? DomicilioID { get; set; }
 
         public int? ProgramaEducativoID { get; set; }
 
         public int? BecaDualID { get; set; }
-
-        public int? DomicilioID { get; set; }
 
         public int? EstatusID { get; set; }
 
@@ -54,9 +54,9 @@ namespace sistemaDual.Models
         public ProgramaEducativo? ProgramaEducativo { get; set; }
 
         
-        public ICollection<AlumnoMentor> AlumnoMentores { get; set; }
-        public ICollection<AlumnoAsignatura> AlumnoAsignaturas { get; set; }
-        public ICollection<CatalagoProyecto> CatalagoProyectos { get; set; }
+        public ICollection<AlumnoMentor>? AlumnoMentores { get; set; }
+        public ICollection<AlumnoAsignatura>? AlumnoAsignaturas { get; set; }
+        public ICollection<CatalagoProyecto>? CatalagoProyectos { get; set; }
 
 
     }

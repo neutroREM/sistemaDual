@@ -89,7 +89,7 @@ namespace sistemaDual.Controllers
 
         //
         [HttpDelete]
-        public async Task<IActionResult> Eliminar(string empresaID)
+        public async Task<IActionResult> Eliminar(int empresaID)
         {
             GenericResponse<string> response = new GenericResponse<string>();
             try

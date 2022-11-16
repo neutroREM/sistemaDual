@@ -10,8 +10,8 @@ namespace sistemaDual.Models
         public string? Fuente { get; set; }
         public string? TipoBeca { get; set; }
         public string? Periocidad { get; set; }
-        public DateTime Duracion { get; set; }
+        public string? Duracion { get; set; }
 
-        public ICollection<AlumnoDual> AlumnosDuales { get; set; }
+        public ICollection<AlumnoDual>? AlumnosDuales { get; set; }
     }
 }

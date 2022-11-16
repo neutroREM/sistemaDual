@@ -6,8 +6,9 @@ namespace sistemaDual.Models
     public class Empresa
     {
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string EmpresaID { get; set; }
+        public int EmpresaID { get; set; }
+
+        public string? RFC { get; set; }
 
         public string? RazonS { get; set; }
 
@@ -22,13 +23,11 @@ namespace sistemaDual.Models
         public DateTime? FechaRegistro { get; set; }
 
         public DateTime? FechaCambio { get; set; }
-        
-        public int DomicilioID { get; set; }
 
-        public Domicilio? Domicilio { get; set; }
+        public bool? EsActivo { get; set; }
 
-        public ICollection<MentorEmpresarial> MentoresEmpresariales { get; set; }
-        public ICollection<CatalagoProyecto> CatalagoProyectos { get; set; }
+        public ICollection<MentorEmpresarial>? MentoresEmpresariales { get; set; }
+        public ICollection<CatalagoProyecto>? CatalagoProyectos { get; set; }
 
     }
 }

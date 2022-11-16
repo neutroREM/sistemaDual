@@ -13,10 +13,19 @@ namespace sistemaDual.Data
                 return;
             }
 
+            var numeroCorrelativo = new NumeroCorrelativo[]
+            {
+                new NumeroCorrelativo{UltimoNumero = 0, CantidadDigitos = 6, Gestion = "proyecto", FechaActualizacion = DateTime.Now}
+            };
+            foreach (NumeroCorrelativo n in numeroCorrelativo)
+            {
+                context.NumerosCorrelativos.Add(n);
+            }
+            context.SaveChanges();
 
             var asesor = new AsesorInstitucional[]
             {
-                new AsesorInstitucional{CURP = "1"}
+                new AsesorInstitucional{FechaRegistro = DateTime.Now}
             };
             foreach (AsesorInstitucional ases in asesor)
             {
@@ -26,7 +35,7 @@ namespace sistemaDual.Data
 
             var responsable = new ResponsableInstitucional[]
             {
-                new ResponsableInstitucional{CURP = "1"}
+                new ResponsableInstitucional{FechaRegistro = DateTime.Now}
             };
             foreach(ResponsableInstitucional resp in responsable)
             {
@@ -76,7 +85,7 @@ namespace sistemaDual.Data
 
             var alumnos = new AlumnoDual[]
             {
-                new AlumnoDual{AlumnoDualID="EAMR000814HMCSJLA6", Matricula="1319104647", Nombre="Raul", ApellidoP="Estrada", ApellidoM="Mejia",Telefono="132933",DomicilioID=2, Correo="dhamarloka90@gmail.com", Cuatrimestre="Decimo", Tipo="NuevoIngreso", Promedio=8.0, EsActivo = true, RolID=1, EstatusID = 1,FechaRegistro=DateTime.Now}
+                new AlumnoDual{CURP="EAMR000814HMCSJLA6", Matricula="1319104647", NombreA="Raul", ApellidoP="Estrada", ApellidoM="Mejia",Telefono="132933",DomicilioID=2, Correo="dhamarloka90@gmail.com", Cuatrimestre="Decimo", Tipo="NuevoIngreso", Promedio=8.0, EsActivo = true, RolID=1, EstatusID = 1,FechaRegistro=DateTime.Now}
             };
             foreach(AlumnoDual alumno in alumnos)
             {
@@ -101,7 +110,7 @@ namespace sistemaDual.Data
 
             var universidades = new Universidad[]
             {
-                new Universidad{UniversidadID="15EPO0003Y", NombreU="Universidad Politecnica de Tecamac", DomicilioID=1, FechaRegistro=DateTime.Now}
+                new Universidad{CCT="15EPO0003Y", NombreU="Universidad Politecnica de Tecamac", DomicilioID=1, FechaRegistro=DateTime.Now}
             };
             foreach(Universidad u in universidades)
             {

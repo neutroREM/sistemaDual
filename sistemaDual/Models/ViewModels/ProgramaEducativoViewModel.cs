@@ -4,12 +4,12 @@
     {
         public int ProgramaEducativoID { get; set; }
 
-        public string NombreP { get; set; }
+        public string? NombreP { get; set; }
         
-        public string Version { get; set; }
+        public string? Version { get; set; }
 
-        public string UniversidadID { get; set; }
+        public int? UniversidadID { get; set; }
 
-        public string NombreU { get; set; }
+        public string? NombreU { get; set; }
     }
 }

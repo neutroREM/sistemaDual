@@ -26,7 +26,9 @@ namespace sistemaDual.Models
         [StringLength(30)]
         public string? Cargo { get; set; }
 
-        public string? UniversidadID { get; set; }
+        public DateTime? FechaRegistro { get; set; }
+
+        public int? UniversidadID { get; set; }
         public Universidad? Universidad { get; set; }
     }
 }
