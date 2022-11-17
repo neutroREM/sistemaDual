@@ -12,4 +12,15 @@
                 })
             }
         })
+
+    fetch("/AsesoresInstitucionales/Obtener")
+        .then(response => {
+            return response.ok ? response.json() : Promise.reject(response);
+        })
+        .then(responseJson => {
+            if (responseJson.estado) {
+                const d = responseJson.objeto;
+                console.log(d)
+            }
+        })
 })
