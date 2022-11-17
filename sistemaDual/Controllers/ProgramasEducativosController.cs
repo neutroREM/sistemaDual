@@ -115,5 +115,23 @@ namespace sistemaDual.Controllers
             }
             return StatusCode(StatusCodes.Status200OK, response);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Obtener()
+        {
+            GenericResponse<ProgramaEducativoViewModel> response = new GenericResponse<ProgramaEducativoViewModel>();
+            try
+            {
+                ProgramaEducativoViewModel programaVM = _mapper.Map<ProgramaEducativoViewModel>(await _programaService.Obtener());
+                response.Estado = true;
+                response.Objeto = programaVM;
+            }
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
+        }
     }
 }

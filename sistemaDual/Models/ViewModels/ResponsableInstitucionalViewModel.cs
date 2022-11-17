@@ -16,7 +16,7 @@ namespace sistemaDual.Models.ViewModels
        
         public string? Correo { get; set; }
 
-        public int? Telefono { get; set; }
+        public string? Telefono { get; set; }
 
         public string? Cargo { get; set; }
 

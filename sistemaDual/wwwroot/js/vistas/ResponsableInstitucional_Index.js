@@ -27,7 +27,6 @@
             if (responseJson.estado) {
                 const d = responseJson.objeto
 
-                $("#txtResponsableInstitucionalID").val(d.responsableInstitucionalID)
                 $("#txtCurp").val(d.curp)
                 $("#txtNombreR").val(d.nombreR)
                 $("#txtApellidoP").val(d.apellidoP)

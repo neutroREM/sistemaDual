@@ -40,7 +40,7 @@ namespace sistemaDual.Implementation
                 entidad.FechaRegistro = DateTime.Now;
                 AlumnoDual alumnoDual = await _repository.Crear(entidad);
 
-                if (alumnoDual.AlumnoDualID == null)
+                if (alumnoDual.AlumnoDualID == 0)
                     throw new TaskCanceledException("No se pudo registrar el Estudiante");
 
                 if (urlPlantillaCorreo != "")
@@ -84,7 +84,7 @@ namespace sistemaDual.Implementation
 
         public async Task<AlumnoDual> Editar(AlumnoDual entidad)
         {
-            AlumnoDual alumno_existe = await _repository.Obtener(u => u.Correo == entidad.Correo);
+            AlumnoDual alumno_existe = await _repository.Obtener(u => u.Correo == entidad.Correo&& u.AlumnoDualID != entidad.AlumnoDualID);
             if (alumno_existe != null)
                 throw new TaskCanceledException("El correo ya esta registrado");
 
@@ -93,7 +93,7 @@ namespace sistemaDual.Implementation
                 IQueryable<AlumnoDual> query = await _repository.Consultar(u => u.AlumnoDualID == entidad.AlumnoDualID);
                 
                 AlumnoDual alumno_editar = query.First();
-                alumno_editar.AlumnoDualID = entidad.AlumnoDualID;
+                alumno_editar.CURP = entidad.CURP;
                 alumno_editar.Matricula = entidad.Matricula;
                 alumno_editar.NombreA = entidad.NombreA;
                 alumno_editar.ApellidoP = entidad.ApellidoP;

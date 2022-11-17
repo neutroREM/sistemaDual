@@ -102,21 +102,21 @@ namespace sistemaDual.Utilidades.AutoMapper
 
             #region AsesorInstitucional
             CreateMap<AsesorInstitucional, AsesorInstitucionalViewModel>()
-                .ForMember(dest => dest.ProgramaEducativoID,
-                opt => opt.MapFrom(src => src.ProgramaEducativo));
+                .ForMember(dest => dest.NombreP,
+                opt => opt.MapFrom(src => src.ProgramaEducativo.NombreP));
 
-            CreateMap<AsesorInstitucional, AsesorInstitucionalViewModel>()
-                .ForMember(dest => dest.ProgramaEducativoID,
+            CreateMap<AsesorInstitucionalViewModel, AsesorInstitucional>()
+                .ForMember(dest => dest.ProgramaEducativo,
                 opt => opt.Ignore());
             #endregion
 
             #region ResposableInstitucional
             CreateMap<ResponsableInstitucional, ResponsableInstitucionalViewModel>()
-                .ForMember(dest => dest.UniversidadID,
-                opt => opt.MapFrom(src => src.Universidad));
+                .ForMember(dest => dest.NombreU,
+                opt => opt.MapFrom(src => src.Universidad.NombreU));
 
-            CreateMap<ResponsableInstitucional, ResponsableInstitucionalViewModel>()
-                .ForMember(dest => dest.UniversidadID,
+            CreateMap<ResponsableInstitucionalViewModel, ResponsableInstitucional>()
+                .ForMember(dest => dest.Universidad,
                 opt => opt.Ignore());
             #endregion
         }

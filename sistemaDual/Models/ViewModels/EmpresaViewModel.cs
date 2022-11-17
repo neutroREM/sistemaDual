@@ -1,4 +1,6 @@
-﻿namespace sistemaDual.Models.ViewModels
+﻿using System.Security.Policy;
+
+namespace sistemaDual.Models.ViewModels
 {
     public class EmpresaViewModel
     {

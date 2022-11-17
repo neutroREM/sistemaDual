@@ -1,9 +1,10 @@
 ﻿
 //Modelado de los datos del Estudiante
 const MODEL_BASE = {
-    alumnoDualID: "",
+    alumnoDualID: 0,
+    curp: "",
     matricula: "",
-    nombre: "",
+    nombreA: "",
     apellidoP: "",
     apellidoM: "",
     telefono: "",
@@ -38,16 +39,16 @@ $(document).ready(function () {
              "type": "GET",
              "datatype": "json"
          },
-         "columns": [
-             { "data": "alumnoDualID" },
+        "columns": [
+            { "data": "alumnoDualID", "visible": false, "searchable": false },
+             { "data": "curp" },
              { "data": "matricula" },
-             { "data": "nombre" },
+             { "data": "nombreA" },
              { "data": "apellidoP" },
              { "data": "apellidoM" },
              { "data": "telefono" },
              { "data": "correo" },
              { "data": "descripcion" },
-             { "data": "fechaRegistro" },
              {
                  "data": "esActivo", render: function (data) {
                      if (data == 1)
@@ -87,14 +88,14 @@ $(document).ready(function () {
 
 function mostrarModal(modelo = MODEL_BASE) {
     $("#txtAlumnoDualID").val(modelo.alumnoDualID)
+    $("#txtCurp").val(modelo.curp)
     $("#txtMatricula").val(modelo.matricula)
-    $("#txtNombre").val(modelo.nombre)
+    $("#txtNombreA").val(modelo.nombreA)
     $("#txtApellidoP").val(modelo.apellidoP)
     $("#txtApellidoM").val(modelo.apellidoM)
     $("#txtTelefono").val(modelo.telefono)
     $("#txtCorreo").val(modelo.correo)
     $("#cboRol").val(modelo.rolID == 0 ? $("#cboRol option:first").val() : modelo.rolID)
-    $("#txtFechaRegistro").val(modelo.fechaRegistro)
     $("#cboEstado").val(modelo.esActivo)
     $("#modalData").modal("show")
 }
@@ -117,15 +118,15 @@ $("#btnGuardar").click(function () {
     }
 
     const modelo = structuredClone(MODEL_BASE);
-    modelo["alumnoDualID"] = $("#txtAlumnoDualID").val()
+    modelo["alumnoDualID"] = parseInt($("#txtAlumnoDualID").val())
+    modelo["curp"] = $("#txtCurp").val()
     modelo["matricula"] = $("#txtMatricula").val()
-    modelo["nombre"] = $("#txtNombre").val()
+    modelo["nombreA"] = $("#txtNombreA").val()
     modelo["apellidoP"] = $("#txtApellidoP").val()
     modelo["apellidoM"] = $("#txtApellidoM").val()
     modelo["telefono"] = $("#txtTelefono").val()  
     modelo["correo"] = $("#txtCorreo").val()
     modelo["rolID"] = $("#cboRol").val()
-    modelo["fechaRegistro"] = $("#txtFechaRegistro").val()
     modelo["esActivo"] = $("#cboEstado").val()
 
 
@@ -134,7 +135,7 @@ $("#btnGuardar").click(function () {
 
     $("#modalData").find("div.modal-content").LoadingOverlay("show"); 
 
-    if (modelo.alumnoDualID != null) {
+    if (modelo.alumnoDualID == 0) {
         //Registrar Estudiante
         fetch("/AlumnosDuales/Create", {
             method: "POST",

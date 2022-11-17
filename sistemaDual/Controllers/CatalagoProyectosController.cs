@@ -18,11 +18,13 @@ namespace sistemaDual.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ICatalagoProyectoService _proyectoService;
+        private readonly IProgramaEducativoService _programaService;
 
-        public CatalagoProyectosController(IMapper mapper, ICatalagoProyectoService proyectoService)
+        public CatalagoProyectosController(IMapper mapper, ICatalagoProyectoService proyectoService, IProgramaEducativoService programaService)
         {
             _mapper = mapper;
-            _proyectoService = proyectoService;    
+            _proyectoService = proyectoService;
+            _programaService = programaService;
         }
 
         public IActionResult NuevoProyecto()
@@ -34,6 +36,15 @@ namespace sistemaDual.Controllers
         {
             return View();
         }
+
+        //
+        [HttpGet]
+        public async Task<IActionResult> ListaProgramas(string busqueda)
+        {
+            List<ProgramaEducativoViewModel> programaVM = _mapper.Map<List<ProgramaEducativoViewModel>>(await _programaService.Lista());
+            return StatusCode(StatusCodes.Status200OK, programaVM);
+        }
+
 
         //
         [HttpGet]

@@ -31,6 +31,9 @@
                                     AlumnoDualID
                                 </th>
                                 <th>
+                                    CURP
+                                </th>
+                                <th>
                                     Matricula
                                 </th>
                                 <th>
@@ -50,9 +53,6 @@
                                 </th>
                                 <th>
                                     Rol    
-                                </th>
-                                <th>
-                                    FechaRegistro
                                 </th>
                                 <th>
                                     EsActivo
@@ -82,20 +82,21 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <input type="hidden" value="0" id="txtAlumnoDualID">
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="form-row">
                                     <div class="form-group col-sm-6">
-                                        <label for="txtAlumnoDualID">CURP</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtAlumnoDualID" name="AlumnoDualID">
+                                        <label for="txtCurp">CURP</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtCurp" name="Curp">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="txtMatricula">Matricula</label>
                                         <input type="text" class="form-control form-control-sm input-validar" id="txtMatricula" name="Matricula">
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="txtNombre">Nombre</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtNombre" name="Nombre">
+                                        <label for="txtNombreA">Nombre</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtNombreA" name="NombreA">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="txtApellidoP">Apellido Paterno</label>
@@ -122,10 +123,6 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtFechaRegistro">FechaRegistro</label>
-                                        <input type="datetime-local" class="form-control form-control-sm input-validar" id="txtFechaRegistro" name="FechaRegistro">
-                                    </div>
                                     <div class="form-group col-sm-6">
                                         <label for="cboEstado">Estado</label>
                                         <select class="form-control form-control-sm" id="cboEstado">

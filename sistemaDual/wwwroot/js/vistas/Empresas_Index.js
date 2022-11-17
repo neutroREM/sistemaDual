@@ -1,13 +1,13 @@
 ﻿//
 const MODEL_DATA = {
-    empresaID: "",
+    empresaID: 0,
+    rfc: "",
     razonS: "",
     nombreC: "",
     sectorS: "",
     representanteL: "",
-    correoR: "",
-    domicilioID: 0,
-    direccion: ""
+    correoR: ""
+
 }
 
 
@@ -22,14 +22,13 @@ $(document).ready(function () {
              "datatype": "json"
          },
          "columns": [
-             { "data": "empresaID" },
+             { "data": "empresaID", "visible": false, "searchable": false },
+             { "data": "rfc"},
              { "data": "razonS" },
              { "data": "nombreC" },
              { "data": "sectorS" },
              { "data": "representanteL" },
              { "data": "correoR" },
-             { "data": "domicilioID", "visible": false, "searchable": false },
-             { "data": "direccion"},
              {
                  "defaultContent": '<button class="btn btn-primary btn-editar btn-sm mr-2"><i class="fas fa-pencil-alt"></i></button>' +
                      '<button class="btn btn-danger btn-eliminar btn-sm"><i class="fas fa-trash-alt"></i></button>',
@@ -60,13 +59,12 @@ $(document).ready(function () {
 //
 function mostrarModal(modelo = MODEL_DATA) {
     $("#txtEmpresaID").val(modelo.empresaID)
+    $("#txtRfc").val(modelo.rfc)
     $("#txtRazonS").val(modelo.razonS)
     $("#txtNombreC").val(modelo.nombreC)
     $("#txtSectorS").val(modelo.sectorS)
     $("#txtRepresentanteL").val(modelo.representanteL)
     $("#txtCorreoR").val(modelo.correoR)
-    $("#txtDomicilioID").val(modelo.domicilioID)
-    $("#txtDireccion").val(modelo.direccion)
     $("#modalData").modal("show")
 }
 
@@ -102,21 +100,21 @@ $("#btnGuardar").click(function () {
     }
 
     const modelo = structuredClone(MODEL_DATA);
-    modelo["empresaID"] = $("#txtEmpresaID").val()
+    modelo["empresaID"] = parseInt($("#txtEmpresaID").val())
+    modelo["rfc"] = $("#txtRfc").val()
     modelo["razonS"] = $("#txtRazonS").val()
     modelo["nombreC"] = $("#txtNombreC").val()
     modelo["sectorS"] = $("#txtSectorS").val()
     modelo["representanteL"] = $("#txtRepresentanteL").val()
     modelo["correoR"] = $("#txtCorreoR").val()
-    modelo["domicilioID"] = parseInt($("#txtDomicilioID").val())
-    modelo["direccion"] = $("#txtDireccion").val()
+
 
     const formData = new FormData();
     formData.append("modelo", JSON.stringify(modelo))
 
     $("#modalData").find("div.modal-content").LoadingOverlay("show");
 
-    if (modelo.domicilioID == 0) {
+    if (modelo.empresaID == 0) {
         //
         fetch("/Empresas/Crear", {
             method: "POST",

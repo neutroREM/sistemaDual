@@ -10,7 +10,7 @@ namespace sistemaDual.Models.ViewModels
 
         public string? Matricula { get; set; }
 
-        public string? Nombre { get; set; }
+        public string? NombreA { get; set; }
 
         public string? ApellidoP { get; set; }
 

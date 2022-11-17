@@ -12,5 +12,7 @@ namespace sistemaDual.Interfaces
 
         Task<bool> Eliminar(int programaEducativoID);
 
+        Task<ProgramaEducativo> Obtener();
+
     }
 }

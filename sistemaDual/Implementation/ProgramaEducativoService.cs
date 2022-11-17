@@ -90,6 +90,20 @@ namespace sistemaDual.Implementation
             }
         }
 
+        public async Task<ProgramaEducativo> Obtener()
+        {
+            try
+            {
+                IQueryable<ProgramaEducativo> query = await _repository.Consultar(i => i.ProgramaEducativoID == 1);
+                ProgramaEducativo programa = query.Include(u => u.Universidad).First();
+                return programa;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         
     }
 }

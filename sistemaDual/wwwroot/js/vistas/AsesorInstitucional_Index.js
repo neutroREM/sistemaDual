@@ -27,15 +27,15 @@
             if (responseJson.estado) {
                 const d = responseJson.objeto
 
-                $("#txtAsesorInstitucionalID").val(d.asesorInstitucionalID)
+
                 $("#txtCurp").val(d.curp)
-                $("#txtNombreR").val(d.nombreR)
+                $("#txtNombreA").val(d.nombreA)
                 $("#txtApellidoP").val(d.apellidoP)
                 $("#txtApellidoM").val(d.apellidoM)
                 $("#txtCorreo").val(d.correo)
                 $("#txtTelefono").val(d.telefono)
                 $("#txtCargo").val(d.cargo)
-                $("#cboPrograma").val(d.universidadID == 0 ? $("#cboPrograma option:first").val() : d.programaEducativoID)
+                $("#cboPrograma").val(d.programaEducativoID == 0 ? $("#cboPrograma option:first").val() : d.programaEducativoID)
 
             } else {
                 swal("Problema", responseJson.mensaje, "error")
@@ -55,9 +55,9 @@ $("#btnGuardarCambios").click(function () {
     }
 
     const modelo = {
-        responsableInstitucionalID: $("#txtResponsableInstitucionalID").val(),
+
         curp: $("#txtCurp").val(),
-        nombreR: $("#txtNombreR").val(),
+        nombreA: $("#txtNombreA").val(),
         apellidoP: $("#txtApellidoP").val(),
         apellidoM: $("#txtApellidoM").val(),
         correo: $("#txtCorreo").val(),

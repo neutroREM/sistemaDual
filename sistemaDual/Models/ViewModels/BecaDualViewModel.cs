@@ -2,7 +2,7 @@
 {
     public class BecaDualViewModel
     {
-        public int BecaDUalID { get; set; }
+        public int BecaDualID { get; set; }
 
         public string? Fuente { get; set; }
 

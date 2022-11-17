@@ -29,7 +29,7 @@ namespace sistemaDual.Implementation
             {
                 entidad.FechaRegistro = DateTime.Now;
                 Universidad nueva_uni = await _repository.Crear(entidad);
-                if(entidad.UniversidadID == null)
+                if(entidad.UniversidadID == 0)
                     throw new TaskCanceledException("No se puedo registrar la Universidad");
 
                 IQueryable<Universidad> query = await _repository.Consultar(i => i.UniversidadID == nueva_uni.UniversidadID);
@@ -46,7 +46,8 @@ namespace sistemaDual.Implementation
         {
             try
             {
-                Universidad uni_editar = await _repository.Obtener(i => i.CCT == "15EPO0003Y");
+                Universidad uni_editar = await _repository.Obtener(i => i.UniversidadID == 1);
+                uni_editar.CCT = entidad.CCT;
                 uni_editar.NombreU = entidad.NombreU;
                 uni_editar.FechaCambio = DateTime.Now;
 
@@ -66,7 +67,7 @@ namespace sistemaDual.Implementation
         {
             try
             {
-                IQueryable<Universidad> query = await _repository.Consultar(i => i.CCT == "15EPO0003Y");
+                IQueryable<Universidad> query = await _repository.Consultar(i => i.UniversidadID == 1);
                 Universidad uni_encontrada = query.Include(d => d.Domicilio).First();
                 return uni_encontrada;
             }

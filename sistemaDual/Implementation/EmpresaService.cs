@@ -21,7 +21,7 @@ namespace sistemaDual.Implementation
 
         public async Task<Empresa> Crear(Empresa modelo)
         {
-            Empresa empresa_existe = await _repository.Obtener(u => u.EmpresaID == modelo.EmpresaID);
+            Empresa empresa_existe = await _repository.Obtener(u => u.EmpresaID == modelo.EmpresaID && u.RFC == modelo.RFC);
             if(empresa_existe != null)
                 throw new TaskCanceledException("Esta UE ya esta registrada");
 
@@ -29,7 +29,7 @@ namespace sistemaDual.Implementation
             {
                 modelo.FechaRegistro = DateTime.Now;
                 Empresa nueva_empresa = await _repository.Crear(modelo);
-                if (nueva_empresa.EmpresaID == null)
+                if (nueva_empresa.EmpresaID == 0)
                     throw new TaskCanceledException("No se pudo registrar a la UE");
 
                 IQueryable<Empresa> query = await _repository.Consultar(u => u.EmpresaID == nueva_empresa.EmpresaID);
@@ -48,8 +48,8 @@ namespace sistemaDual.Implementation
             {
                 IQueryable<Empresa> query = await _repository.Consultar(i => i.EmpresaID == modelo.EmpresaID);
                 Empresa empresa_editar = query.First();
-
-                empresa_editar.EmpresaID = modelo.EmpresaID;
+                
+                empresa_editar.RFC = modelo.RFC;
                 empresa_editar.RazonS = modelo.RazonS;
                 empresa_editar.NombreC = modelo.NombreC;
                 empresa_editar.SectorS = modelo.SectorS;
@@ -92,9 +92,9 @@ namespace sistemaDual.Implementation
             }
         }
 
-        public async Task<Empresa> ObtenerXRFC(int EmpresaID)
+        public async Task<Empresa> ObtenerXRFC(string rfc)
         {
-            IQueryable<Empresa> query = await _repository.Consultar(i => i.EmpresaID == EmpresaID);
+            IQueryable<Empresa> query = await _repository.Consultar(i => i.RFC == rfc);
             Empresa result = query.First();
             return result;
         }

@@ -12,6 +12,6 @@ namespace sistemaDual.Interfaces
 
         Task<bool> Eliminar(int EmpresaID);
 
-        Task<Empresa> ObtenerXRFC(int EmpresaID);
+        Task<Empresa> ObtenerXRFC(string rfc);
     }
 }

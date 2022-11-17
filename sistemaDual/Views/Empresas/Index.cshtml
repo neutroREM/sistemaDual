@@ -32,6 +32,9 @@
                         <thead>
                             <tr>
                                 <th>
+                                    EmpresaID
+                                </th>
+                                <th>
                                     RFC
                                 </th>
                                 <th>
@@ -48,12 +51,6 @@
                                 </th>
                                 <th>
                                     Correo
-                                </th>
-                                <th>
-                                    DomicilioID
-                                </th>
-                                <th>
-                                    Direccion
                                 </th>
                                 <th>
                                     Acciones
@@ -81,13 +78,13 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <input type="hidden" value="0" id="txtDomicilioID">
+                        <input type="hidden" value="0" id="txtEmpresaID">
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="form-row">
                                     <div class="form-group col-sm-6">
-                                        <label for="txtEmpresaID">RFC</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtEmpresaID" name="EmpresaID">
+                                        <label for="txtRfc">RFC</label>
+                                        <input type="text" class="form-control form-control-sm input-validar" id="txtRfc" name="Rfc">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="txtRazonS">Razón Social</label>
@@ -112,12 +109,6 @@
                                     <div class="form-group col-sm-6">
                                         <label for="txtCorreoR">Correo</label>
                                         <input type="text" class="form-control form-control-sm input-validar" id="txtCorreoR" name="CorreoR">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-sm-6">
-                                        <label for="txtDireccion">Direccion</label>
-                                        <input type="text" class="form-control form-control-sm input-validar" id="txtDireccion" name="Direccion">
                                     </div>
                                 </div>
                             </div>

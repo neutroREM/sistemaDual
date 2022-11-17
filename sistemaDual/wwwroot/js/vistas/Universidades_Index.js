@@ -12,7 +12,7 @@ $(document).ready(function () {
             if (responseJson.estado) {
                 const d = responseJson.objeto
 
-                $("#txtUniversidadID").val(d.universidadID)
+                $("#txtCct").val(d.cct)
                 $("#txtNombreU").val(d.nombreU)
                 $("#txtDomicilioID").val(d.domicilioID)
                 $("#txtDireccion").val(d.direccion)
@@ -39,6 +39,7 @@ $("#btnGuardarCambios").click(function () {
      
     const modelo = {
         universidadID: $("#txtDomicilioID").val(),
+        cct: $("#txtCct").val(),
         nombreU: $("#txtNombreU").val(),
         direccion: $("#txtDireccion").val(),
         colonia: $("#txtColonia").val(),

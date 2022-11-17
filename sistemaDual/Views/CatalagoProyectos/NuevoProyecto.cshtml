@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Nuevo Proyecto";
+    ViewData["Title"] = "NuevoProyecto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -77,11 +77,10 @@
                                         <div class="card-body">
                                             <div class="input-group input-group-sm mb-3">
                                                 <div class="input-group-prepend">
-                                                  <label class="input-group-text" for="cboTipoDocumentoVenta">Tipo</label>
+                                                  <label class="input-group-text" for="cboProgramaE">Programa Educativo</label>
                                                 </div>
-                                                <select class="custom-select" id="cboTipoDocumentoVenta">
-                                                  <option value="1">Boleta</option>
-                                                  <option value="2">Factura</option>
+                                                <select class="custom-select" id="cboProgramaE">
+                                                  
                                                 </select>
                                               </div>
                                             <div class="input-group input-group-sm mb-3">
@@ -121,10 +120,12 @@
                             </div>
                         </div>
                     </div>
-                    @section Scripts{
+@section Scripts {
     <script src="~/vendor/select2/select2.min.js"></script>
     <script src="~/vendor/select2/es.min.js"></script>
 
 
     <script src="~/js/vistas/Nuevo_Proyecto.js"></script>
-                    }
+                    
+}
+                    

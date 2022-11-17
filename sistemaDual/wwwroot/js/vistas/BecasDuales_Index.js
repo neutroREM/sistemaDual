@@ -50,7 +50,7 @@ $(document).ready(function () {
     });
 });
 
-function mostrarlModal(modelo = MODEL_BASE) {
+function mostrarModal(modelo = MODEL_BASE) {
     $("#txtBecaDualID").val(modelo.becaDualID)
     $("#txtFuente").val(modelo.fuente)
     $("#txtTipoBeca").val(modelo.tipoBeca)

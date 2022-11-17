@@ -7,5 +7,7 @@ namespace sistemaDual.Interfaces
         Task<AsesorInstitucional> Obtener();
 
         Task<AsesorInstitucional> GuardarCambios(AsesorInstitucional entidad);
+
+        
     }
 }
