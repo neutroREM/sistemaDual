@@ -21,7 +21,7 @@ namespace sistemaDual.Implementation
         public async Task<List<AlumnoDual>> ObtenerAlumnos(string busqueda)
         {
             IQueryable<AlumnoDual> query = await _alumnoRepository.Consultar(
-                a => a.EsActivo == true && string.Concat(a.AlumnoDualID, a.NombreA, a.ApellidoP)
+                a => a.EsActivo == true && string.Concat(a.CURP, a.NombreA, a.ApellidoP)
                 .Contains(busqueda));
 
             return query.Include(p => p.ProgramaEducativo).ToList();
@@ -30,7 +30,7 @@ namespace sistemaDual.Implementation
         public async Task<List<Empresa>> ObtenerEmpresas(string busqueda)
         {
             IQueryable<Empresa> query = await _empresaRepository.Consultar(
-                e => e.EsActivo == true && string.Concat(e.NombreC, e.RazonS, e.RepresentanteL)
+                e => e.EmpresaID >= 1 && string.Concat(e.NombreC, e.RazonS, e.RepresentanteL)
                 .Contains(busqueda));
 
             return query.ToList();
