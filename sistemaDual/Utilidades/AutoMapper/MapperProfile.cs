@@ -119,6 +119,17 @@ namespace sistemaDual.Utilidades.AutoMapper
                 .ForMember(dest => dest.Universidad,
                 opt => opt.Ignore());
             #endregion
+
+
+            #region CatalagoProyecto
+            CreateMap<CatalagoProyecto, CatalagoProyectoViewModel>()
+                .ForMember(dest => dest.CURP,
+                opt => opt.MapFrom(src => src.AlumnoDual.CURP));
+
+            CreateMap<CatalagoProyectoViewModel, CatalagoProyecto>()
+                .ForMember(dest => dest.AlumnoDual,
+                opt => opt.Ignore());
+            #endregion
         }
     }
 }

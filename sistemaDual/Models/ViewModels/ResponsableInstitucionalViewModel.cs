@@ -4,7 +4,7 @@ namespace sistemaDual.Models.ViewModels
 {
     public class ResponsableInstitucionalViewModel
     {
-        public int ResposableInstitucionalID { get; set; }
+        public int ResponsableInstitucionalID { get; set; }
 
         public string? CURP { get; set; }
 

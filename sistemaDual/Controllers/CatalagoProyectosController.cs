@@ -19,9 +19,13 @@ namespace sistemaDual.Controllers
         private readonly IMapper _mapper;
         private readonly ICatalagoProyectoService _proyectoService;
         private readonly IProgramaEducativoService _programaService;
+        private readonly IAsesorInstitucionalService _asesorService;
+        private readonly IResponsableInstitucionalService _responsableService;
 
-        public CatalagoProyectosController(IMapper mapper, ICatalagoProyectoService proyectoService, IProgramaEducativoService programaService)
+        public CatalagoProyectosController(IAsesorInstitucionalService asesorService, IResponsableInstitucionalService responsableService ,IMapper mapper, ICatalagoProyectoService proyectoService, IProgramaEducativoService programaService)
         {
+            _responsableService = responsableService;
+            _asesorService = asesorService;
             _mapper = mapper;
             _proyectoService = proyectoService;
             _programaService = programaService;
@@ -39,12 +43,24 @@ namespace sistemaDual.Controllers
 
         //
         [HttpGet]
-        public async Task<IActionResult> ListaProgramas(string busqueda)
+        public async Task<IActionResult> ListaProgramas()
         {
             List<ProgramaEducativoViewModel> programaVM = _mapper.Map<List<ProgramaEducativoViewModel>>(await _programaService.Lista());
             return StatusCode(StatusCodes.Status200OK, programaVM);
         }
 
+
+        public async Task<IActionResult> ListaAsesores()
+        {
+            List<AsesorInstitucionalViewModel> asesorVM = _mapper.Map<List<AsesorInstitucionalViewModel>>(await _asesorService.Lista());
+            return StatusCode(StatusCodes.Status200OK, asesorVM);
+        }
+
+        public async Task<IActionResult> ListaResponsables()
+        {
+            List<ResponsableInstitucionalViewModel> responsableVM = _mapper.Map<List<ResponsableInstitucionalViewModel>>(await _responsableService.Lista());
+            return StatusCode(StatusCodes.Status200OK, responsableVM);
+        }
 
         //
         [HttpGet]

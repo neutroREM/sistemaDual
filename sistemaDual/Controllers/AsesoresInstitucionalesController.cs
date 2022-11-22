@@ -44,12 +44,23 @@ namespace sistemaDual.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Obtener()
+        public async Task<IActionResult> Lista()
+        {
+            List<AsesorInstitucionalViewModel> asesorVM = _mapper.Map<List<AsesorInstitucionalViewModel>>(await _asesorService.Lista());
+            return StatusCode(StatusCodes.Status200OK, new { data = asesorVM });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Crear([FromForm] string modelo)
         {
             GenericResponse<AsesorInstitucionalViewModel> response = new GenericResponse<AsesorInstitucionalViewModel>();
             try
             {
-                AsesorInstitucionalViewModel asesorVM = _mapper.Map<AsesorInstitucionalViewModel>(await _asesorService.Obtener());
+                AsesorInstitucionalViewModel asesorVM = JsonConvert.DeserializeObject<AsesorInstitucionalViewModel>(modelo);
+                AsesorInstitucional asesor_crear = await _asesorService.Crear(_mapper.Map<AsesorInstitucional>(asesorVM));
+
+                asesorVM = _mapper.Map<AsesorInstitucionalViewModel>(asesor_crear);
+
                 response.Estado = true;
                 response.Objeto = asesorVM;
             }
@@ -58,10 +69,12 @@ namespace sistemaDual.Controllers
                 response.Estado = false;
                 response.Mensaje = ex.Message;
             }
+
             return StatusCode(StatusCodes.Status200OK, response);
         }
 
-        [HttpPost]
+
+        [HttpPut]
         public async Task<IActionResult> GuardarCambios([FromForm] string modelo)
         {
             GenericResponse<AsesorInstitucionalViewModel> response = new GenericResponse<AsesorInstitucionalViewModel>();
@@ -74,6 +87,24 @@ namespace sistemaDual.Controllers
 
                 response.Estado = true;
                 response.Objeto = asesorVM;
+            }
+            catch (Exception ex)
+            {
+                response.Estado = false;
+                response.Mensaje = ex.Message;
+            }
+
+            return StatusCode(StatusCodes.Status200OK, response);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(int asesorInstitucionalID)
+        {
+            GenericResponse<AsesorInstitucionalViewModel> response = new GenericResponse<AsesorInstitucionalViewModel>();
+            try
+            {
+
+                response.Estado = await _asesorService.Eliminar(asesorInstitucionalID);
             }
             catch (Exception ex)
             {

@@ -14,117 +14,115 @@
 }
 
 <div class="row">
-                         <div class="col-sm-8">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3 bg-second-primary">
-                                            <h6 class="m-0 font-weight-bold text-white">Estudiante</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-row">
-                                                <div class="form-group col-sm-6">
-                                                    <input type="text" class="form-control form-control-sm" id="txtDocumentoCliente" placeholder="numero documento">
-                                                </div>
-                                                <div class="form-group col-sm-6">
-                                                    <input type="text" class="form-control form-control-sm" id="txtNombreCliente" placeholder="nombre completo">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3 bg-second-primary">
-                                            <h6 class="m-0 font-weight-bold text-white">Empresas</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-row">
-                                                <div class="form-group col-sm-12">
-                                                    <select class="form-control form-control-sm" id="cboBuscarEmpresa" >
-                                                        <option value=""></option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <table class="table table-striped table-sm" id="tbProducto">
-                                                        <thead>
-                                                            <tr>
-                                                                <th></th>
-                                                                <th>Producto</th>
-                                                                <th>Cantidad</th>
-                                                                <th>Precio</th>
-                                                                <th>Total</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 bg-second-primary">
+                            <h6 class="m-0 font-weight-bold text-white">Estudiante</h6>
                         </div>
-                        <div class="col-sm-4">
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3 bg-second-primary">
-                                            <h6 class="m-0 font-weight-bold text-white">Detalles del Programa Educativo</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="input-group input-group-sm mb-3">
-                                                <div class="input-group-prepend">
-                                                  <label class="input-group-text" for="cboProgramaE">Programa Educativo</label>
-                                                </div>
-                                                <select class="custom-select" id="cboProgramaE">
-                                                </select>
-                                              </div>
-                                            <div class="input-group input-group-sm mb-3">
-                                                <div class="input-group-prepend">
-                                                  <span class="input-group-text" id="inputGroupNombreA"></span>
-                                                </div>
-                                                 <input type="text" class="form-control text-left" aria-label="Small" aria-describedby="inputGroupNombreA" id="txtNombreA" disabled>
-                                            </div>
-                                            <div class="input-group input-group-sm mb-3">
-                                                <div class="input-group-prepend">
-                                                  <span class="input-group-text" id="inputCorreoA"></span>
-                                                </div>
-                                                <input type="text" class="form-control text-left" aria-label="Small" aria-describedby="inputGroupCorreoA" id="txtCorreoA" disabled>
-                                            </div>
-                                            <div class="input-group input-group-sm mb-3">
-                                                <div class="input-group-prepend">
-                                                  <span class="input-group-text" id="inputGroupTelefonoA"></span>
-                                                </div>
-                                                <input type="text" class="form-control text-left" aria-label="Small" aria-describedby="inputGroupTelefonoA" id="txtTelefonoA" disabled>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <input type="text" class="form-control form-control-sm" id="txtCurpAlumno" placeholder="Curp">
                                 </div>
-                            </div>
-                            
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card shadow">
-                                        <div class="card-body">
-                                            <div class="form-group mb-0">
-                                                <button class="btn btn-success btn-sm btn-block" id="btnTerminarVentar">Asignar Proyecto</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="form-group col-sm-6">
+                                    <input type="text" class="form-control form-control-sm" id="txtNombreAlumno" placeholder="Nombre Completo">
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 bg-second-primary">
+                            <h6 class="m-0 font-weight-bold text-white">Unidad Económica</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <select class="form-control form-control-sm" id="cboBuscarEmpresa">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-striped table-sm" id="tbEmpresa">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Sector Social</th>
+                                                <th>Nombre Comercial</th>
+                                                <th>Razon Social</th>
+                                                <th>Representante Legal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 bg-second-primary">
+                            <h6 class="m-0 font-weight-bold text-white">Detalles del Programa Educativo</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="cboProgramaE">Programa Educativo</label>
+                                </div>
+                                <select class="custom-select" id="cboProgramaE">
+                                </select>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="cboAsesorI">Asesor Institucional</label>
+                                </div>
+                                <select class="custom-select" id="cboAsesorI">
+                                </select>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="cboResponsableI">Responsable Institucional</label>
+                                </div>
+                                <select class="custom-select" id="cboResponsableI">
+                                </select>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="form-group mb-0">
+                                <button class="btn btn-success btn-sm btn-block" id="btnAsignarProyecto">Asignar Proyecto</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                         
 @section Scripts {
     <script src="~/vendor/select2/select2.min.js"></script>
     <script src="~/vendor/select2/es.min.js"></script>

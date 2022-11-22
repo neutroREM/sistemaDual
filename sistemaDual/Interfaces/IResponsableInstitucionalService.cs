@@ -4,8 +4,12 @@ namespace sistemaDual.Interfaces
 {
     public interface IResponsableInstitucionalService
     {
-        Task<ResponsableInstitucional> Obtener();
+        Task<List<ResponsableInstitucional>> Lista();
+
+        Task<ResponsableInstitucional> Crear(ResponsableInstitucional entidad);
 
         Task<ResponsableInstitucional> GuardarCambios(ResponsableInstitucional entidad);
+
+        Task<bool> Eliminar(int responsablesInstitucionalID);
     }
 }
