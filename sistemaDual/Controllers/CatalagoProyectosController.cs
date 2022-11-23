@@ -79,7 +79,7 @@ namespace sistemaDual.Controllers
         }
 
         //
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> RegistrarProyecto([FromBody] CatalagoProyectoViewModel modelo)
         {
             GenericResponse<CatalagoProyectoViewModel> response = new GenericResponse<CatalagoProyectoViewModel>();
@@ -93,7 +93,7 @@ namespace sistemaDual.Controllers
             }
             catch (Exception ex)
             {
-                response.Estado = true;
+                response.Estado = false;
                 response.Mensaje = ex.Message;
             }
             return StatusCode(StatusCodes.Status200OK, response);

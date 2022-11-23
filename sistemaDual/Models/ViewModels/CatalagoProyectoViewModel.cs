@@ -6,6 +6,8 @@ namespace sistemaDual.Models.ViewModels
     {
         public int CatalagoProyectoID { get; set; }
 
+        public string? NumeroProyecto { get; set; }
+
         public string? NombreProyecto { get; set; }
 
         public string? Etapa { get; set; }
@@ -28,7 +30,7 @@ namespace sistemaDual.Models.ViewModels
 
         public string? NombreP { get; set; }
 
-        public string? Version { get; set; }
+        
 
 
     }

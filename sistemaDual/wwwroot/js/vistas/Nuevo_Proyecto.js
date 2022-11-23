@@ -43,6 +43,38 @@ $(document).ready(function () {
             }
         })
 
+    $("#cboBuscarEstudiante").select2({
+        ajax: {
+            url: "/CatalagoProyectos/ObtenerAlumnos",
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            delay: 250,
+            data: function (params) {
+                return {
+                    busqueda: params.term
+                };
+            },
+            processResults: function (data,) {
+                return {
+                    results: data.map((item) => (
+                        {
+                            id: item.alumnoDualID,
+                            text: item.curp,
+
+                            nombreA: item.nombreA,
+                            telefono: item.telefono,
+                            esActivo: item.esActivo
+                        }
+                    ))
+                };
+            },
+        },
+        language: "es",
+        placeholder: 'Buscar Estudiante',
+        minimumInputLength: 1,
+        templateResult: formatoEstudiante
+    });
+
     $("#cboBuscarEmpresa").select2({
         ajax: {
             url: "/CatalagoProyectos/ObtenerEmpresas",
@@ -77,6 +109,27 @@ $(document).ready(function () {
     });
 })
 
+
+
+function formatoEstudiante(data) {
+    if (data.loading)
+        return data.text;
+
+    var contenedor = $(
+        `<table width="100%">
+            <tr>
+                <td>
+                   <p style="margin:2px">${data.nombreA}</p>
+                   <p style="margin:2px">${data.telefono}</p>
+                   <p style="margin:2px">${data.esActivo}</p>
+                   <p style="font-weight: bolder;margin:2px">${data.text}</p> 
+                </td>
+            </tr>
+        </table>`
+    );
+    return contenedor;
+}
+
 function formatoEmpresas(data) {
     if (data.loading)
         return data.text;
@@ -102,6 +155,51 @@ $(document).on("select2:open", function () {
 })
 
 
+let estudianteDatos = [];
+$("#cboBuscarEstudiante").on("select2:select", function (e) {
+    const data = e.params.data;
+
+    let estudiante_encontrado = estudianteDatos.filter(p => p.alumnoDualID == data.id)
+    if (estudiante_encontrado.length > 0) {
+        $("#cboBuscarEstudiante").val("").trigger("change")
+        toastr.warning("", "El estudiante ya fue selecionado")
+        return false
+    }
+
+    swal({
+        title: "aaaqqw",
+        text: "asignar este Estudiante",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Si, eliminar",
+        cancelButtonText: "No, cancelar",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+        function (valor) {
+
+
+            let estudiante = {
+                alumnoDualID: data.id,
+                curp: data.text,
+                nombreA: data.nombreA,
+                telefono: data.telefono,
+                esActivo: data.esActivo
+            }
+            estudianteDatos.push(estudiante)
+
+            mostrarEstudiante_Datos();
+
+            $("#cboBuscarEstudiante").val("").trigger("change")
+            swal.close()
+        }
+    )
+
+})
+
+
+///
 let empresasProyecto = [];
 $("#cboBuscarEmpresa").on("select2:select", function (e) {
     const data = e.params.data;
@@ -115,25 +213,17 @@ $("#cboBuscarEmpresa").on("select2:select", function (e) {
 
     swal({
         title: data.razonS,
-        text: data.text,
-        type: "input",
+        text: "asignar esta UE",
+        type: "warning",
         showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Si, eliminar",
+        cancelButtonText: "No, cancelar",
         closeOnConfirm: false,
-        inputPlaceholder:"Catidad???"
+        closeOnCancel: true
     },
         function (valor) {
 
-            if (valor === false) return false;
-
-            if (valor === "") {
-                toastr.warning("", "necesita agradgasas")
-                return false;
-            }
-
-            if (isNaN(parseInt(valor))) {
-                toastr.warning("", "necesita agradgasas numero")
-                return false;
-            }
 
             let empresa = {
                 empresaID: data.id,
@@ -177,6 +267,29 @@ function mostrarEmpresa_Datos() {
 
 }
 
+function mostrarEstudiante_Datos() {
+
+    $("#tbEstudiante tbody").html("")
+
+    estudianteDatos.forEach((item) => {
+        $("#tbEstudiante tbody").append(
+            $("<tr>").append(
+                $("<td>").append(
+                    $("<button>").addClass("btn btn-danger btn-eliminar btn-sm").append(
+                        $("<i>").addClass("fas fa-trash-alt")
+                    ).data("alumnoDualID", item.alumnoDualID)
+                ),
+                $("<td>").text(item.curp),
+                $("<td>").text(item.nombreA),
+                $("<td>").text(item.telefono),
+                $("<td>").text(item.esActivo)
+            )
+        )
+    })
+
+
+}
+
 $(document).on("click", "button.btn-eliminar", function () {
 
     const _empresaID = $(this).data("empresaID")
@@ -184,6 +297,15 @@ $(document).on("click", "button.btn-eliminar", function () {
 
     empresasProyecto = empresasProyecto.filter(p => p.empresaID != _empresaID);
     mostrarEmpresa_Datos();
+})
+
+
+$(document).on("click", "button.btn-eliminar", function () {
+
+    const _alumnoDualID = $(this).data("alumnoDualID")
+
+    estudianteDatos = estudianteDatos.filter(a => a.alumnoDualID != _alumnoDualID);
+    mostrarEstudiante_Datos();
 })
 
 $("#btnAsignarProyecto").click(function () {
@@ -194,21 +316,19 @@ $("#btnAsignarProyecto").click(function () {
         return;
     }
 
-    const proyectoVM =
+    const entidad =
     {
+ 
+        programaEducativoID: $("#cboProgramaE").val()
 
-        ///
-        empresaID: empresasProyecto[0].empresaID
     }
-
-    console.log(proyectoVM)
 
     $("#btnAsignarProyecto").LoadingOverlay("show");
 
     fetch("/CatalagoProyectos/RegistrarProyecto", {
         method: "POST",
-        headers: { "Content-Type": "applications(json; charset=utf-8" },
-        body: JSON.stringify(proyectoVM)
+        headers: { 'Content-Type': 'application/json', 'charset': 'utf-8' },
+        body: JSON.stringify(entidad)
     })
         .then(response => {
             $("#btnAsignarProyecto").LoadingOverlay("hide");
@@ -216,8 +336,6 @@ $("#btnAsignarProyecto").click(function () {
         })
         .then(responseJson => {
             if (responseJson.estado) {
-                empresasProyecto = [];
-                mostrarEmpresa_Datos();
 
                 swal("Asginado", `Numero Proyecto: ${responseJson.objeto.numeroProyecto}`, "success")
             } else {

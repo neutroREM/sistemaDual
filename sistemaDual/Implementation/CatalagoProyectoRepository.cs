@@ -35,10 +35,12 @@ namespace sistemaDual.Implementation
                     string ceros = string.Concat(Enumerable.Repeat("0", correlativo.CantidadDigitos.Value));
                     string numeroProyecto = ceros + correlativo.UltimoNumero.ToString();
                     numeroProyecto = numeroProyecto.Substring(numeroProyecto.Length - correlativo.CantidadDigitos.Value, correlativo.CantidadDigitos.Value);
-                    entidad.FechaRegistro = DateTime.Now;
+                    
                     entidad.NumeroProyecto = numeroProyecto;
+                    entidad.FechaRegistro = DateTime.Now;
 
-                    await _context.AddAsync(entidad);
+
+                    await _context.CatalagoProyectos.AddAsync(entidad);
                     await _context.SaveChangesAsync();
 
                     proyectoGenerado = entidad;
