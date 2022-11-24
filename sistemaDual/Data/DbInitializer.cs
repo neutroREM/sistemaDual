@@ -23,26 +23,7 @@ namespace sistemaDual.Data
             }
             context.SaveChanges();
 
-            var asesor = new AsesorInstitucional[]
-            {
-                new AsesorInstitucional{FechaRegistro = DateTime.Now}
-            };
-            foreach (AsesorInstitucional ases in asesor)
-            {
-                context.AsesoresInstitucionales.Add(ases);
-            }
-            context.SaveChanges();
-
-            var responsable = new ResponsableInstitucional[]
-            {
-                new ResponsableInstitucional{FechaRegistro = DateTime.Now}
-            };
-            foreach(ResponsableInstitucional resp in responsable)
-            {
-                context.ResponsablesInstitucionales.Add(resp);
-            }
-            context.SaveChanges();
-
+            
             var estatus = new Estatus[]
             {
                 new Estatus{Descripcion="Activo"},

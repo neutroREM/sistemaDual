@@ -35,12 +35,12 @@ $(document).ready(function () {
     tableData = $('#tbdata').DataTable({
         responsive: true,
          "ajax": {
-             "url": 'AlumnosDuales/Lista',
+             "url": '/AlumnosDuales/Lista',
              "type": "GET",
              "datatype": "json"
          },
         "columns": [
-            { "data": "alumnoDualID", "visible": false, "searchable": false },
+             { "data": "alumnoDualID", "visible": false, "searchable": false },
              { "data": "curp" },
              { "data": "matricula" },
              { "data": "nombreA" },
@@ -72,9 +72,9 @@ $(document).ready(function () {
                 text: 'Exportar Excel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte Usuarios',
+                filename: 'Reporte de Estudiantes',
                 exportOptions: {
-                    columns: [0, 1, 2, 3]
+                    columns: [1,2,3,4,5,6,7,8,9]
                 }
             }, 'pageLength'
         ],
@@ -82,7 +82,7 @@ $(document).ready(function () {
             url: "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
         },
     });
-});
+})
 
 
 

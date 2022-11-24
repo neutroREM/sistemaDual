@@ -16,6 +16,12 @@ namespace sistemaDual.Models.ViewModels
 
         public int? NumHoras { get; set; }
 
+        public DateTime? FechaRegistro { get; set; }
+
+        public DateTime? FechaInicio { get; set; }
+
+        public DateTime? FechaTermino { get; set; }
+
         public int? AlumnoDualID { get; set; }
 
         public string? CURP { get; set; }
@@ -30,7 +36,13 @@ namespace sistemaDual.Models.ViewModels
 
         public string? NombreP { get; set; }
 
-        
+        public int? AsesorInstitucionalID { get; set; }
+
+        public string? NombreAsesor{ get; set; }
+
+        public int? ResponsableInstitucionalID { get; set; }
+
+        public string? NombreResponsable { get; set; }
 
 
     }

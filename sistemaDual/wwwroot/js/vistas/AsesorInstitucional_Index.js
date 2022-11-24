@@ -56,12 +56,12 @@ $(document).ready(function () {
         dom: "Bfrtip",
         buttons: [
             {
-                text: 'Exportar Excel',
+                text: 'Exportar Esadcel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte',
+                filename: 'Reporte de Asesores',
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6]
+                    columns: [1,2,3,4,5,6,7]
                 }
             }, 'pageLength'
         ],
@@ -69,7 +69,7 @@ $(document).ready(function () {
             url: "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
         },
     });
-});
+})
 
 
 function mostrarModal(modelo = MODEL_BASE) {

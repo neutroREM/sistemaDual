@@ -26,6 +26,8 @@ namespace sistemaDual.Models
         public DateTime? FechaRegistro { get; set; }
 
         public int? ProgramaEducativoID { get; set; }
+
         public ProgramaEducativo? ProgramaEducativo { get; set; }
+        public ICollection<CatalagoProyecto>? CatalagoProyectos { get; set; }
     }
 }

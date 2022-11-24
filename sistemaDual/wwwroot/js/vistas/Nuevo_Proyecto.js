@@ -23,7 +23,7 @@ $(document).ready(function () {
             if (responseJson.length > 0) {
                 responseJson.forEach((item) => {
                     $("#cboAsesorI").append(
-                        $("<option>").val(item.asesorInstitucionalID).text(item.nombreA)
+                        $("<option>").val(item.asesorInstitucionalID).text(item.nombreA + " " + item.apellidoP)
                     )
                 })
             }
@@ -37,7 +37,7 @@ $(document).ready(function () {
             if (responseJson.length > 0) {
                 responseJson.forEach((item) => {
                     $("#cboResponsableI").append(
-                        $("<option>").val(item.responsableInstitucionalID).text(item.nombreR)
+                        $("<option>").val(item.responsableInstitucionalID).text(item.nombreR +" "+ item.apellidoP)
                     )
                 })
             }
@@ -167,19 +167,22 @@ $("#cboBuscarEstudiante").on("select2:select", function (e) {
     }
 
     swal({
-        title: "aaaqqw",
-        text: "asignar este Estudiante",
-        type: "warning",
+        title: "Estudiante Dual",
+        text: `¿Asignar Estudiante? ${data.nombreA}`,
+        type: "info",
         showCancelButton: true,
-        confirmButtonClass: "btn-danger",
-        confirmButtonText: "Si, eliminar",
+        confirmButtonClass: "btn-success",
+        confirmButtonText: "Si, asignar",
         cancelButtonText: "No, cancelar",
         closeOnConfirm: false,
         closeOnCancel: true
     },
         function (valor) {
 
-
+            if (valor == false) {
+                $("#cboBuscarEstudiante").val("").trigger("change")
+                return false;
+            }
             let estudiante = {
                 alumnoDualID: data.id,
                 curp: data.text,
@@ -190,8 +193,8 @@ $("#cboBuscarEstudiante").on("select2:select", function (e) {
             estudianteDatos.push(estudiante)
 
             mostrarEstudiante_Datos();
-
             $("#cboBuscarEstudiante").val("").trigger("change")
+            $("#cboBuscarEstudiante").attr('disabled', 'disabled')
             swal.close()
         }
     )
@@ -212,19 +215,22 @@ $("#cboBuscarEmpresa").on("select2:select", function (e) {
     }
 
     swal({
-        title: data.razonS,
-        text: "asignar esta UE",
-        type: "warning",
+        title: "Unidad Económica",
+        text: `¿Asignar esta UE? ${data.nombreC}`,
+        type: "info",
         showCancelButton: true,
-        confirmButtonClass: "btn-danger",
-        confirmButtonText: "Si, eliminar",
+        confirmButtonClass: "btn-success",
+        confirmButtonText: "Si, asignar",
         cancelButtonText: "No, cancelar",
         closeOnConfirm: false,
         closeOnCancel: true
     },
         function (valor) {
 
-
+            if (valor == false) {
+                $("#cboBuscarEmpresa").val("").trigger("change")
+                return false;
+            }
             let empresa = {
                 empresaID: data.id,
                 sectorS: data.sectorS,
@@ -235,8 +241,8 @@ $("#cboBuscarEmpresa").on("select2:select", function (e) {
             empresasProyecto.push(empresa)
 
             mostrarEmpresa_Datos();
-
             $("#cboBuscarEmpresa").val("").trigger("change")
+            $("#cboBuscarEmpresa").attr('disabled', 'disabled')
             swal.close()
         }
     )
@@ -252,7 +258,7 @@ function mostrarEmpresa_Datos() {
         $("#tbEmpresa tbody").append(
             $("<tr>").append(
                 $("<td>").append(
-                    $("<button>").addClass("btn btn-danger btn-eliminar btn-sm").append(
+                    $("<button>").addClass("btn btn-danger btn-eliminar-empresa btn-sm").append(
                         $("<i>").addClass("fas fa-trash-alt")
                     ).data("empresaID", item.empresaID)
                 ),
@@ -275,7 +281,7 @@ function mostrarEstudiante_Datos() {
         $("#tbEstudiante tbody").append(
             $("<tr>").append(
                 $("<td>").append(
-                    $("<button>").addClass("btn btn-danger btn-eliminar btn-sm").append(
+                    $("<button>").addClass("btn btn-danger btn-eliminar-estudiante btn-sm").append(
                         $("<i>").addClass("fas fa-trash-alt")
                     ).data("alumnoDualID", item.alumnoDualID)
                 ),
@@ -290,23 +296,25 @@ function mostrarEstudiante_Datos() {
 
 }
 
-$(document).on("click", "button.btn-eliminar", function () {
+$(document).on("click", "button.btn-eliminar-empresa", function () {
 
     const _empresaID = $(this).data("empresaID")
 
-
     empresasProyecto = empresasProyecto.filter(p => p.empresaID != _empresaID);
+    $("#cboBuscarEmpresa").removeAttr('disabled')
     mostrarEmpresa_Datos();
 })
 
-
-$(document).on("click", "button.btn-eliminar", function () {
+$(document).on("click", "button.btn-eliminar-estudiante", function () {
 
     const _alumnoDualID = $(this).data("alumnoDualID")
 
     estudianteDatos = estudianteDatos.filter(a => a.alumnoDualID != _alumnoDualID);
+    $("#cboBuscarEstudiante").removeAttr('disabled')
     mostrarEstudiante_Datos();
+
 })
+
 
 $("#btnAsignarProyecto").click(function () {
 
@@ -318,8 +326,17 @@ $("#btnAsignarProyecto").click(function () {
 
     const entidad =
     {
- 
-        programaEducativoID: $("#cboProgramaE").val()
+        nombreProyecto: $("#txtNombreProyecto").val(),
+        etapa: $("#txtEtapa").val(),
+        areaConocimiento: $("#txtAreaConocimiento").val(),
+        numHoras: parseInt($("#txtNumeroHoras").val()),
+        fechaInicio: $("#txtFechaInicio").val(),
+        fechaTermino: $("#txtFechaTermino").val(),
+        alumnoDualID: estudianteDatos[0].alumnoDualID,
+        empresaID: empresasProyecto[0].empresaID,
+        programaEducativoID: $("#cboProgramaE").val(),
+        asesorInstitucionalID: $("#cboAsesorI").val(),
+        responsableInstitucionalID: $("#cboResponsableI").val()
 
     }
 

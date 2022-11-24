@@ -40,7 +40,7 @@ namespace sistemaDual.Utilidades.AutoMapper
             CreateMap<ProgramaEducativo, ProgramaEducativoViewModel>()
                 .ForMember(dest => dest.NombreU,
                 opt => opt.MapFrom(src => src.Universidad.NombreU));
-            
+
             CreateMap<ProgramaEducativoViewModel, ProgramaEducativo>()
                 .ForMember(dest => dest.Universidad,
                 opt => opt.Ignore());
@@ -131,7 +131,11 @@ namespace sistemaDual.Utilidades.AutoMapper
                 .ForMember(dest => dest.NombreC,
                 opt => opt.MapFrom(src => src.Empresa.NombreC))
                 .ForMember(dest => dest.NombreP,
-                opt => opt.MapFrom(src => src.ProgramaEducativo.NombreP));
+                opt => opt.MapFrom(src => src.ProgramaEducativo.NombreP))
+                .ForMember(dest => dest.NombreAsesor,
+                opt => opt.MapFrom(src => src.AsesorInstitucional.NombreA))
+                .ForMember(dest => dest.NombreResponsable,
+                opt => opt.MapFrom(src => src.ResponsableInstitucional.NombreR));
 
             CreateMap<CatalagoProyectoViewModel, CatalagoProyecto>()
                 .ForMember(dest => dest.AlumnoDual,
@@ -139,6 +143,10 @@ namespace sistemaDual.Utilidades.AutoMapper
                 .ForMember(dest => dest.Empresa,
                 opt => opt.Ignore())
                 .ForMember(dest => dest.ProgramaEducativo,
+                opt => opt.Ignore())
+                .ForMember(dest => dest.AsesorInstitucional,
+                opt => opt.Ignore())
+                .ForMember(dest => dest.ResponsableInstitucional,
                 opt => opt.Ignore());
 
 

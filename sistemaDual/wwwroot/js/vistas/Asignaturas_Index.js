@@ -37,9 +37,9 @@ $(document).ready(function () {
                 text: 'Exportar Excel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte Usuarios',
+                filename: 'Reporte',
                 exportOptions: {
-                    columns: [0, 1, 2, 3]
+                    columns: [1,2,3,4]
                 }
             }, 'pageLength'
         ],
@@ -47,7 +47,7 @@ $(document).ready(function () {
             url: "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
         },
     });
-});
+})
 
 function mostrarModal(modelo = MODEL_BASE) {
     $("#txtAsignaturaID").val(modelo.asignaturaID)

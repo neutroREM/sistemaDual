@@ -247,15 +247,16 @@ namespace sistemaDual.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("AreaConocimiento")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("AsesorInstitucionalID")
+                        .HasColumnType("int");
 
                     b.Property<int?>("EmpresaID")
                         .HasColumnType("int");
 
                     b.Property<string>("Etapa")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("FechaCambioEstatus")
                         .HasColumnType("datetime2");
@@ -270,8 +271,7 @@ namespace sistemaDual.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NombreProyecto")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("NumHoras")
                         .HasColumnType("int");
@@ -279,11 +279,23 @@ namespace sistemaDual.Migrations
                     b.Property<string>("NumeroProyecto")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProgramaEducativoID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ResponsableInstitucionalID")
+                        .HasColumnType("int");
+
                     b.HasKey("CatalagoProyectoID");
 
                     b.HasIndex("AlumnoDualID");
 
+                    b.HasIndex("AsesorInstitucionalID");
+
                     b.HasIndex("EmpresaID");
+
+                    b.HasIndex("ProgramaEducativoID");
+
+                    b.HasIndex("ResponsableInstitucionalID");
 
                     b.ToTable("CatalagoProyecto", (string)null);
                 });
@@ -520,15 +532,13 @@ namespace sistemaDual.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProgramaEducativoID"));
 
                     b.Property<string>("NombreP")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UniversidadID")
                         .HasColumnType("int");
 
                     b.Property<string>("Version")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProgramaEducativoID");
 
@@ -546,20 +556,16 @@ namespace sistemaDual.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResponsableInstitucionalID"));
 
                     b.Property<string>("ApellidoM")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ApellidoP")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CURP")
-                        .HasMaxLength(18)
-                        .HasColumnType("nvarchar(18)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cargo")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Correo")
                         .HasColumnType("nvarchar(max)");
@@ -568,8 +574,7 @@ namespace sistemaDual.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NombreR")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
@@ -722,13 +727,31 @@ namespace sistemaDual.Migrations
                         .WithMany("CatalagoProyectos")
                         .HasForeignKey("AlumnoDualID");
 
+                    b.HasOne("sistemaDual.Models.AsesorInstitucional", "AsesorInstitucional")
+                        .WithMany("CatalagoProyectos")
+                        .HasForeignKey("AsesorInstitucionalID");
+
                     b.HasOne("sistemaDual.Models.Empresa", "Empresa")
                         .WithMany("CatalagoProyectos")
                         .HasForeignKey("EmpresaID");
 
+                    b.HasOne("sistemaDual.Models.ProgramaEducativo", "ProgramaEducativo")
+                        .WithMany("CatalagoProyectos")
+                        .HasForeignKey("ProgramaEducativoID");
+
+                    b.HasOne("sistemaDual.Models.ResponsableInstitucional", "ResponsableInstitucional")
+                        .WithMany("CatalagoProyectos")
+                        .HasForeignKey("ResponsableInstitucionalID");
+
                     b.Navigation("AlumnoDual");
 
+                    b.Navigation("AsesorInstitucional");
+
                     b.Navigation("Empresa");
+
+                    b.Navigation("ProgramaEducativo");
+
+                    b.Navigation("ResponsableInstitucional");
                 });
 
             modelBuilder.Entity("sistemaDual.Models.Empresa", b =>
@@ -792,6 +815,11 @@ namespace sistemaDual.Migrations
                     b.Navigation("CatalagoProyectos");
                 });
 
+            modelBuilder.Entity("sistemaDual.Models.AsesorInstitucional", b =>
+                {
+                    b.Navigation("CatalagoProyectos");
+                });
+
             modelBuilder.Entity("sistemaDual.Models.Asignatura", b =>
                 {
                     b.Navigation("AlumnoAsignaturas");
@@ -834,7 +862,14 @@ namespace sistemaDual.Migrations
 
                     b.Navigation("AsesoresInstitucionales");
 
+                    b.Navigation("CatalagoProyectos");
+
                     b.Navigation("MentoresAcademicos");
+                });
+
+            modelBuilder.Entity("sistemaDual.Models.ResponsableInstitucional", b =>
+                {
+                    b.Navigation("CatalagoProyectos");
                 });
 
             modelBuilder.Entity("sistemaDual.Models.Rol", b =>

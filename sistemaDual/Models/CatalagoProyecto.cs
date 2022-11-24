@@ -9,13 +9,10 @@ namespace sistemaDual.Models
 
         public string? NumeroProyecto { get; set; }
 
-        [StringLength(50)]
         public string? NombreProyecto { get; set; }
 
-        [StringLength(20)]
         public string? Etapa { get; set; }
 
-        [StringLength(20)]
         public string? AreaConocimiento { get; set; }
 
         public int? NumHoras { get; set; }
@@ -31,7 +28,11 @@ namespace sistemaDual.Models
         public int? AlumnoDualID { get; set; }
         public int? EmpresaID { get; set; }
         public int? ProgramaEducativoID { get; set; }
+        public int? AsesorInstitucionalID { get; set; }
+        public int? ResponsableInstitucionalID { get; set; }
         
+        public ResponsableInstitucional? ResponsableInstitucional { get; set; }
+        public AsesorInstitucional? AsesorInstitucional { get; set; }
         public ProgramaEducativo? ProgramaEducativo { get; set; }
         public AlumnoDual? AlumnoDual { get; set; }
         public Empresa? Empresa { get; set; }

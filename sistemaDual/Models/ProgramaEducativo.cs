@@ -9,10 +9,8 @@ namespace sistemaDual.Models
     {
         public int ProgramaEducativoID { get; set; }
 
-        [StringLength(30)]
         public string? NombreP { get; set; }
 
-        [StringLength(15)]
         public string? Version { get; set; }
 
         public int? UniversidadID { get; set; }
@@ -22,6 +20,7 @@ namespace sistemaDual.Models
         public ICollection<AlumnoDual>? AlumnosDuales { get; set; }
         public ICollection<MentorAcademico>? MentoresAcademicos { get; set; }
         public ICollection<AsesorInstitucional>? AsesoresInstitucionales { get; set; }
+        public ICollection<CatalagoProyecto>? CatalagoProyectos { get; set; }
 
 
     }
