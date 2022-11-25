@@ -124,6 +124,10 @@ namespace sistemaDual.Utilidades.AutoMapper
             #region CatalagoProyecto
 
             CreateMap<CatalagoProyecto, CatalagoProyectoViewModel>()
+                .ForMember(dest => dest.FechaInicio,
+                opt => opt.MapFrom(src => src.FechaInicio.Value.ToString("dd/MM/yyyy")))
+                 .ForMember(dest => dest.FechaTermino,
+                opt => opt.MapFrom(src => src.FechaTermino.Value.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.CURP,
                 opt => opt.MapFrom(src => src.AlumnoDual.CURP))
                 .ForMember(dest => dest.NombreA,

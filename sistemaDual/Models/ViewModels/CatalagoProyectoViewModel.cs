@@ -18,9 +18,9 @@ namespace sistemaDual.Models.ViewModels
 
         public DateTime? FechaRegistro { get; set; }
 
-        public DateTime? FechaInicio { get; set; }
+        public string? FechaInicio { get; set; }
 
-        public DateTime? FechaTermino { get; set; }
+        public string? FechaTermino { get; set; }
 
         public int? AlumnoDualID { get; set; }
 

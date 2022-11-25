@@ -36,7 +36,7 @@ namespace sistemaDual.Controllers
             return View();
         }
 
-        public IActionResult HistorialProyectos()
+        public IActionResult ReporteProyectos()
         {
             return View();
         }
@@ -100,10 +100,10 @@ namespace sistemaDual.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Historial(string numeroProyecto, string fechaInicio, string fechaFin)
+        public async Task<IActionResult> ReporteProyecto(string fechaInicio, string fechaFin)
         {
-            List<CatalagoProyectoViewModel> historialProyectoVM = _mapper.Map<List<CatalagoProyectoViewModel>>(await _proyectoService.Historial(numeroProyecto, fechaInicio, fechaFin));
-            return StatusCode(StatusCodes.Status200OK, historialProyectoVM);
+            List<CatalagoProyectoViewModel> historialProyectoVM = _mapper.Map<List<CatalagoProyectoViewModel>>(await _proyectoService.Reporte( fechaInicio, fechaFin));
+            return StatusCode(StatusCodes.Status200OK, new {data = historialProyectoVM });
         }
 
     }

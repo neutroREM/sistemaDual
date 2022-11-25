@@ -63,8 +63,10 @@ namespace sistemaDual.Implementation
                 .Include(a => a.AlumnoDual)
                 .Include(p => p.ProgramaEducativo)
                 .Include(e => e.Empresa)
-                .Where(cp => cp.FechaRegistro.Value.Date >= fechaInicio.Date &&
-                cp.FechaRegistro <= fechaFin.Date).ToListAsync();
+                .Include(e => e.AsesorInstitucional)
+                .Include(e => e.ResponsableInstitucional)
+                .Where(cp => cp.FechaInicio.Value.Date >= fechaInicio.Date &&
+                cp.FechaInicio <= fechaFin.Date).ToListAsync();
                 
             return reporteProyecto;
                 

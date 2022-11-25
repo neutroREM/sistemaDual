@@ -31,12 +31,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVjYXNEdWFsZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/CatalagoProyectos/HistorialProyectos.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0YWxhZ29Qcm95ZWN0b3NcSGlzdG9yaWFsUHJveWVjdG9zLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/CatalagoProyectos/NuevoProyecto.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0YWxhZ29Qcm95ZWN0b3NcTnVldm9Qcm95ZWN0by5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/CatalagoProyectos/ReporteProyectos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0YWxhZ29Qcm95ZWN0b3NcUmVwb3J0ZVByb3llY3Rvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/farao/source/repos/sistemaDual/sistemaDual/Views/Dashboard/Index.cshtml]
