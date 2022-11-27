@@ -39,6 +39,11 @@ $(document).ready(function () {
                 "width": "80px"
             }
         ],
+        rowCallback: function (row, data, index) {
+            if (data.programaEducativoID) {
+                $(row).find('td:eq(5)').css('color', 'green', '!important');
+            }
+        },
         order: [[0, "desc"]],
         dom: "Bfrtip",
         buttons: [
@@ -48,7 +53,7 @@ $(document).ready(function () {
                 title: '',
                 filename: 'Reporte de Proyectos',
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
                 }
             }, 'pageLength'
         ],

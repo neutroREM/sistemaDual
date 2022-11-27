@@ -61,9 +61,9 @@ $(document).ready(function () {
                 text: 'Exportar Excel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte Usuarios',
+                filename: 'Reporte de Mentores Empresariales',
                 exportOptions: {
-                    columns: [0, 1, 2, 3]
+                    columns: [1, 2, 3, 4 ,5 ,6 ,7, 8]
                 }
             }, 'pageLength'
         ],

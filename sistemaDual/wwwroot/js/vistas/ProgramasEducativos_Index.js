@@ -50,9 +50,9 @@ $(document).ready(function () {
                 text: 'Exportar Excel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte Usuarios',
+                filename: 'Reporte Programas Educativos',
                 exportOptions: {
-                    columns: [0, 1, 2, 3]
+                    columns: [1, 2, 3]
                 }
             }, 'pageLength'
         ],

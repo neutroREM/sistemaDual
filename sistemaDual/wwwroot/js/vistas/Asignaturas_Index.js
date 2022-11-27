@@ -37,7 +37,7 @@ $(document).ready(function () {
                 text: 'Exportar Excel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte',
+                filename: 'Reporte de Asignaturas',
                 exportOptions: {
                     columns: [1,2,3,4]
                 }

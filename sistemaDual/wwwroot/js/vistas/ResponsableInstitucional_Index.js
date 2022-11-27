@@ -60,9 +60,9 @@ $(document).ready(function () {
                 text: 'Exportar Excel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte',
+                filename: 'Reporte Responsables Institucionales',
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6]
+                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
                 }
             }, 'pageLength'
         ],

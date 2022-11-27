@@ -44,9 +44,9 @@ $(document).ready(function () {
                 text: 'Exportar Excel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte Usuarios',
+                filename: 'Reporte de Unidades Económicas',
                 exportOptions: {
-                    columns: [1, 2]
+                    columns: [1, 2, 3, 4, 5, 6]
                 }
             }, 'pageLength'
         ],

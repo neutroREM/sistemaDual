@@ -56,10 +56,10 @@ $(document).ready(function () {
         dom: "Bfrtip",
         buttons: [
             {
-                text: 'Exportar Esadcel',
+                text: 'Exportar Excel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte de Asesores',
+                filename: 'Reporte de Asesores Institucionales',
                 exportOptions: {
                     columns: [1,2,3,4,5,6,7]
                 }
