@@ -9,7 +9,7 @@ namespace sistemaDual.Implementation
 
         public RolService(IGenericRespository<Rol> repository)
         {
-                _repository = repository;
+            _repository = repository;
         }
 
         public async Task<List<Rol>> Lista()

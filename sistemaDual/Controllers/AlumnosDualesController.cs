@@ -20,18 +20,29 @@ namespace sistemaDual.Controllers
         private readonly IMapper _mapper;
         private readonly IAlumnoService _alumnoService;
         private readonly IRolService _rolService;
+        private readonly IEstatusService _statusService;
 
-        public AlumnosDualesController(IMapper mapper, IAlumnoService alumnoService, IRolService rolService)
+        public AlumnosDualesController(IMapper mapper, IAlumnoService alumnoService, IRolService rolService, IEstatusService statusService)
         {
             _mapper = mapper;
             _alumnoService = alumnoService;
             _rolService = rolService;
+            _statusService = statusService;
         }
 
         public IActionResult Index()
         {
             return View();
         }
+
+        // GET: AlumnosDuales/ListaEstatus 
+        [HttpGet]
+        public async Task<IActionResult> ListaEstatus()
+        {
+            List<EstatusViewModel> estatusVM = _mapper.Map<List<EstatusViewModel>>(await _statusService.Lista());
+            return StatusCode(StatusCodes.Status200OK, estatusVM);
+        }
+
 
         // GET: AlumnosDuales/ListaRoles
         [HttpGet]

@@ -13,6 +13,8 @@ namespace sistemaDual.Models
 
         public string? Version { get; set; }
 
+        public DateTime? FechaRegistro { get; set; }
+
         public int? UniversidadID { get; set; }
 
         public Universidad? Universidad { get; set; }

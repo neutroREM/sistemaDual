@@ -11,5 +11,7 @@
         public int? UniversidadID { get; set; }
 
         public string? NombreU { get; set; }
+
+        public DateTime? FechaRegistro { get; set; }
     }
 }

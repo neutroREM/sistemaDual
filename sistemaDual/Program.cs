@@ -31,6 +31,8 @@ builder.Services.AddScoped<IAsesorInstitucionalService, AsesorInstitucionalServi
 builder.Services.AddScoped<IBecaDualService, BecaDualService>();
 builder.Services.AddScoped<IAsignaturaService, AsignaturaService>();
 builder.Services.AddScoped<ICatalagoProyectoService, CatalagoProyectoService>();
+builder.Services.AddScoped<IEstatusService, EstatusService>();
+builder.Services.AddScoped<IDashBoardService, DashBoardService>();
 
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(MapperProfile));

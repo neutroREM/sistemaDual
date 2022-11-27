@@ -69,14 +69,18 @@ namespace sistemaDual.Utilidades.AutoMapper
                 .ForMember(dest => dest.Descripcion,
                 opt => opt.MapFrom(src => src.Rol.Descripcion))
                 .ForMember(dest => dest.EsActivo,
-                opt => opt.MapFrom(src => src.EsActivo == true ? 1 : 0));
+                opt => opt.MapFrom(src => src.EsActivo == true ? 1 : 0))
+                .ForMember(dest => dest.Estatus,
+                opt => opt.MapFrom(src => src.Estatus.Descripcion));
 
 
             CreateMap<AlumnoDualViewModel, AlumnoDual>()
                 .ForMember(dest => dest.Rol,
                 opt => opt.Ignore())
                 .ForMember(dest => dest.EsActivo,
-                opt => opt.MapFrom(src => src.EsActivo == 1 ? true : false));
+                opt => opt.MapFrom(src => src.EsActivo == 1 ? true : false))
+                .ForMember(dest => dest.Estatus,
+                opt => opt.Ignore());
 
             #endregion
 

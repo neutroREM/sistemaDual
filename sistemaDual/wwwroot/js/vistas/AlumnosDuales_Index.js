@@ -12,11 +12,28 @@ const MODEL_BASE = {
     rolID: 0,
     fechaRegistro: "",
     esActivo: 1,
+    estatusID: 0
 }
 
 
 let tableData;
 $(document).ready(function () {
+
+    //Mostrar Lista Estatus
+    fetch("/AlumnosDuales/ListaEstatus")
+        .then(response => {
+            return response.ok ? response.json() : Promise.reject(response);
+        })
+        .then(responseJson => {
+            if (responseJson.length > 0) {
+                responseJson.forEach((item) => {
+                    $("#cboEstatus").append(
+                        $("<option>").val(item.estatusID).text(item.descripcion)
+                    )
+                })
+            }
+        })
+
     //Mostrar Roles
     fetch("/AlumnosDuales/ListaRoles")
         .then(response => {
@@ -56,7 +73,9 @@ $(document).ready(function () {
                      else
                          return '<span class="badge badge-danger">No activo</span>';
                  }
-             },
+             }, 
+             { "data": "e mstatus" },
+
              {
                  "defaultContent": '<button class="btn btn-primary btn-editar btn-sm mr-2"><i class="fas fa-pencil-alt"></i></button>' +
                      '<button class="btn btn-danger btn-eliminar btn-sm"><i class="fas fa-trash-alt"></i></button>',
@@ -74,7 +93,7 @@ $(document).ready(function () {
                 title: '',
                 filename: 'Reporte de Estudiantes',
                 exportOptions: {
-                    columns: [1,2,3,4,5,6,7,8,9]
+                    columns: [1,2,3,4,5,6,7,8,9,10]
                 }
             }, 'pageLength'
         ],
@@ -97,6 +116,7 @@ function mostrarModal(modelo = MODEL_BASE) {
     $("#txtCorreo").val(modelo.correo)
     $("#cboRol").val(modelo.rolID == 0 ? $("#cboRol option:first").val() : modelo.rolID)
     $("#cboEstado").val(modelo.esActivo)
+    $("#cboEstatus").val(modelo.estatusID == 0 ? $("#cboEstatus option:first").val() : modelo.estatusID) 
     $("#modalData").modal("show")
 }
 
@@ -128,6 +148,7 @@ $("#btnGuardar").click(function () {
     modelo["correo"] = $("#txtCorreo").val()
     modelo["rolID"] = $("#cboRol").val()
     modelo["esActivo"] = $("#cboEstado").val()
+    modelo["estatusID"] = $("#cboEstatus").val()
 
 
     const formData = new FormData();

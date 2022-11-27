@@ -26,6 +26,10 @@ namespace sistemaDual.Models.ViewModels
 
         public int? EsActivo { get; set; }
 
+        public int? EstatusID { get; set; }
+
+        public string? Estatus { get; set; }
+
         
     }
 }

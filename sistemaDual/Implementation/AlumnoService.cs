@@ -22,7 +22,9 @@ namespace sistemaDual.Implementation
         public async Task<List<AlumnoDual>> Lista()
         {
             IQueryable<AlumnoDual> query = await _repository.Consultar();
-            return query.Include(r => r.Rol).ToList();
+            return query.Include(r => r.Rol)
+                .Include(e => e.Estatus)
+                .ToList();
         }
 
         public async Task<AlumnoDual> Crear(AlumnoDual entidad, string urlPlantillaCorreo = "")
@@ -71,7 +73,9 @@ namespace sistemaDual.Implementation
                         await _correoService.EnviarCorreo(alumnoDual.Correo, "Cuenta registrada", htmlCorreo);
                 }
                 IQueryable<AlumnoDual> query = await _repository.Consultar(u => u.AlumnoDualID == alumnoDual.AlumnoDualID);
-                alumnoDual = query.Include(r => r.Rol).First();
+                alumnoDual = query.Include(r => r.Rol)
+                    .Include(e => e.Estatus)
+                    .First();
                  
                 return alumnoDual;
             }
@@ -102,6 +106,7 @@ namespace sistemaDual.Implementation
                 alumno_editar.Correo = entidad.Correo;
                 alumno_editar.RolID = entidad.RolID;
                 alumno_editar.EsActivo = entidad.EsActivo;
+                alumno_editar.EstatusID = entidad.EstatusID;
                 alumno_editar.FechaCambios = DateTime.Now;
 
                 bool resp = await _repository.Editar(alumno_editar);
@@ -109,7 +114,9 @@ namespace sistemaDual.Implementation
                 if (!resp)
                     throw new TaskCanceledException("No se modifico el Alumno");
 
-                AlumnoDual alumno_editado = query.Include(r => r.Rol).First();
+                AlumnoDual alumno_editado = query.Include(r => r.Rol)
+                    .Include(e => e.Estatus)
+                    .First();
 
                 return alumno_editado;
                  
