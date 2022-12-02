@@ -2,8 +2,8 @@
 {
     public class AlumnosSemanaVM
     {
-        public string? NombreA { get; set; }
+        public string? Alumno { get; set; }
 
-        public Double? Promedio { get; set; }
+        public int Cantidad { get; set; }
     }
 }

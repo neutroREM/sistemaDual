@@ -29,17 +29,17 @@ namespace sistemaDual.Controllers
             {
                 DashBoardVM dashBoardVM = new DashBoardVM();
 
-                dashBoardVM.TotalAlumnos = await _dashService.TotalAlumnosUtimaSemana();
-                dashBoardVM.TotalProgramas = await _dashService.TotalProyectosUltimoMes();
+                dashBoardVM.TotalAlumnos = await _dashService.TotalAlumnosUltimaSemana();
+                dashBoardVM.TotalProyectos = await _dashService.TotalProyectosUltimaSemana();
                 dashBoardVM.TotalProgramas = await _dashService.TotalProgramasEducativos();
                 dashBoardVM.TotalEmpresas = await _dashService.TotalEmpresas();
 
                 List<AlumnosSemanaVM> listAlumnoSemana = new List<AlumnosSemanaVM>();
-                List<ProyectosMesVM> ListaproyectosMes = new List<ProyectosMesVM>();
+                List<ProyectoSemanaVM> listaProyectosSemana= new List<ProyectoSemanaVM>();
 
-                foreach (KeyValuePair<string, int> item in await _dashService.ProyectoUltimoMes())
+                foreach (KeyValuePair<string, int> item in await _dashService.ProyectosUltimaSemana())
                 {
-                    ListaproyectosMes.Add(new ProyectosMesVM()
+                    listaProyectosSemana.Add(new ProyectoSemanaVM()
                     {
                         Fecha = item.Key,
                         Total = item.Value
@@ -50,12 +50,12 @@ namespace sistemaDual.Controllers
                 {
                     listAlumnoSemana.Add(new AlumnosSemanaVM()
                     {
-                        NombreA = item.Key,
-                        Promedio = item.Value
+                        Alumno = item.Key,
+                        Cantidad = item.Value
                     });
 
-                    dashBoardVM.ProyectosMesVM = ListaproyectosMes;
-                    dashBoardVM.AlumnosSemanaVM = listAlumnoSemana;
+                    dashBoardVM.ProyectoSemana= listaProyectosSemana;
+                    dashBoardVM.AlumnosSemana = listAlumnoSemana;
                 }
 
                 response.Estado = true;
@@ -64,7 +64,7 @@ namespace sistemaDual.Controllers
             }
             catch (Exception ex)
             {
-                response.Estado = true;
+                response.Estado = false;
                 response.Mensaje = ex.Message;
             }
 

@@ -10,8 +10,8 @@
 
         public int TotalProyectos { get; set; }
 
-        public List<AlumnosSemanaVM> AlumnosSemanaVM { get; set; }
+        public List<AlumnosSemanaVM>? AlumnosSemana { get; set; }
 
-        public List<ProyectosMesVM> ProyectosMesVM { get; set; }
+        public List<ProyectoSemanaVM>? ProyectoSemana { get; set; }
     }
 }

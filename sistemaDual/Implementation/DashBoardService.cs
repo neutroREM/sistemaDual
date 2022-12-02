@@ -6,31 +6,27 @@ namespace sistemaDual.Implementation
 {
     public class DashBoardService : IDashBoardService
     {
-        private readonly ICatalagoProyectoRepository _proyectoRepository;
-        private readonly IGenericRespository <CatalagoProyecto>  _proyectoGenericRepository;
+        private readonly ICatalagoProyectoRepository _proyectoRepository; 
         private readonly IGenericRespository<AlumnoDual> _alumnoRepository;
         private readonly IGenericRespository<Empresa> _empresaRepository;
         private readonly IGenericRespository<ProgramaEducativo> _programaRepository;
-        private DateTime FechaInicioMes = DateTime.Now;
         private DateTime FechaInicioSemana = DateTime.Now;
 
-        public DashBoardService(ICatalagoProyectoRepository _proyectoReposiroty, IGenericRespository<CatalagoProyecto> proyectoGenericRepository, IGenericRespository<AlumnoDual> alumnoRepository, IGenericRespository<Empresa> empresaRepository, IGenericRespository<ProgramaEducativo> programaRepository)
+        public DashBoardService(ICatalagoProyectoRepository proyectoReposiroty, IGenericRespository<AlumnoDual> alumnoRepository, IGenericRespository<Empresa> empresaRepository, IGenericRespository<ProgramaEducativo> programaRepository)
         {
-            _proyectoRepository = _proyectoReposiroty;
-            _proyectoGenericRepository = proyectoGenericRepository;
+            _proyectoRepository = proyectoReposiroty;
             _alumnoRepository = alumnoRepository;
             _empresaRepository = empresaRepository;
             _programaRepository = programaRepository;
 
-            FechaInicioMes = FechaInicioMes.AddMonths(-1);
             FechaInicioSemana = FechaInicioSemana.AddDays(-7);
         }
 
-        public async Task<int> TotalProyectosUltimoMes()
+        public async Task<int> TotalProyectosUltimaSemana()
         {
             try
             {
-                IQueryable<CatalagoProyecto> query = await _proyectoRepository.Consultar(p => p.FechaRegistro.Value.Date >= FechaInicioMes.Date);
+                IQueryable<CatalagoProyecto> query = await _proyectoRepository.Consultar();
                 int total = query.Count();
                 return total;
             }
@@ -40,11 +36,11 @@ namespace sistemaDual.Implementation
             }
         }
 
-        public async Task<int> TotalAlumnosUtimaSemana()
+        public async Task<int> TotalAlumnosUltimaSemana()
         {
             try
             {
-                IQueryable<AlumnoDual> query = await _alumnoRepository.Consultar(a => a.FechaRegistro >= FechaInicioSemana.Date);
+                IQueryable<AlumnoDual> query = await _alumnoRepository.Consultar();
                 int total = query.Count();
                 return total;
             }
@@ -81,16 +77,15 @@ namespace sistemaDual.Implementation
             {
                 throw;
             }
-        }
+        } 
 
-        public async Task<Dictionary<string, int>> ProyectoUltimoMes()
+        public async Task<Dictionary<string, int>> ProyectosUltimaSemana()
         {
             try
             {
-                IQueryable<CatalagoProyecto> query = await _proyectoRepository.Consultar(p => p.FechaRegistro.Value.Date >= FechaInicioMes.Date);
+                IQueryable<CatalagoProyecto> query = await _proyectoRepository.Consultar(p => p.FechaRegistro.Value.Date >= FechaInicioSemana.Date);
 
                 Dictionary<string, int> result = query
-                    .Include(a => a.AlumnoDual)
                     .GroupBy(v => v.FechaRegistro.Value.Date)
                     .OrderByDescending(g => g.Key)
                     .Select(cp => new {fecha = cp.Key.ToString("dd/MM/yyyy"), total = cp.Count()})
@@ -113,7 +108,7 @@ namespace sistemaDual.Implementation
                 Dictionary<string, int> result = query
                     .Include(a => a.AlumnoDual)
                     .Where(cp => cp.AlumnoDual.FechaRegistro.Value.Date >= FechaInicioSemana.Date)
-                    .GroupBy(cp => cp.NumeroProyecto).OrderByDescending(g => g.Count())
+                    .GroupBy(cp => cp.AlumnoDual.NombreA).OrderByDescending(g => g.Count())
                     .Select(cp => new { alumno = cp.Key, total = cp.Count() })
                     .ToDictionary(keySelector: r => r.alumno, elementSelector: r => r.total);
 

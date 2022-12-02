@@ -531,6 +531,9 @@ namespace sistemaDual.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProgramaEducativoID"));
 
+                    b.Property<DateTime?>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NombreP")
                         .HasColumnType("nvarchar(max)");
 

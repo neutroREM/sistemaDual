@@ -41,7 +41,7 @@ $(document).ready(function () {
         ],
         rowCallback: function (row, data, index) {
             if (data.programaEducativoID) {
-                $(row).find('td:eq(5)').css('color', 'green', '!important');
+                $(row).find('td:eq(5)').css('color', 'blue', '!important');
             }
         },
         order: [[0, "desc"]],

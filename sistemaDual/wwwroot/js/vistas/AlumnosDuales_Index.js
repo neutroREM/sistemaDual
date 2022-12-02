@@ -74,7 +74,7 @@ $(document).ready(function () {
                          return '<span class="badge badge-danger">No activo</span>';
                  }
              }, 
-             { "data": "e mstatus" },
+             { "data": "estatus" },
 
              {
                  "defaultContent": '<button class="btn btn-primary btn-editar btn-sm mr-2"><i class="fas fa-pencil-alt"></i></button>' +
